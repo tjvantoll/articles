@@ -75,6 +75,6 @@ But they also realize that a bigger native app can help build a better user expe
 
 After all, Snapchat’s iOS app is nearly 100 megs, but they have [over 300 million monthly active users](http://www.fool.com/investing/2016/11/23/snap-in-3-charts.aspx). Pokémon GO’s iOS app is over 200 megs, yet the app [made $950 million in 2016](http://venturebeat.com/2017/01/17/pokemon-go-generated-revenues-of-950-million-in-2016/). I could keep going too—Facebook, YouTube, Instagram, and Pandora all have large apps, and they aren’t exactly a list of unsuccessful brands.
 
-This is also a list of large brands with big name recognition and large engineering resources, so again—just because Facebook can build a 100 meg mobile app and make tons of money, that doesn’t mean you can. But you can probably build a 20 meg one without anyone noticing—and maybe use those 20 megs to build a pretty awesome user experience.
+That being said, the Facebooks and Googles of the world almost certainly have more name recognition and engineering resources than your company does. So again, just because Facebook can build a 100 meg mobile app and make tons of money, that doesn’t mean you can. But, you can probably build a 20 meg one without anyone caring—and maybe even use those 20 megs to build an engaging experience.
 
 
