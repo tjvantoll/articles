@@ -30,7 +30,7 @@ There is one major caveat to this though: native apps still need to get those as
 
 ## Do users mind big apps?
 
-Some do, yes. Not everyone has a fast internet connection, and no one unlimited space on their device. You don’t have to look far to find users complaining about the size of native apps, especially 100+ meg ones like Facebook.
+Some do, yes. Not everyone has a fast internet connection, and no one has unlimited space on their device. You don’t have to look far to find users complaining about the size of native apps, especially 100+ meg ones like Facebook.
 
 But a whole lot of people don’t care.
 
@@ -57,11 +57,11 @@ Futher proof of users’ collective indifference towards app sizes can be found 
 1. Netflix—46.1 MB
 1. Spotify Music—81.4 MB
 
-Note how the average file size of a top-10 iOS app is over 100 megs, and the smallest is a still-large-feeling 46 megs. If users do have issues with large apps, their behavior doesn’t show it.
+Note how the average file size of a top-10 iOS app is over 100 megs, and the smallest is a still-large-feeling 46 megs. If users do have issues with big apps, their behavior doesn’t show it.
 
 > For Android, a list of top apps is more difficult to draw conclusions from, as so many of the top downloaded apps are built into Android. But the [most popular third-party Android apps](https://en.wikipedia.org/wiki/List_of_most_downloaded_Android_applications) are WhatsApp Messenger, Facebook Messenger, and Facebook—which are currently 18 MB, 48.6 MB, and 72.7 MB, respectively.
 
-Now, to back up for just a moment, I don’t present this data to imply that native apps can be limitless in size, as there are certainly reprecussions from making native apps _too_ big. There is evidence that [large app sizes can negatively affect user acquisition](http://www.recode.net/2016/10/4/13151432/app-size-calculator-bloat-experiment-developers-segment), and deleting large apps is one of the most common things people do when they run out of space on their devices. (The “Storage” menus on both iOS and Android sort apps by descending size—so large apps stick out.)
+Now, to back up for just a moment, I don’t present this data to imply that native apps can be limitless in size, as there are certainly reprecussions from making native apps _too_ big. There is evidence that [large app sizes can negatively affect user acquisition](http://www.recode.net/2016/10/4/13151432/app-size-calculator-bloat-experiment-developers-segment), and deleting big apps is one of the most common things people do when they run out of space on their devices. (The “Storage” menus on both iOS and Android sort apps by descending size—so huge apps stick out.)
 
 What I do mean to show is that the lower bound for an acceptable application size is fundamentally different on native than it is on the web. While it’s easy to find people complaining about the 150+ meg Facebook iOS app, you’ll have trouble finding anyone complaining about a 46 meg Netflix app, or even a 73 meg Google Maps app. These are sizes that the average mobile user has deemed acceptable.
 
