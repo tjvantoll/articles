@@ -6,7 +6,7 @@ The popular [Angular framework](https://angular.io/) is well suited for implemen
 
 This article is a comprehensive step-by-step tutorial for creating master-detail UIs with Angular. If you follow along throughout you should know everything you need to build your own master-detail interfaces for your clients or company. There’s a lot to cover, so let’s jump right in.
 
-> Side note: Angular’s applicability for these sort of mobile-centric user interfaces is one of the reasons the library works so well in frameworks like [NativeScript](https://www.nativescript.org/). Although this tutorial covers using Angular to build a web app, you can use a nearly identical approach to [build a native iOS and Android app that leverages more performant native user interface components](http://docs.nativescript.org/angular/tutorial/ng-chapter-0). 
+> Side note: Angular’s applicability for these sort of mobile-centric user interfaces is one of the reasons the library works so well in frameworks like [NativeScript](https://www.nativescript.org/). Although this tutorial covers using Angular to build a web app, a fully functional NativeScript implementation for building native iOS and Android apps is [available on GitHub](https://github.com/tjvantoll/angular-master-detail) for your reference.
 
 ## Setting up
 
@@ -566,4 +566,4 @@ If all went well, if you head back to your browser and refresh `localhost:4200` 
 
 ## Where to go from here
 
-Hopefully after following this tutorial you have a better idea of how to build master-detail user interfaces with Angular. The full code for this app is up on GitHub, so feel free to clone it and alter it to your heart’s desire. The GitHub repo also contains a completely functional NativeScript app , so you can compare and contrast the two approaches, and see just how much code you can share across environments. (Hint: it’s a lot.)
+Hopefully after following this tutorial you have a better idea of how to build master-detail user interfaces with Angular. The [full code for this app is up on GitHub](https://github.com/tjvantoll/angular-master-detail), so feel free to clone it and alter it to your heart’s desire. The GitHub repo also contains a completely functional NativeScript app , so you can compare and contrast the two approaches, and see just how much code you can share across environments. (Hint: it’s a lot.)
