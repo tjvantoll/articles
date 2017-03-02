@@ -1,12 +1,10 @@
-# How to Build Master-Detail User Interfaces with Angular
+# A Step-By-Step Guide for Building Master-Detail User Interfaces with Angular
 
-The master-detail design pattern is an incredibly popular way to build mobile apps, regardless of whether you’re building for native or for the web.
-
-The popular [Angular framework](https://angular.io/) is well suited for implementing this design pattern as it has a number of the necessary features you need baked in, such as data binding, routing, services, and a whole lot more.
+The master-detail design pattern is an incredibly popular way to build mobile apps, regardless of whether you’re building for native or for the web. [Angular](https://angular.io/) is well suited for implementing master-detail interfaces as it has a number of the necessary features you need baked in, such as data binding, routing, services, and a whole lot more.
 
 This article is a comprehensive step-by-step tutorial for creating master-detail UIs with Angular. If you follow along throughout you should know everything you need to build your own master-detail interfaces for your clients or company. There’s a lot to cover, so let’s jump right in.
 
-> Side note: Angular’s applicability for these sort of mobile-centric user interfaces is one of the reasons the library works so well in frameworks like [NativeScript](https://www.nativescript.org/). Although this tutorial covers using Angular to build a web app, a fully functional NativeScript implementation for building native iOS and Android apps is [available on GitHub](https://github.com/tjvantoll/angular-master-detail) for your reference.
+> **Note**: Angular’s applicability for these sort of mobile-centric user interfaces is one of the reasons Angular works so well in native mobile frameworks like [NativeScript](https://www.nativescript.org/). Although this tutorial covers using Angular to build a web app, a complete NativeScript implementation of this tutorial’s interface is [available on GitHub](https://github.com/tjvantoll/angular-master-detail) for your reference.
 
 ## Setting up
 
@@ -20,7 +18,7 @@ In this tutorial you’ll use the popular [pokéapi](http://pokeapi.co/) to buil
 
 ![](pokemon-master-detail.png)
 
-Your Pokémon app will be purposely simple to show off the basic concepts of building master-detail apps with Angular. However, the techniques you learn should be applicable to your own application development. Let’s start building.
+Your Pokémon app will be purposely simple to show off the basic concepts of building master-detail apps with Angular. However, the techniques you learn will be applicable to your own application development. Let’s start building.
 
 ## Starting your app
 
@@ -31,7 +29,9 @@ ng new pokemon
 cd pokemon
 ```
 
-The Angular CLI generates an app with a lot of files, but all you’re interested in for now are the ones in your new app’s `src/app` folder. To set up a structure you’ll need for this tutorial, alter the files in the `src/app` folder to look like the listing shown below. (Don’t worry about the contents of any of these files yet, as we’ll be covering that shortly.)
+The `ng new` command takes some time, as it needs to download Angular and its dependencies from npm. When the command finishes you’ll have a project with a lot of files, but all you’re interested in for now are the ones in your new app’s `src/app` folder.
+
+To set up a structure you’ll need for this tutorial, alter the files in the `src/app` folder to look like the listing shown below. (Don’t worry about the contents of any of these files yet, as we’ll be covering that shortly.)
 
 ```
 src/app
@@ -39,18 +39,23 @@ src/app
 ├── app.component.ts
 ├── app.module.ts
 └── pokemon
+    ├── pokemon-detail.component.html
+    ├── pokemon-detail.component.ts
     ├── pokemon-list.component.html
-    ├── pokemon-list.component.js
     ├── pokemon-list.component.ts
     ├── pokemon-service.ts
     └── pokemon.model.ts
 ```
 
+> **Note**: The Angular style guide [recommends grouping folders by feature](https://angular.io/docs/ts/latest/guide/style-guide.html#!#04-07), which is why you’re placing all Pokémon-related functionality in a `pokemon` folder.
+
 ## Scaffolding your app
 
 There are a lot of files here so let’s walk through them sequentially, and along the way start the “master” part of the master-detail interface, as it’s the page the user needs to start on.
 
-Angular-built apps start in `src/main.ts`, a small file that bootstraps the Angular app and passes control to an Angular module. In most applications, including this tutorial’s, you’ll want to leave the `main.ts` file alone. So let’s start in the file that `main.ts` passes control to, `app.module.ts`. Open that file in your editor or IDE, and replace the contents of that file with the code below.
+Angular-built apps start in `src/main.ts`, a small file that bootstraps the Angular app and passes control to an Angular module. In most applications, including this tutorial’s, you’ll want to leave the `main.ts` file alone. So let’s start in the file that `main.ts` passes control to—`app.module.ts`.
+
+Open `app.module.ts` in your editor or IDE, and replace the contents of that file with the code below.
 
 ```
 import { BrowserModule } from "@angular/platform-browser";
@@ -73,33 +78,35 @@ import { PokemonListComponent } from "./pokemon/pokemon-list.component";
   declarations: [
     AppComponent,
     PokemonListComponent
-  ]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
 
-The module you define in `app.module.ts` is known as the root module, and the Angular documentation has [an extensive guide on how to use it](https://angular.io/docs/ts/latest/guide/appmodule.html). Succinctly, the app module is where you define all the things you need to use throughout your application. Angular gives you the ability to separate your app into multiple `@NgModule`s to keep your app modular, but for simple apps like the one you’re building keeping everything in the root module makes a lot of sense.
+The module you define in `app.module.ts` is known as [the root module](https://angular.io/docs/ts/latest/guide/appmodule.html). Succinctly, the app module is where you define the various components and services you need to use throughout your application. Angular gives you the ability to separate your app into multiple `@NgModule`s to keep this listing from getting unwieldy, but for simple apps like the one you’re building keeping everything in the root module makes a lot of sense.
 
-The two things unique to the Pokémon app in this file are the `PokemonListComponent` and `PokemonService`. These are both classes you haven’t created yet, so expect to get a few TypeScript errors in your editor until we get to that point.
+The two things unique to your Pokémon app in this file are the `PokemonListComponent` and `PokemonService` classes. These are both classes you haven’t created yet, so expect to get a few TypeScript errors in your editor until we get to that point.
 
-The last thing to know about the `AppModule` is its `bootstrap` property, which determines which component Angular should pass control flow over to. Because you passed `AppComponent` as the bootstrap component, that’s the next thing Angular will interpret, so let’s switch over the to `app.component.ts` file that the `AppComponent` is defined in. Open `app.component.ts` in your text editor or IDE and replace its contents with the code below.
+The last thing to know about the `AppModule` is its `bootstrap` property, which determines which component Angular should pass control flow over to. Because you passed `AppComponent` as the bootstrap component, that’s the next thing Angular will interpret, so let’s switch over the to `app.component.ts` file that the `AppComponent` is defined in.
+
+Open `app.component.ts` in your text editor or IDE and replace its contents with the code below.
 
 ```
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "pk-root",
+  selector: "app-root",
   template: "<router-outlet></router-outlet>"
 })
 export class AppComponent { }
 ```
 
-As with the previous `app.module.ts` file, most of the code you see here is the same you’d see in any Angular app. If you need some background on how Angular components work, head over to the [Angular documentation](https://angular.io/docs/ts/latest/guide/architecture.html#!#components) for a full guide.
-
-The key thing to know here is the string you pass for the component’s `template` property is what Angular renders on the screen. For example using a `template` of `<h1>Hello World</h1>` would print a display a simple heading in your browser.
+As with the previous `app.module.ts` file, most of the code you see here is the same you’d see in any Angular app. The key thing to know here is the string you pass for the component’s `template` property is what Angular renders on the screen. For example using a `template` of `<h1>Hello World</h1>` would print a display a simple heading in your browser.
 
 Things get a little trickier when you get into custom directives (or custom HTML tags) like `<router-outlet>`, as they can have special behavior. The `<router-outlet>` directive specifically tells Angular to render the currently selected route. To see how all that works, let’s shift our discussion over to routing in Angular apps.
+
+> **Note**: If you need more details on exactly how Angular components work, head over to the [Angular documentation](https://angular.io/docs/ts/latest/guide/architecture.html#!#components) for a full guide.
 
 ## Configuring your app’s routing
 
@@ -140,14 +147,16 @@ Therefore, the last thing you need to do to get this app running is to define th
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "pk-items",
+  selector: "app-list",
   moduleId: module.id,
   template: "<h1>Pokémon</h1>"
 })
 export class PokemonListComponent { }
 ```
 
-This is another Angular component, much like the one you defined in `app.component.ts`. This component is simple, and renders a single `<h1>` tag. At this point you have a functional, albeit trivial, master screen. To see this page in action head back to your terminal or command prompt, and run the Angular CLI’s `ng serve` command.
+This is another Angular component, much like the one you defined in `app.component.ts`. This component is simple, and renders a single `<h1>` tag.
+
+At this point you have a functional, albeit trivial, master screen. To see this page in action head back to your terminal or command prompt, and run the Angular CLI’s `ng serve` command.
 
 ```
 ng serve
@@ -157,7 +166,9 @@ If all went well, you should be able to load `localhost:4200` in your browser an
 
 ![](basic-master-screen.png)
 
-This isn’t the most exciting app in the world, but at this point you now have all the setup needed to get started. Your `app.module.ts` file contains your app-level configuration; your `app-routing.module.ts` file contains your routing configuration; and your `app.component.ts` file renders the app’s current route. By default that route is the `PokemonListComponent` in your `pokemon-list.component.ts` file. Let’s start building that component out, and then work our way to additionally define a “details” component that you can navigate to.
+This isn’t the most exciting app in the world, but at this point you now have all the setup needed to get started. Your `app.module.ts` file contains your app-level configuration; your `app-routing.module.ts` file contains your routing configuration; and your `app.component.ts` file renders the app’s current route.
+
+By default, that default route is the `PokemonListComponent` in your `pokemon-list.component.ts` file. Let’s start building that component out, and then work our way to additionally define a “details” component that you can navigate to.
 
 ## Building out the master view
 
@@ -215,9 +226,9 @@ export class PokemonService {
 }
 ```
 
-You can refer to [Angular’s documentation on services](https://angular.io/docs/ts/latest/tutorial/toh-pt4.html) for details on the specific syntax here, but essentially this gives you define a simple `list()` method you can call that returns a `Promise` containing the data you need. The bit of code that works with `pokemon_entries` does a bit of simple formatting to extract data from the APIs format into simple JavaScript objects that your UI can use.
+A [full explanation of how Angular services work](https://angular.io/docs/ts/latest/tutorial/toh-pt4.html) is outside the scope of this article, but essentially what you’re doing here is defining a simple `list()` method that returns a `Promise` containing the data you need. The bit of code that works with `pokemon_entries` does a bit of simple formatting to extract data from the API’s format into simple TypeScript objects that your UI can use.
 
-You can see that the service makes use of a `Pokemon` class, and because that class doesn’t yet exist you’ll get syntax errors for now. To fix that open your app’s `pokemon/pokemon.model.ts` file and paste in the following basic class.
+You can see that the service makes use of a `Pokemon` class, and because that class doesn’t yet exist you’ll get syntax errors for now. To fix that, open your app’s `pokemon/pokemon.model.ts` file and paste in the following basic class.
 
 ```
 export class Pokemon {
@@ -246,7 +257,7 @@ import { Pokemon } from "./pokemon.model";
 import { PokemonService } from "./pokemon-service";
 
 @Component({
-  selector: "pk-items",
+  selector: "all-list",
   moduleId: module.id,
   templateUrl: "./pokemon-list.component.html",
 })
@@ -264,7 +275,7 @@ export class PokemonListComponent implements OnInit {
 }
 ```
 
-The addition here is a new [`ngOnInit()` lifecycle hook](https://angular.io/docs/ts/latest/api/core/index/OnInit-class.html), which Anguar calls as soon as your component initializes. You use that hook to call your newly defined service’s `list()` method to get the data you need. When the `list()` method completes, you assign the returned data to the component’s `pokemon` property, which makes the data available to the component’s template.
+The addition here is a new [`ngOnInit()` lifecycle hook](https://angular.io/docs/ts/latest/api/core/index/OnInit-class.html), which Angular calls as soon as your component initializes. You use that hook to call your newly defined service’s `list()` method to get the data you need. When the `list()` method completes, you assign the returned data to the component’s `pokemon` property, which makes the data available to the component’s template.
 
 To define that template open your app’s `pokemon-list.component.html` file and paste in the following code.
 
@@ -326,13 +337,17 @@ export class AppModule { }
 
 After this change if you return to `localhost:4200` in your browser you should see an app that looks like this.
 
+> **Note**: You might have to use `Ctrl` + `C` to kill the previous `ng serve` task, and re-run `ng serve` to see your updates.
+
 ![](master-list-only.png)
 
-This is again not super exciting, but you’re making some real progress. You now have a backend-driven list of data, and all the necessary setup done to start to add some more advanced functionality. Now that the master list is functionaly complete, let’s move our switch our discussion to implementing your app’s details screen.
+This is again not super exciting, but you’re making some real progress. You now have a backend-driven list of data, and all the necessary setup done to start to add some more advanced functionality.
+
+Now that the master list is functionally complete, let’s move our switch our discussion to implementing your app’s details screen.
 
 ## Building out the detail view
 
-In a typical master-detail setup users tap on an item on the master screen to see more information on that particular item. Depending on the application, sometimes that details screen requires a different backend call to retrieve more data, and sometimes it doesn’t.
+In a typical master-detail setup, users tap items on the master screen to see more information on a second, “details” screen. Depending on the application, sometimes that details screen requires a different backend call to retrieve more data, and sometimes it doesn’t.
 
 If your dataset is relatively small, it may make sense to retrieve all the data you need at once, and maybe even cache that data on the client to avoid subsequent calls. If your dataset is large, or if your data updates relatively frequently, it might make sense to check with your backend every time the user navigates to the details screen.
 
@@ -392,7 +407,7 @@ import { Pokemon } from "./pokemon.model";
 import { PokemonService } from "./pokemon-service";
 
 @Component({
-  selector: "pk-details",
+  selector: "app-details",
   moduleId: module.id,
   templateUrl: "./pokemon-detail.component.html",
 })
@@ -416,7 +431,7 @@ There are a few things to note here. The first is the use of Angular’s `Activa
 this.route.snapshot.params["id"];
 ```
 
-In general the `ActivatedRoute` has [a variety of APIs](https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html) that give you access to all things routing. The `snapshot` property in particular gives you access to the current route, and you use that to access an “id” URL parameter you passed from the list component.
+The `ActivatedRoute` class has [a variety of APIs](https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html) that give you access to all things routing. The `snapshot` property in particular gives you access to the current route, and you use that to access an “id” URL parameter you passed from the list component.
 
 This gives you the `id` you need to hit the pokéapi and get details about an individual Pokémon, which you’re doing in this line of code.
 
@@ -459,7 +474,7 @@ get(id: number) {
 }
 ```
 
-Like the `list()` method, the `get()` method here hits a pokéapi endpoint, does a little formatting, and returns an object that your user interface components can use. In the case of `list()` that data was an array of `Pokemon` objects; in the case of `get()` that data is a single `Pokemon` object.
+Like the `list()` method, the `get()` method hits a pokéapi endpoint, does a little formatting, and returns an object that your user interface components can use. In the case of `list()` that data was an array of `Pokemon` objects; in the case of `get()` that data is a single `Pokemon` object.
 
 With this service in place there are two last things you need to do to get this app fully functional. First open your app’s `pokemon-details.component.html` file and paste in the following code, which renders the Pokeémon data that your newly added `get()` function returns.
 
