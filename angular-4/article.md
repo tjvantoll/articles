@@ -1,6 +1,6 @@
 # NativeScript Supports Angular 4
 
-Last week, the Angular team [released Angular 4.0.0](http://angularjs.blogspot.com/2017/03/angular-400-now-available.html), and today we’re happy to announce that NativeScript now support this latest update 🎉
+Last week, the Angular team [released Angular 4.0.0](http://angularjs.blogspot.com/2017/03/angular-400-now-available.html), and today we’re happy to announce that NativeScript now supports this latest update 🎉
 
 Angular 4 brings smaller application packages and faster runtime speeds. Let’s look at how you can update your NativeScript apps to take advantage of these optimizations.
 
