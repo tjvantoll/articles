@@ -1,6 +1,8 @@
 {
-  "editor.wrappingColumn": 0,
+  "editor.wordWrap": "on",
   "editor.quickSuggestions": false,
+  "markdown.preview.scrollEditorWithPreview": false,
+  "markdown.preview.scrollPreviewWithEditorSelection": false,
   "markdown.styles": [
     "file:///Users/tj/Documents/articles/.vscode/style.css"
   ]
