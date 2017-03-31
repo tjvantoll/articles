@@ -14,7 +14,7 @@ A couple notes about the changes above.
 
 * The main update here is bumping the `nativescript-angular` package to version 1.5.0, and the various Angular packages to 4.0.0. Note that the `@angular/router` package moved from 3.x to 4.x, rather than 2.x to 4.x.
 * With Angular 4, the various animation libraries now live in their own package, `@angular/animations`. This package is optional, so you only need to depend on it if you intend to use Angular animations in your app. (Note that there’s one extra step you’ll need to take to use Angular animations in your NativeScript apps because of this change—more on that in a minute.)
-* The `zone.js` dependency package should now be listed as a dependency rather than a devDependency. This is to resolve some rather arcance npm peer dependency issues.
+* The `zone.js` dependency package should now be listed as a dependency rather than a devDependency. This is to resolve some rather arcane npm peer dependency issues.
 * Notice that the TypeScript version remains specified as `~2.1.0`. This is important, as **NativeScript with Angular doesn’t support TypeScript 2.2 quite yet**. Support is coming in our upcoming NativeScript 3.0 release, which you can expect a release candidate for very soon 😄
 
 ## Breaking changes
