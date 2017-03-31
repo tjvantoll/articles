@@ -37,7 +37,7 @@ Sebastian’s session starts at noon Eastern US time on Thursday. Use the link b
 
 <h2 id="rave-party">Rave party 💃 (Thursday, April 6th)</h2>
 
-On Thursday, April 6th we’ll be hosting a rave party based on Jen Looper’s [PocketRave app](https://pocketrave.me/). We’ll have free snacks, free drinks, and a Jen-Looper-crafted Spotify playlist playing.
+On Thursday, April 6th we’ll be hosting a rave party based on Jen Looper’s [PocketRave app](https://pocketrave.me/). We’ll have free snacks, free drinks, and a [Jen-Looper-crafted Spotify playlist playing](https://open.spotify.com/user/1218545798/playlist/6uWMqimXMasicA6MNm1nLo).
 
 ![](pocketrave.png)
 
