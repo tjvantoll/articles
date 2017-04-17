@@ -8,7 +8,7 @@ Don’t worry though; once you’ve completed these steps once it’s a whole lo
 
 When you’re ready, grab some coffee, and let’s start getting your app ready for deployment.
 
-## Steps
+## Table of contents
 
 * [Step 1: Create your app icons](#step-1)
 * [Step 2: Create your splash screens](#step-2)
@@ -225,13 +225,114 @@ Once the command finishes, you’ll have a release `.apk` file in your app’s `
 
 Google Play is where Android users find and install apps, and the [Google Play Developer Console](https://play.google.com/apps/publish/) is where developers register and upload apps for users to find.
 
+Android’s documentation on [uploading apps and setting up your store listing](https://support.google.com/googleplay/android-developer/answer/113469?hl=en) is quite good, so I’m not going to recreate all that information here. Instead, I’ll give a few tips you might find helpful when uploading your own NativeScript apps to Google Play.
+
+### Screenshots
+
+On the “Store Listing” tab in the Google Play Developer Console you’ll have to provide at least two screenshots of your app in action. Although there are many ways you may choose to create these screenshots, I thought I’d spell out my preferred approach.
+
+Launch your app in an Android AVD (Android Virtual Device) using `tns run android`. The built-in emulators have a built-in way of taking screenshots using the little camera icon in the emulator’s sidebar.
+
+![](avd-camera.png)
+
+Use this button to take a few screenshots of the most important screens in your app—the image files themselves will appear on your desktop. From there you could take those files an upload them directly on the Google Play Developer Console, but I personally recommend using a service like [DaVinci](https://www.davinciapps.com/) to add a little flair to your screenshots, and turn them into a small little tutorial of what your app does. For example, here are the screenshots I use for Pokémon Types.
+
+![](pokemon-types-screenshots.png)
+
+Little touches like polished screenshots can make the difference between users hitting the _Install_ button or moving on, so it really is worth taking a few extra minute to making high-quality screenshot files.
+
+### Feature graphic
+
+Google Play also requires you to upload a 1024 x 500 “Feature Graphic” image file. This file will appear at the top of your store listing. To give you an idea of what that looks like in action, here’s what the Pokémon Types “Feature Graphic” looks like on my Nexus 6.
+
+![](android-feature-graphic.png)
+
+Designing a feature graphic can be hard, and as someone that lacks design talent, I don’t think I did a particularly good job with Pokémon Types. If you’re having trouble designing one of these images, one thing you might want to try is just using your app’s logo against a solid background color. Several popular apps take this approach, such as Facebook.
+
+![](facebook-feature-graphic.png)
+
+### APK
+
+The “App Releases” section of the Google Play Developer Console is where you upload the `.apk` file you generated in the previous step of this article. Just as a reminder, that file is located in your app’s `platforms/android/build/outputs/apk` folder.
+
+Once you have your APK uploaded, and all of your app’s information spelled out in the Developer Console, you’re ready to submit your app! Android app reviews generally take a few hours, and unless Google flags any problems, your app should be available in Google Play within a half day or so.
+
+With Android out of the way, now you’re ready to tackle iOS.
+
 <h2 id="step-7">Step 7: iOS release build</h2>
+
+There’s no point lying to you—releasing an iOS app to the iOS App Store is one of the most painful processes you’ll ever go through in your software development career. So in case you get stuck or confused in these steps, just know that it’s not just you—everyone gets frustrated releasing iOS apps the first time.
+
+As with the previous steps, I’m not going to spell out everything step you need to do to generate an iOS release build in this article, because the necessary steps change frequently, and the NativeScript documentation already covers the topic of [creating iOS release builds in detail](https://docs.nativescript.org/publishing/publishing-ios-apps). What I will do is spell out a few things that you should know.
+
+### Apple developer account
+
+The first is that you absolutely must have an active Apple Developer account to upload iOS apps to the iOS App Store. It costs $99 USD per year to be a part of the program, and you can sign up at [developer.apple.com/register](https://developer.apple.com/register/).
+
+### Certificates, identifiers, and profiles
+
+Once you have an Apple Developer account, you’ll need to create a production certificate, an app ID, and a distribution provisioning profile on the Apple Developer portal. This is the most tedious part of the entire process, as it takes some time to learn what each of these various files do and how to use them.
+
+The NativeScript documentation has [steps that walk you through the process](https://docs.nativescript.org/publishing/publishing-ios-apps#certificates-identifiers--profiles), but honestly the best thing you can do is find someone else that’s been through these steps to walk you through the process. If you get stuck ask for help on the [NativeScript community forum](https://discourse.nativescript.org/).
+
+### Generating your `.ipa` file
+
+The iOS equivalent of Android’s `.apk` file is a `.ipa` file, and you’ll need that file to upload your app to the iOS App Store.
+
+In NativeScript there are a few different ways you can generate this file. My preferred route is using the NativeScript CLI’s `tns build ios` command, and pass in the following two flags.
+
+```
+tns build ios --release --for-device
+```
+
+> **NOTE**: The above command requires you to fill in the code signing information in your `app/App_Resources/iOS/build.xcconfig` file—specifically, uncomment the `CODE_SIGN_IDENTITY` and `DEVELOPMENT_TEAM` lines, and provide the appropriate values. The `CODE_SIGN_IDENTITY` should have the same name as your distribution iOS certificate (I called mine “iOS Distribution”), and you can find your `DEVELOPMENT_TEAM` id on [https://developer.apple.com/account/#/membership](developer.apple.com/account/#/membership) (look for “Team ID”).
+
+After this command finishes, you’ll have the `.ipa` file you’ll need in your `platforms/ios/build/device` folder. Phew! Hopefully you’ve made it to this point in one piece. You’re now ready for the final step, which I wish I could tell you was easy—but nope—iTunes Connect.
 
 <h2 id="step-8">Step 8: iTunes Connect</h2>
 
-- Configure release certificates and provisioning profiles
-- `tns build ios --release --for-device`
+iTunes Connect is Apple’s equivalent of the Google Play Developer portal, just worse. And by worse I just mean that it’s at least 50% more time consuming to fill in the appropriate information and figure out what you’re supposed to do.
 
-- Add the app in iTunes Connect
-- Take screenshots on 7 plus and iPad 12.9 and upload
+As with previous steps, I’m not going to provide a step-by-step guide to uploading your apps to iTunes Connect. Apple changes that portal too often, and their [documentation on iTunes Connect](https://help.apple.com/itunes-connect/developer/) is pretty good. I will, however, give you a few tips on how to register your app for iOS distribution.
 
+### Create a new app
+
+The first thing you’ll need to do is register your app. To do that, visit <https://itunesconnect.apple.com/>, click “My Apps”, and, click the “+” button (currently in the top-left corner of the screen), and then select “New App”.
+
+![](itunes-connect-new-app.png)
+
+Here you’ll have to provide a few pieces of information about your app, such as its name and its app id. Here’s the information I provided for Pokémon Types.
+
+![](itunes-connect-info.png)
+
+After providing this information you’ll be taken to your app’s dashboard where you need to provide more metadata about your application. Most of this information is pretty straightforward, such as descriptions, pricing, and so forth, but there are a few “fun” pieces you’ll have to deal with, such as screenshots.
+
+### Screenshots
+
+Much like on Android, iOS requires you to provide screenshot files in order to submit your apps. Previous versions of iTunes Connect required you to provide screenshots in every supported iPhone and iPad dimension, which is just as painful as it sounds.
+
+Luckily, iTunes Connect now only requires you to upload two sets of screenshots, one for the largest iPhone devices (5.5-inch displays), and another for the largest iPad devices (12.9-inch devices). Apple still gives you the ability to provide optimized screenshots for each and every iOS device dimension, but if you provide only 5.5-inch and 12.9 inch screenshots, Apple will rescale your provided screenshots for smaller display devices automatically.
+
+To get those screenshots you could run your app on physical iPhone Plus and iPad Pro devices, but I find it far easier to get these screenshots from iOS simulators. You can use the following command to launch your NativeScript app on a simulated iPhone 7 Plus, which is the correct dimensions for the 5.5-inch screenshots that iTunes Connect requires.
+
+```
+tns emulate ios --device "iPhone 7 Plus"
+```
+
+image
+
+With the simulator running, you can use the `Cmd` + `S` keyboard shortcut to take a screenshot of your app to your desktop.
+
+To get the 12.9-inch screenshots, you’ll want to kill the previous `tns 
+
+```
+tns emulate ios --device "iPad Pro (12.9 inch)"
+```
+
+## Wrapping up
+
+And with those eight steps, you now have your app listed both on Google Play and the iOS App Store. If you’ve made it this far, congratulations 🎉
+
+Deploying apps is not easy, but now that you’ve went through the process once it should be a whole lot easier when you need to do this for your future apps.
+
+Did you get stuck while going through this guide? The [NativeScript community forum](https://discourse.nativescript.org/) is a great place to ask any questions you might have related to all things NativeScript. Let us know how you can help.
