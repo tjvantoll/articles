@@ -156,7 +156,7 @@ To change that value on iOS, first open your app’s `app/App_Resources/iOS/Info
 One note: although there’s no real character limit to display names, both iOS and Android will truncate your display names after somewhere around 10–12 characters. For example, when I tried to use “Pokémon Types” as a display name of my app, I ended up with the following truncated display.
 
 ![](icon-truncated.png)
-*Both iOS and Android truncate long display names. Here, iOS is truncating a display name of “Pokémon Types”.
+*Both iOS and Android truncate long display names. Here, iOS is truncating a display name of “Pokémon Types”.*
 
 Because the truncated display is less than ideal, you might have to be creative in how you choose your app’s display name.
 
@@ -192,7 +192,7 @@ Before we get started, it’s worth noting that webpack usage is optional for Na
 
 The disadvantage of using webpack in NativeScript is having another thing you have to configure and maintain. Although [NativeScript’s webpack plugin is super easy to install and get started with](https://docs.nativescript.org/tooling/bundling-with-webpack#installation-and-configuration), it can be tricky to configure for advanced usage, especially if you’ve never used webpack before. If you’re already feeling overwhelmed by the deployment steps in this article, you could consider deploying your apps to the stores as a first step, and optimizing those apps with webpack in a subsequent version.
 
-The decision is up to you, but if you’d like to give webpack a shot, go ahead and read through the [NativeScript webpack documentation](https://docs.nativescript.org/tooling/bundling-with-webpack). If you run into issues, try asking for help on the [NativeScript community forum](https://discourse.nativescript.org/).
+The decision is up to you, but if you’d like to give webpack a shot, go ahead and read through the [NativeScript webpack documentation](https://docs.nativescript.org/tooling/bundling-with-webpack). If you run into issues, try asking for help on the [NativeScript community forum](https://discourse.nativescript.org/t/how-to-decrease-app-size-and-release-it-using-webpack-and-nativescript/798).
 
 Once you’re all set, let’s move to building your apps.
 
