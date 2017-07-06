@@ -1,6 +1,6 @@
 # Introducing the Official NativeScript Plugin Seed
 
-Plugins are a critical part of what makes NativeScript a a compelling framework to develop iOS and Android apps. Because plugins have become essential to your apps, we on the NativeScript team are taking steps to ensure that the NativeScript plugin ecosystem remains strong.
+Plugins are a critical part of what makes NativeScript a compelling framework to develop iOS and Android apps. Because plugins have become essential to your apps, we on the NativeScript team are taking steps to ensure that the NativeScript plugin ecosystem remains strong.
 
 Today we’re happy to announce the first of our plugin initiatives: [an official plugin seed for building NativeScript plugins](https://github.com/NativeScript/nativescript-plugin-seed).
 
@@ -28,9 +28,9 @@ Developing plugins should now feel just like you’re working on a normal Native
 
 ## Feature #3: Built-in unit testing setup
 
-Testing is an important part of any robust software ecosystem, and the NativeScript plugin world is no exception. NativeScript plugins are driving an increasing number of mission-criticial application; therefore, it’s important to us that plugin authors have the testing tools they need to ensure reliability as their plugins evolve.
+Testing is an important part of any robust software ecosystem, and the NativeScript plugin world is no exception. NativeScript plugins are driving an increasing number of mission-criticial application; therefore, it’s important that plugin authors have the testing tools they need to ensure reliability as their plugins evolve.
 
-The NativeScript plugin seed [automatically adds Jasmine-based unit testing support to new plugins](https://github.com/NativeScript/nativescript-plugin-seed#unittesting). Your plugin’s demo app will have a series of sample tests in its `demo/app/tests` folder; we hope you’ll find it easy to configure these tests to test the features of your plugin.
+The NativeScript plugin seed [automatically adds Jasmine-based unit testing support to new plugins](https://github.com/NativeScript/nativescript-plugin-seed#unittesting). Your plugin’s demo app will have a series of sample tests in its `demo/app/tests` folder, and we hope you’ll find it easy to configure these tests to verify your plugin is working as intended
 
 ## Feature #4: Built-in support for Travis CI testing
 
