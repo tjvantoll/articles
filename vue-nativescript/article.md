@@ -1,8 +1,8 @@
 # Building Native iOS and Android Apps With Vue and NativeScript
 
-[Vue](https://vuejs.org/) is a popular JavaScript framework for handling the view layer of your application. NativeScript is technology that lets developers use JavaScript to drive completely native iOS and Android applications.
+[Vue](https://vuejs.org/) is a popular JavaScript framework for handling the view layer of your application. NativeScript is technology that lets developers use JavaScript to drive completely native iOS and Android applications. Together the two technologies build native applications with the simplicity you expect from Vue, and the power you expect from NativeScript.
 
-Together the two technologies build native applications with the simplicity you expect from Vue, and the power you expect from NativeScript. The NativeScript community has been [hard at work trying to make this possible](https://www.nativescript.org/blog/a-new-vue-for-nativescript), and has made considerable progress over the last few months. Although the integration is still in an early state and not ready for production apps, the stack is ready for you to experiment and see what you can build.
+The NativeScript community has been [hard at work trying to make this possible](https://www.nativescript.org/blog/a-new-vue-for-nativescript), and has made considerable progress over the last few months. Although the integration is still in an early state, the stack is ready for you to experiment and see what you can build.
 
 And in this article we’ll do just that. You’ll learn how to build a simple app with NativeScript and Vue by going through a handful of examples to see how it all works. Let’s get started.
 
@@ -18,13 +18,13 @@ The first of those commands is `tns create`, which is the command you use to cre
 tns create MyApp --template nativescript-vue-template
 ```
 
-This command will take take a few seconds to complete, as it will scaffold out the files you need for your new NativeScript app. After that command completes, `cd` into your new `MyApp` folder.
+This command will take a few seconds to complete, as it scaffolds out the files you need for your new NativeScript app. After the initialization completes, `cd` into your new `MyApp` folder.
 
 ```
 cd MyApp
 ```
 
-Next, run the app for either iOS or Android using the `tns run` command.
+Next, run your app for either iOS or Android using the `tns run` command.
 
 ```
 tns run ios
@@ -42,7 +42,7 @@ And with that, you’re now running a completely native iOS or Android app drive
 
 ![](sample.png)
 
-Don’t worry about the details of what this app is doing at the moment. We’re going to replace this app with a dead-simple implementation so we can talk about how all of this works. To do so, open your project’s `app/app.js` file in your editor of choice and replace the entire contents of that file with the following code.
+Don’t worry about the details of what this app is doing at the moment. We’re going to replace this app with a dead-simple sample so we can talk about how all of this works. To do so, open your project’s `app/app.js` file in your editor of choice and replace the entire contents of that file with the following code.
 
 ```
 const Vue = require("nativescript-vue/dist");
@@ -89,7 +89,7 @@ To give ourselves a little context for this conversation, let’s look at how th
 
 In this example you bring in Vue’s JavaScript code with a `<script>` tag, and initialize a new app by invoking the `Vue()` constructor. Vue takes your app’s template, in this case a `<div>` with a `<label>`, and renders that markup in the DOM (specifically in the `<div id="app">` element).
 
-The code is simple and easy, and this simplicity is one of the reasons that people like Vue so much. With the background of how Vue web apps work in mind, let’s go back to the NativeScript code.
+The code is simple and easy, and this simplicity is one of the reasons that people like Vue so much. Now that you know a little bit about how Vue web apps work, let’s go back to the NativeScript code.
 
 ```
 const Vue = require("nativescript-vue");
@@ -105,7 +105,7 @@ new Vue({
 }).$start();
 ```
 
-As you can see the code is similar, but there are some very clear differences. Let’s start at the top.
+The code is similar, but there are some very clear differences. Let’s start at the top.
 
 ```
 const Vue = require("nativescript-vue");
@@ -142,7 +142,7 @@ new Vue({
 });
 ```
 
-The first thing to note is the lack of an `el` property in your NativeScript app. When using Vue on the web you have the ability to have Vue control only a certain portion of your web app, and you configure which portion by passing a selector into the `el` property.
+The first thing to note is the lack of an `el` property in your NativeScript app. When using Vue on the web you have the ability to let Vue control only a certain portion of your web app, and you configure which portion by passing a CSS selector into the `el` property.
 
 In the context of NativeScript you don’t have that option—by default Vue controls your entire native iOS and Android app, and therefore the `el` property is unnecessary.
 
@@ -150,7 +150,7 @@ Now that you’ve seen how the `Vue` constructor works in both Vue web and Nativ
 
 ## Working with templates
 
-The `template` property of this example is where the differences between using Vue in web apps and using Vue in NativeScript apps is most noticeable. For context here’s the template you’re using on the web.
+The `template` property of this example is where the differences between using Vue in web apps and using Vue in NativeScript apps is most noticeable. For context, here’s the template our Vue web app example used.
 
 ```
 <div>
@@ -251,9 +251,9 @@ This code looks a lot like our previous example, except this time the components
 
 ![](styled-app.png)
 
-So how is this working? Although NativeScript doesn’t use HTML or DOM elements, the framework does let you [style apps using a subset of CSS](https://docs.nativescript.org/ui/styling) to change the appearance native UI components. Because NativeScript uses native UI components, only certain CSS properties are available for styling your apps—you can view the [full list of properties on the NativeScript documentation](https://docs.nativescript.org/ui/styling#supported-css-properties)—but the really common properties like `margin`, `padding`, `color`, `background-color` and such all work.
+So how is this working? Although NativeScript doesn’t use HTML or DOM elements, the framework does let you [style apps using a subset of CSS](https://docs.nativescript.org/ui/styling) to change the appearance of UI components. Because NativeScript uses native iOS and Android UI components, only certain CSS properties are available for styling your apps. You can view the [full list of properties on the NativeScript documentation](https://docs.nativescript.org/ui/styling#supported-css-properties), but the really common properties like `margin`, `padding`, `color`, `background-color`, and such all work.
 
-NativeScript also includes a [Bootstrap-like theme](https://docs.nativescript.org/ui/theme) you can use to style your controls with a familiar `class` attribute syntax, and that’s exactly what the code above is using. The `<Label>`’s `h1` class name makes the control appear like an `<h1>` on the web, and the `btn`, `btn-primary`, and `btn-active` class names help you build native iOS and Android buttons that look decent by default.
+NativeScript also includes a [Bootstrap-like theme](https://docs.nativescript.org/ui/theme) you can use to style your controls with a familiar `class` attribute syntax, and that’s exactly what this code is using. The `<Label>`’s `h1` class name makes the control appear like an `<h1>` on the web, and the `btn`, `btn-primary`, and `btn-active` class names help you build native iOS and Android buttons that look decent by default.
 
 Feel free to look through the NativeScript documentation on [styling](https://docs.nativescript.org/ui/styling) or [theming](https://docs.nativescript.org/ui/theme) if you want to play a bit more with how this all works, but for now let’s continue to evolve this example by exploring how data binding works.
 
@@ -276,13 +276,13 @@ new Vue({
       <StackLayout class="p-20">
         <Label text="Tap the button" class="h1 text-center"></Label>
         <Button text="TAP" class="btn btn-primary btn-active"></Button>
-        <Label class="h2 text-center" textWrap="true">{{ setMessage() }}</Label>
+        <Label class="h2 text-center" textWrap="true">{{ message }}</Label>
       </StackLayout>
     </Page>
   `,
 
-  methods: {
-    setMessage() {
+  computed: {
+    message: function() {
       return this.counter + " taps left";
     }
   }
@@ -301,29 +301,27 @@ The `data` object is where you place all properties that you need to bind to in 
 
 Vue provides a [number of different ways you can bind to data](https://vuejs.org/v2/guide/index.html#Handling-User-Input) in your user interface components, but the easiest to use is the `{{ }}` syntax. For example, you could bind to the `counter` property with `<Button text="{{ counter }}"></Button>`.
 
-In this case, your example uses another of Vue’s features, the `methods` property, to bind to a dynamically generated message.
+In this case, your example uses another of Vue’s features, [computed properties](https://vuejs.org/v2/guide/computed.html), to bind to a dynamically generated property.
 
 ```
-<Label class="h2 text-center" textWrap="true">{{ setMessage() }}</Label>
+<Label class="h2 text-center" textWrap="true">{{ message }}</Label>
 ```
 
 ```
-methods: {
-  setMessage() {
+computed: {
+  message: function() {
     return this.counter + " taps left";
   }
 }
 ```
 
-With this code, when your app loads Vue interprets the `{{ setMessage() }}` call in the template, invokes the `setMessage()` function in the `methods` property, and sets it to the returned string. You now have an app that looks like this.
+With this code, when your app loads, Vue first interprets the `{{ message }}` call in the template. To figure out what value to use, Vue next invokes the `message` property’s function in the `computed` object, and displays the string you return. You now have an app that looks like this.
 
 ![](app-with-text.png)
 
-Before we finish this example by adding a bit of logic it’s worth taking a step back to think about how cool that previous bit of code is. Remember that the “42 taps left” label you see above isn’t a DOM `<label>`—it’s a `UILabel` on iOS and an `android.widget.TextView` on Android. And you can bind to those completely native controls using the same Vue syntax you use to build apps for the web.
+Before we finish this example by adding a bit of logic it’s worth taking a step back to think about how cool that previous bit of code is. Remember that the “42 taps left” label you see above isn’t a DOM `<label>`—it’s a `UILabel` on iOS and an `android.widget.TextView` on Android. And you can bind to those completely native controls using the same Vue syntax you use to build apps for the web. Pretty cool, huh?
 
 With that aside out of the way, the last step you need to take to make this app work is adding a bit of logic that decrements the `counter` property when you tap the button. To implement this functionality and complete this example, take the code below and paste it into your `app.js` file.
-
-> **WARNING**: This code adds a `tap` event handler—which we’ll chat about in a second—and there’s currently an issue in the NativeScript Vue integration that causes apps to crash on `tap` events on iOS. Therefore, if you’re following along on iOS you’ll need to switch over to Android to see this demo work as expected. You can follow the progress of this issue at <https://github.com/rigor789/nativescript-vue/issues/24>.
 
 ```
 const Vue = require("nativescript-vue");
@@ -338,35 +336,36 @@ new Vue({
       <StackLayout class="p-20">
         <Label text="Tap the button" class="h1 text-center"></Label>
         <Button text="TAP" @tap="onTap" class="btn btn-primary btn-active"></Button>
-        <Label class="h2 text-center" textWrap="true">{{ setMessage() }}</Label>
+        <Label class="h2 text-center" textWrap="true">{{ message }}</Label>
       </StackLayout>
     </Page>
   `,
 
-  methods: {
-    onTap() {
-      this.counter--;
-      this.setMessage();
-    },
-    setMessage() {
+  computed: {
+    message: function() {
       if (this.counter <= 0) {
         return "Hoorraaay! You unlocked the NativeScript clicker achievement 🎉";
       } else {
         return this.counter + " taps left";
       }
     }
+  },
+
+  methods: {
+    onTap() {
+      this.counter--;
+    }
   }
 }).$start();
 ```
 
-There are two new things in the code above to note. The first is the `@tap="onTap"` attribute on the app’s button, which is Vue’s syntax for handling event binding. NativeScript fires a `tap` event when the user taps user interface controls, and the `@tap="methodName` syntax is how you can bind to that event. (Again, how cool is it that you can bind to native iOS and Android events using the same Vue syntax.)
+There are two new things in the code above to note. The first is the `@tap="onTap"` attribute on the app’s button, which is Vue’s syntax for handling event binding. NativeScript fires a `tap` event when the user taps user interface controls, and the `@tap="methodName` syntax is how you can bind to that event. (Again, how cool is it that you can bind to native iOS and Android events using the same Vue syntax?)
 
-The second new piece of code is the `onTap` handler, which is a simple function that decrements the app’s counter and updates its message.
+The second new piece of code is the `onTap` handler, which is a simple function that decrements the app’s counter.
 
 ```
 onTap() {
   this.counter--;
-  this.setMessage();
 }
 ```
 
@@ -376,8 +375,8 @@ And with that, you now have a complete tap challenge implementation in thirty li
 
 ## What else can you do?
 
-The tap challenge is not the world’s most complex mobile app, but it’s important to keep in perspective what you just built—this is a functional native iOS _and_ Android app that uses completely native user interface controls.
+The tap challenge is not the world’s most complex mobile app, but it’s important to keep in perspective what you just built—this is a functional native iOS _and_ Android app that uses completely native user interface controls, and you built it with JavaScript and Vue.
 
-NativeScript’s Vue integration is a community-led effort that’s still in its infancy, but that doesn’t mean there isn’t some cool stuff you can build. To start, take a look at the `app-with-list-view.js`, `app-with-router.js`, `app-with-tab-view.js`, and `app-with-vmodel.js` files that are a part of your sample app. Each of those are complete chunks of code that you can copy and paste into your `app.js` file to try building different types of Vue apps.
+NativeScript’s Vue integration is a community-led effort that’s still in its infancy, but that doesn’t mean there isn’t some cool stuff you can build. To start, take a look at the `app-with-list-view.js`, `app-with-router.js`, `app-with-tab-view.js`, and `app-with-vmodel.js` files that are a part of your sample app. Each of those files are complete chunks of code that you can copy and paste into your `app.js` file to try building different types of Vue apps.
 
-Oh, one last thing: although NativeScript’s Vue integration is in its infancy, NativeScript itself is production-ready app framework for building robust iOS and Android applications with JavaScript. Most NativeScript concepts apply regardless of what framework you choose to use NativeScript with, so you could set aside some time to learn NativeScript today, and keep tabs on NativeScript’s Vue integration as it evolves. If you’re curious, the best place to start is in [one of the NativeScript getting started tutorials](https://docs.nativescript.org/#get-started).
+And on that note I’ll leave you with two quick links. First, although NativeScript’s Vue integration is in its infancy, NativeScript itself is production-ready app framework for building robust iOS and Android applications with JavaScript. If you want to learn more about NativeScript works, the best place to start is in [one of the NativeScript getting started tutorials](https://docs.nativescript.org/#get-started). Second, if you’d like to get involved helping to make Vue + NativeScript happen [hop on our #vue channel in Slack](http://developer.telerik.com/wp-login.php?action=slack-invitation). Feedback and comments are more than welcome 😄
