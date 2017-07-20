@@ -10,7 +10,12 @@ Don’t worry though—with a few optimizations, NativeScript apps can startup f
 
 Let’s get started.
 
-## Step 1: Enable webpack
+* [Step 1: Enable webpack](#step-1)
+* [Step 2: Add uglification](#step-2)
+* [Step 3: Perform heap snapshots](#step-3)
+* [Summary](#summary)
+
+<h2 id="step-1">Step 1: Enable webpack</h2>
 
 One of the biggest thing that slows down NativeScript apps on startup is file I/O. Every time you do a `require()` call in your app, the NativeScript modules must retrieve a file from your app, and run that file through the [JavaScript virtual machine that NativeScript uses](http://developer.telerik.com/featured/nativescript-works/). That cost adds up, especially in larger apps that might require hundreds or thousands of modules to render their first page.
 
@@ -61,7 +66,7 @@ Your app should be a lot faster now that you’ve using a lot fewer files, but w
 
 Luckily webpack has a series of easy-to-add plugins can help.
 
-## Step 2: Add uglification
+<h2 id="step-2">Step 2: Add uglification</h2>
 
 Webpack has a number of plugins, but perhaps the most useful plugin is built right into webpack itself—[UglifyJS](https://github.com/mishoo/UglifyJS2). As its name implies, UglifyJS compresses and minifies your JavaScript code to reduce files sizes.
 
@@ -96,7 +101,7 @@ Next, you enabled UglifyJS, which reduces the size of your app by removing dead 
 
 As a next step you’re going to take things one step further, and register your JavaScript with the JavaScript virtual machine itself.
 
-## Step 3: Perform heap snapshots
+<h2 id="step-3">Step 3: Perform heap snapshots</h2>
 
 NativeScript runs the JavaScript code you write through a [JavaScript virtual machine](http://developer.telerik.com/featured/a-guide-to-javascript-engines-for-idiots/), which is essentially a piece of software that’s specifically designed to interpret and execute JavaScript code.
 
