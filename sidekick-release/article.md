@@ -6,7 +6,7 @@ Many of us have grown to embrace CLI tooling as the most efficient way to integr
 
 We first discussed our plans with Sidekick a few months ago, and today we’re announcing that **Sidekick is [available as a public preview](https://www.nativescript.org/nativescript-sidekick) for everyone to try** 🎉
 
-![](sidekick-icon.png)
+![](sidekick-logo.png)
 
 ## What is NativeScript Sidekick...Exactly?
 
