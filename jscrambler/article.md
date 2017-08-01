@@ -13,25 +13,35 @@ In NativeScript you write your application logic in JavaScript. And because Java
 ![](plain-text.png)
 _An example of the plain text code that gets distributed with your NativeScript applications by default. This specific code is from a built version of the [NativeScript Groceries sample](https://github.com/nativescript/sample-Groceries)._
 
-If you come from a web development background this plain-text deployment is not a new concept—web apps absolutely must ship their source code in plain text for browsers to intepret. But if you come from a native development background, this is a new problem, as native apps typically only distribute compiled byte code.
+If you come from a web development background this plain text deployment is not a new concept—web apps absolutely must ship their source code in plain text for browsers to intepret. But if you come from a native development background, this is a new problem, as native apps typically only distribute compiled byte code.
 
-If you’re concerned about protecting your NativeScript app’s source code you have a few options. NativeScript has [built-in support for UglifyJS](https://docs.nativescript.org/best-practices/bundling-with-webpack#uglifyjs), a tool that compresses JavaScript code. During the minification process, Uglify replaces variable names and removes whitespace, making your code far harder for your average developer to read.
+If you’re concerned about protecting your NativeScript app’s source code you have a few options. NativeScript has [built-in support for UglifyJS](https://docs.nativescript.org/best-practices/bundling-with-webpack#uglifyjs), a tool that compresses JavaScript code. During the minification process, Uglify replaces variable names and removes whitespace, making your code far harder for your average developer to read. For example, here’s what the code for the Groceries sample looks like after it goes through UglifyJS.
 
-Uglify provides a base level of protection by compressing your JavaScript code, which might be sufficient for some applications. However, Uglify’s primary purpose is to minify your code, and not to obfuscate your code so that’s it’s difficult for malicious users to reverse engineer. In contrast, Jscrambler’s sole purpose is obfuscation, and it does that very well.
+![](uglify-raw.png)
+_The source code of the NativeScript Groceries sample after going through UglifyJS._
+
+However, UglifyJS’s sole purpose is to reduce the file size of your code, and not to obfuscate your code so that’s it’s difficult for malicious users to reverse engineer. For instance, if I take the same code from above and run it through a beautifier or formatting tool, suddenly that code becomes far more readable.
+
+![](uglify-beautified.png)
+_The uglified source code of the NativeScript Groceries sample formatted using jsbeautifier.org._
+
+The processing UglifyJS does might be sufficient if you just want to do some really basic code hiding as part of your NativeScript app deployments, but if you really want to protect your code you need a tool dedicated to obfuscation—and that’s where Jscrambler comes in.
 
 ## How Jscrambler works
 
- At a high-level, Jscrambler takes your JavaScript code, and mangles it beyond recognition while ensuring that the code continues to work as expected. Just to give you an idea, here’s what one of the files in my NativeScript apps looked like after it went through Jscrambler.
+ At a high-level, Jscrambler takes your JavaScript code, and mangles it beyond recognition while ensuring that the code continues to work as expected. Just to give you an idea, here’s what the same NativeScript Groceries sample code looks like after it goes through Jscrambler.
 
 ![](scrambled-code.png)
-_An example of a NativeScript source file ran through Jscrambler._
+_The source code of the NativeScript Groceries sample after going through Jscrambler._
 
-Good luck figuring out what’s going on there. And even if you run this code through a beautifier or formatting tool, you’ll still have a heck of a time deciphering anything. Here’s what I get if I run that same file through jsbeautifier.org.
+Good luck figuring out what’s going on there. And even if you run this code through a beautifier or formatting tool, you’ll still have a heck of a time deciphering anything. Here’s what that same file looks like after going through jsbeautifier.org.
 
 ![](beautified.png)
-_An example of running a Jscramber-processed file through jsbeautifier.org. Even after formatting and beautification the file is indecipherable._
+_The Jscrambler-processed source code of the NativeScript Groceries sample formatted using jsbeautifier.org._
 
-Again, good luck making sense of that code. Jscrambler offers a [number of configurable transformations](https://docs.jscrambler.com/code-integrity/documentation/transformations) so you can fine tune exactly how the tool transforms your code, but the Jscrambler team has provided us with a series of default settings for NativeScript developers. Let’s take a look at these settings and see how you can get Jscrambler working in your apps.
+As the above screenshot above shows, Jscrambler goes above and beyond scrambling your code so that it’s unreadable even after going through formatting and beautifier tools. Good luck to anyone that wants to figure out what’s going on there.
+
+Jscrambler offers a [number of configurable transformations](https://docs.jscrambler.com/code-integrity/documentation/transformations) so you can fine tune exactly how the tool transforms your code, but the Jscrambler team has provided us with a series of default settings for NativeScript developers. Let’s take a look at these settings and see how you can get Jscrambler working in your apps.
 
 ## Getting Jscrambler working
 
@@ -75,7 +85,7 @@ Once you have webpack installed, you’ll next want to install the Jscrambler we
 npm i --save-dev jscrambler-webpack-plugin
 ```
 
-Next, create a new file in the root of your app named `jscrambler.json`, and paste in the following code.
+After that, create a new file in the root of your app named `jscrambler.json`, and paste in the following code.
 
 ```
 {
