@@ -1,14 +1,10 @@
 # How to Build NativeScript Apps That Start Up Fast
 
-> Hi! 👋  The article you see here is a draft. It’s destined for the NativeScript documentation, but it needs some technical editing help first. If you have feedback feel free to join the [NativeScript community Slack](http://tinyurl.com/nativescriptSlack) and ping me (@tjvantoll). Thanks!
-
 NativeScript allows you to write native iOS and Android applications using JavaScript. Although there are many advantages to taking this approach—using one language to write multiple apps, faster development times from using an interpreted language, and so forth—there is one fact NativeScript developers can’t avoid: NativeScript apps can take longer to start up than applications written with native development languages such as Objective-C and Java.
 
 Don’t worry though—with a few optimizations, NativeScript apps can startup fast enough for the overwhelming majority of app use cases. This article is a straight-to-the-point list of steps you can take to make sure your NativeScript apps start up as fast as possible. 
 
 > **NOTE**: Jump to the [summary](#summary) if you want an explanation-free list of commands to run.
-
-Let’s get started.
 
 * [Step 1: Enable webpack](#step-1)
 * [Step 2: Add uglification](#step-2)
@@ -49,16 +45,25 @@ Or
 npm run start-ios-bundle
 ```
 
-Here’s how fast the default NativeScript apps start with webpack enabled.
+> **NOTE**: If you’re having trouble enabling webpack in your own apps, feel free to reach out for help on the [NativeScript community forum](https://discourse.nativescript.org/).
 
-<div style="display: flex; max-width: 100%;">
+To give you a sense of how big of a difference webpack makes, let’s look at some before and after shots of applying webpack builds to the [NativeScript Groceries sample](https://github.com/nativescript/sample-Groceries). Here’s what Groceries looks like if you start it _without_ webpack.
+
+<div style="display: flex; max-width: 100%; height: 300px;">
+  <img src="ios-0.gif">
+  <img src="android-0.gif">
+</div>
+
+And here’s the same app with webpack turned on.
+
+<div style="display: flex; max-width: 100%; height: 300px;">
   <img src="ios-1.gif">
   <img src="android-1.gif">
 </div>
 
 > **NOTE**:
-> * If you’re having trouble enabling webpack in your own apps, feel free to reach out for help on the [NativeScript community forum](https://discourse.nativescript.org/).
-> * If you’re interested in seeing _exactly_ how big of a difference these optimizations make, check out [this article on profiling NativeScript apps](https://www.nativescript.org/blog/deep-dive-into-nativescript-3.1-performance-improvements).
+> * The above iOS and Android test runs were run on a physical iPhone 6S, and a physical Nexus 6P, respectively. You’re welcome to repeat the tests by cloning the [Groceries sample from GitHub](https://github.com/nativescript/sample-Groceries).
+> * You can enable [far more detailed profiling information from the NativeScript CLI](https://www.nativescript.org/blog/deep-dive-into-nativescript-3.1-performance-improvements), if you’re looking for more detailed information on what’s happening when your app starts up.
 
 Webpack speeds up your app by placing most of your application code in two files—`vendor.js` and `bundle.js`. If you’re curious, you can find those files in your `platforms/ios/NAME_OF_YOUR_APP_/app` folder for iOS, and in your `platforms/android/src/main/assets/app` folder for Android.
 
@@ -90,9 +95,9 @@ If you open your `vendor.js` and `bundle.js` files, you should now see compresse
 
 ![](compressed-code.png)
 
-Your apps should start noticeable faster as well now that NativeScript has less JavaScript code to parse during the startup process. Here’s what the default NativeScript apps looks like with Uglify added to the webpack build process.
+Your apps should start noticeable faster as well now that NativeScript has less JavaScript code to parse during the startup process. Here’s what the NativeScript Groceries sample looks like with Uglify added to the webpack build process.
 
-<div style="display: flex; max-width: 100%;">
+<div style="display: flex; max-width: 100%;height: 300px;">
   <img src="ios-2.gif">
   <img src="android-2.gif">
 </div>
@@ -129,10 +134,6 @@ Because heap snapshots completely avoid the need parse the vast majority of your
 ![](android-3.gif)
 
 > **NOTE**: For a far more technical explanation of how V8 heap snapshots work in NativeScript, and how you can configure and optimize the snapshots, check out [this article on the NativeScript blog](https://www.nativescript.org/blog/improving-app-startup-time-on-android-with-webpack-v8-heap-snapshot).
-
-## Step 4???
-
-> **TJ NOTE**: At this point there are two things I’m considering covering: lazy loading Angular routes, and moving as much code as possible to your `vendor.js` file. I’m torn—both of these tasks help your apps start up faster, but both aren’t exactly the easiest things to explain, and the benefits are more marginal. Dunno. Thoughts?
 
 <h2 id="summary">Summary</h2>
 
