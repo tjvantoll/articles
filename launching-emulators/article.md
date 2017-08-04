@@ -1,8 +1,8 @@
 # How to Launch Android Emulators and iOS Simulators From the Command Line
 
-I use the iOS Simulator and Android AVDs (Android Virtual Devices) heavily, and I was getting frustrated needing to manually launch the two from Xcode and Android Studio, respectively.
+I use the iOS Simulator and AVDs (Android Virtual Devices) heavily, and I was getting frustrated needing to manually launch the two from Xcode and Android Studio, respectively.
 
-So I spent a little time setting up commands that let me launch these tools from my terminal. I named them  `ios-simulator` and `android-emulator`, and here’s what those look like in action.
+So I spent a little time setting up commands that let me launch these tools from my terminal. I named them  `ios-simulator` and `android-emulator`, and here’s what they look like in action.
 
 ![](ios-sim-workflow.gif)
 ![](android-avd-workflow.gif)
