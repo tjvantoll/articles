@@ -13,7 +13,7 @@ Don’t worry though—with a few optimizations, NativeScript apps can startup f
 
 <h2 id="step-1">Step 1: Enable webpack</h2>
 
-One of the biggest thing that slows down NativeScript apps on startup is file I/O. Every time you do a `require()` call in your app, the NativeScript modules must retrieve a file from your app’s file system, and run that file through the [JavaScript virtual machine that NativeScript uses](http://developer.telerik.com/featured/nativescript-works/). That cost adds up, especially in larger apps that might require hundreds or thousands of modules to render their first page.
+File I/O is one of the biggest reasons that NativeScript apps can start up slowly. Every time you do a `require()` call in your app, the NativeScript modules must retrieve a file from your app’s file system, and run that file through the [JavaScript virtual machine that NativeScript uses](http://developer.telerik.com/featured/nativescript-works/). That cost adds up, especially in larger apps that might require hundreds or thousands of modules to render their first page.
 
 The best way to reduce this file I/O is to place all of your JavaScript code in a small number of files. For NativeScript apps the best way to do this is [enabling the NativeScript webpack plugin](https://docs.nativescript.org/best-practices/bundling-with-webpack), which gives you the ability to use the popular [webpack](https://webpack.github.io/) build tool to optimize your NativeScript apps.
 
@@ -23,7 +23,7 @@ First you’ll want to install the plugin.
 npm install --save-dev nativescript-dev-webpack
 ```
 
-And then run `npm install` to install its dependencies..
+And then run `npm install` to install its dependencies.
 
 ```
 npm install
@@ -47,7 +47,7 @@ npm run start-ios-bundle
 
 > **NOTE**: If you’re having trouble enabling webpack in your own apps, feel free to reach out for help on the [NativeScript community forum](https://discourse.nativescript.org/).
 
-To give you a sense of how big of a difference webpack makes, let’s look at some before and after shots of applying webpack builds to the [NativeScript Groceries sample](https://github.com/nativescript/sample-Groceries). Here’s what Groceries looks like if you start it _without_ webpack.
+To give you a sense of how big of a difference webpack makes, let’s look at some before and after videos of applying webpack builds to the [NativeScript Groceries sample](https://github.com/nativescript/sample-Groceries). Here’s what Groceries looks like if you start it _without_ using webpack.
 
 <div style="display: flex; max-width: 100%; height: 300px;">
   <img src="ios-0.gif">
@@ -62,12 +62,12 @@ And here’s the same app with webpack turned on.
 </div>
 
 > **NOTE**:
-> * The above iOS and Android test runs were run on a physical iPhone 6S, and a physical Nexus 6P, respectively. You’re welcome to repeat the tests by cloning the [Groceries sample from GitHub](https://github.com/nativescript/sample-Groceries).
-> * You can enable [far more detailed profiling information from the NativeScript CLI](https://www.nativescript.org/blog/deep-dive-into-nativescript-3.1-performance-improvements), if you’re looking for more detailed information on what’s happening when your app starts up.
+> * The above iOS and Android test runs were run on a physical iPhone 6S and a physical Nexus 6, respectively. You’re welcome to repeat the tests by cloning the [Groceries sample from GitHub](https://github.com/nativescript/sample-Groceries).
+> * You can enable [far more detailed profiling information using a flag in your `package.json` file](https://www.nativescript.org/blog/deep-dive-into-nativescript-3.1-performance-improvements).
 
 Webpack speeds up your app by placing most of your application code in two files—`vendor.js` and `bundle.js`. If you’re curious, you can find those files in your `platforms/ios/NAME_OF_YOUR_APP_/app` folder for iOS, and in your `platforms/android/src/main/assets/app` folder for Android.
 
-Your app should be a lot faster now that you’re using a lot fewer files, but we’re just getting started. Even through your app only uses two JavaScript files, there’s still a cost for NativeScript to parse all of the JavaScript code that lives in those files.
+Your app should be a lot faster now that you’re using a lot fewer files, but we’re just getting started. Even though your app only uses two JavaScript files, there’s still a cost for NativeScript to parse all of the JavaScript code that lives in those files.
 
 Simply put, the more lines of JavaScript code in your app, the more time it’ll take NativeScript to interpret that code and get your app up and running. Luckily webpack can help with that as well.
 
@@ -77,7 +77,7 @@ Simply put, the more lines of JavaScript code in your app, the more time it’ll
 
 Webpack has a number of plugins that extend its capabilities, but perhaps the most useful plugin is built right into webpack itself—[UglifyJS](https://github.com/mishoo/UglifyJS2). As its name implies, UglifyJS compresses and minifies your JavaScript code to reduce files sizes.
 
-For NativeScript apps there are two advantages to using UglifyJS—first, because UglifyJS reduces the file size of JavaScript files, it’ll also reduce the file size of your app as a whole. Second, because UglifyJS removes dead code as it minifies your code, your app will start up faster as there will be fewer JavaScript instructions for NativeScript to parse when your app starts up.
+For NativeScript apps there are two advantages to using UglifyJS. First, because UglifyJS reduces the file size of JavaScript files, it’ll also reduce the file size of your app as a whole. Second, because UglifyJS removes dead code as it minifies your code, your app will start up faster because there will be fewer JavaScript instructions for NativeScript to parse.
 
 Using UglifyJS is easy too. To use UglifyJS as part of your NativeScript builds, all you need to do is add a `--uglify` flag to the scripts you ran earlier. That is, run one of the following commands.
 
@@ -95,14 +95,14 @@ If you open your `vendor.js` and `bundle.js` files, you should now see compresse
 
 ![](compressed-code.png)
 
-Your apps should start noticeable faster as well now that NativeScript has less JavaScript code to parse during the startup process. Here’s what the NativeScript Groceries sample looks like with Uglify added to the webpack build process.
+The more code you have, the more of a difference the UglifyJS optimization will make. Here’s what the NativeScript Groceries sample looks like with Uglify added to the webpack build process.
 
 <div style="display: flex; max-width: 100%;height: 300px;">
   <img src="ios-2.gif">
   <img src="android-2.gif">
 </div>
 
-To recap our steps so far, you started by enabling webpack, which placed all of your application code into two files. Having your code in two files greatly reduced the file I/O NativeScript had to do when your app starts, and your startup times improved.
+To recap our steps so far, you started by enabling webpack, which placed all of your application code into two files. Having your code in two files greatly reduced the file I/O NativeScript had to do when your app started, and your startup times improved.
 
 Next, you enabled UglifyJS, which reduced the size of your app by removing dead code. Fewer lines of code meant less JavaScript for NativeScript to parse when your app started up, so your startup times improved again.
 
@@ -112,7 +112,7 @@ As a next step you’re going to take things one step further, and register your
 
 NativeScript runs the JavaScript code you write through a [JavaScript virtual machine](http://developer.telerik.com/featured/a-guide-to-javascript-engines-for-idiots/), which is essentially a piece of software that’s specifically designed to interpret and execute JavaScript code.
 
-NativeScript Android apps run on top of Google’s V8 engine, and NativeScript iOS apps run on top of Apple’s JavaScriptCore engine. V8 has a [neat feature called heap snapshots](https://v8project.blogspot.bg/2015/09/custom-startup-snapshots.html), which NativeScript leverages to give a pretty powerful boost to Android startup times.
+NativeScript Android apps run on top of Google’s V8 engine, and NativeScript iOS apps run on top of Apple’s JavaScriptCore engine. V8 has a [neat feature called heap snapshots](https://v8project.blogspot.bg/2015/09/custom-startup-snapshots.html), which NativeScript leverages to give a powerful boost to Android startup times.
 
 Here’s the basics of how heap snapshots work: when you start up your app, normally, the JavaScript VM has to fetch and parse every JavaScript file you use intend to use in your app. There is a cost to doing this, and that cost is one thing that can slow down the startup of your NativeScript apps.
 
@@ -129,9 +129,9 @@ There are two important things to note:
 1) Because heap snapshots are a feature of V8, you can only use this feature as part of your NativeScript Android builds. A similar feature is not available for NativeScript iOS builds.
 2) Under the hood, the NativeScript snapshot generator uses a V8 tool called `mksnapshot`. The `mksnapshot` tool only supports macOS and Linux, and therefore at the moment you are unable to use the `--snapshot` flag as part of your builds on Windows. On Windows-based development machine the NativeScript CLI ignores the `--snapshot` flag.
 
-Because heap snapshots completely avoid the need parse the vast majority of your JavaScript on startup, they tend to speed up the startup times of NativeScript apps substantially. Here’s how the default NativeScript app starts up on Android with heap snapshots enabled.
+Because heap snapshots completely avoid the need to parse and execute the vast majority of your JavaScript on startup, they tend to speed up the startup times of NativeScript apps substantially. Here’s how the NativeScript Groceries app starts up on Android with heap snapshots enabled.
 
-![](android-3.gif)
+<img src="android-3.gif" style="height: 300px;">
 
 > **NOTE**: For a far more technical explanation of how V8 heap snapshots work in NativeScript, and how you can configure and optimize the snapshots, check out [this article on the NativeScript blog](https://www.nativescript.org/blog/improving-app-startup-time-on-android-with-webpack-v8-heap-snapshot).
 
