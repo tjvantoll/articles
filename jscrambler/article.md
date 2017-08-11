@@ -1,6 +1,6 @@
 # Protecting Your Source Code with Jscrambler
 
-Today we’re happy to announce support for [Jscrambler](https://jscrambler.com) in NativeScript apps. Jscrambler is premium tool that transforms the JavaScript in your application to make it virtually impossible to reverse engineer.
+Today we’re happy to announce support for [Jscrambler](https://jscrambler.com) in NativeScript apps. Jscrambler is premium tool that transforms the JavaScript in your application to make it extremely difficult to reverse engineer.
 
 ![](jscrambler.png)
 
@@ -174,7 +174,7 @@ After the build process completes, you’ll have to look through the `platforms`
 
 ![](scrambled-code.png)
 
-Malicious users will now have a nearly impossible task figuring out what this code does, and your app should continue to work exactly as expected. (Let us know if it doesn’t—we’ve tested about a dozen apps and haven’t hit a single problem.)
+Malicious users will now have a extremely difficult time figuring out what this code does, and your app should continue to work exactly as expected. (Let us know if it doesn’t—we’ve tested about a dozen apps and haven’t hit a single problem.)
 
 Furthermore, in our testing we haven’t detected any meaningful performance regressions from scrambling NativeScript application code. Your experiences may very, so it’s definitely worth testing your app heavily once you enable Jscrambler, but in our experimenting enabling Jscrambler is a fairly seamless process.
 
