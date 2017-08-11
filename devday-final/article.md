@@ -1,6 +1,6 @@
-# The Speaker List is Now Final for NativeScript Developer Day
+# NativeScript Developer Day—Announcing the Final Speaker Lineup
 
-We’re happy to announce that the speaker list is now final for [NativeScript Developer Day](http://developerday.nativescript.org/) 🎉
+We’re happy to announce that the speaker for [NativeScript Developer Day](http://developerday.nativescript.org/) is now final 🎉
 
 ![](speakers.png)
 
@@ -48,7 +48,7 @@ At Developer Day Alex Ziskind will be talking about a topic I’m very intereste
 
 There’s not enough space in this article to cover all the great sessions at NativeScript Developer Day.
 
-I mean, I didn’t even get to talk about an Angular deep dive from Jeff Whelpley and Rob Laverty, or a TypeScript and ES6 deep dive from Daniel Zen, or hearing first-hand hybrid and native experiences from Nic Raboy.
+I mean, I didn’t even get to talk about an Angular deep dive from Jeff Whelpley and Rob Laverty, or a TypeScript and ES6 deep dive from Daniel Zen, or hearing first-hand hybrid and native experiences from Nic Raboy, or a look into the world of RxJS from Tracy Lee.
 
 The entire NativeScript DevRel team will be speaking as well, so you’ll also get to hear from Jen Looper, Sebastian Witalec, Rob Lauer, and yours truly 😄
 
