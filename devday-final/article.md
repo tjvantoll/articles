@@ -34,7 +34,7 @@ While it’s exciting to hear from NativeScript engineering, I’m equally excit
 
 If you’ve built a NativeScript app before, you’ve almost certainly used a plugin built by Nathan Walker, Nathanael Anderson, or Brad Martin. Seriously, these three have well over 60 plugins to their names, and Nathan started what is today the [official NativeScript plugin seed](https://docs.nativescript.org/plugins/building-plugins).
 
-These three will be speaking on day one of Developer Day, which is a deep dive day you can use to really learn a topic. That means you get 90 minutes to dive deep into NativeScript plugins with these three.
+These three will be speaking on day one of NativeScript Developer Day, or “deep dive” day. That means you get 90 minutes on plugins from three of the most prolific NativeScript plugin authors.
 
 > **NOTE**: Brad and Nathanael are both giving day two sessions as well. Brad will be speaking about NativeScript layouts, and Nathanael will be speaking about NativeScript performance tips. You won’t want to miss either!
 
@@ -50,7 +50,7 @@ There’s not enough space in this article to cover all the great sessions at Na
 
 I mean, I didn’t even get to talk about an Angular deep dive from Jeff Whelpley and Rob Laverty, or a TypeScript and ES6 deep dive from Daniel Zen, or hearing first-hand hybrid and native experiences from Nic Raboy.
 
-Not to mention the Progress DevRel team, as Jen Looper, Sebastian Witalec, Rob Lauer, and I will also be at Developer Day in full force 😄
+The entire NativeScript DevRel team will be speaking as well, so you’ll also get to hear from Jen Looper, Sebastian Witalec, Rob Lauer, and yours truly 😄
 
 ## Join us!
 
