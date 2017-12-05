@@ -1,7 +1,5 @@
 # My NativeScript Development Workflow
 
-I find articles where developers document their development workflow interesting, so I thought I’d write one.
-
 In this article I’ll tell you how I build NativeScript apps. I’ll start with one big disclaimer though—my workflow isn’t the “best” way to build NativeScript apps, or the only way. One of the great things about NativeScript is you have a lot of flexibility in how you build, so you can find a workflow that works for you.
 
 In fact, if you’re a NativeScript developer you should totally write an article like this and share it in the comments 😉  It’d  be great to get different perspectives on how developers build their apps.
@@ -117,11 +115,12 @@ Once my apps are running, I edit my source code in [Visual Studio Code](https://
 
 Here are a few of my configuration settings and extensions you might find interesting.
 
-* Quiet Light Theme—My personal favorite built-in VS Code themes. It has good contrast for presentations and I really like the colo scheme.
+* Quiet Light Theme—My personal favorite built-in VS Code theme. It has good contrast for presentations and I really like the color scheme.
 
 > **TIP**: You can preview different VS Code themes using the keyboard shortcut `Ctrl`/`Cmd` + `K` ▶️ `Ctrl`/`Cmd` + `T`. Use the arrow keys to toggle between different themes.
 
 * [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)—My favorite icon theme. This controls the icons that appear next to file names in the explorer.
+* [NativeScript](https://www.nativescript.org/nativescript-for-visual-studio-code)—An extension for step debugging NativeScript code directly within VS Code. This works really well, although I’m starting to use [NativeScript’s Chrome DevTools integration](https://docs.nativescript.org/tooling/chrome-devtools) for my debugging needs.
 * [SpellChecker](https://marketplace.visualstudio.com/items?itemName=swyphcosmo.spellchecker)—This extension isn’t about NativeScript directly, but I really like this spell checker for when I’m writing articles and documentation in VS Code.
 
 Now that I’ve given you a broad overview of some of the things I use independently, let’s put it all together and look at the big picture.
