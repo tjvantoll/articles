@@ -57,11 +57,53 @@ JavaScript-driven native apps are native apps, and so they also suffer many of t
 
 ## Which to choose
 
-Now that we’ve introduced both approaches to app development, let’s look at some questions you can ask yourself about the app you’re developing to help you decide which approach to take.
+Now that we’ve introduced both approaches to app development, let’s tackle the hard question of what platform you should build your next app on. For most situations you’ll want to consider the web platform first and build a PWA. The web is easier to build for and deploy to; you’ll reach far more users on the web; and it’s far easier to give your users a URL to reach your app than dealing with potentially unintuitive app store processes.
 
-* Do you need an API that is not available on the web?
+That being said ,the web is not the best choice for all app usage scenarios, and there are some really compelling reasons to build native applications using JavaScript-driven native frameworks. Let’s look at the top few reasons.
 
-There are situations
+* Your app needs an API that is not available on the web
+
+The single biggest reason to build a native app, and not a web app, is your app must do something the web can’t do. Although the list of things the web can do today is pretty impressive, the web can’t keep up with what native platforms make possible.
+
+Furthermore, even in cases where the web and native both allow a particular piece of functionality, you can almost always do more with that functionality in native applications.
+
+For example, both the web and JavaScript-driven native apps allow you to use a device’s camera to take a picture. But native applications let you go farther, and customize the camera to make a variety of additional use cases possible. If you’ve ever used a banking app to deposit a check, you’ve seen this functionality in action.
+
+-- image of check app
+
+Little tweaks like putting an overlay on the camera can be enormously valuable for the user, and can drive real engagement for your application. And it’s not just the camera, this same pattern repeats itself with many other common mobile APIs. For example web and native applications both have access to a users location, but native apps can track a user’s location while your app is in the background, meaning Google Maps can continue to track you while take a phone call.
+
+The great thing about JavaScript-driven native frameworks is they make this sort of advanced mobile functionality possible while sticking to a web-friendly workflow. For example you can easily find background geolocation plugins for both React Native and NativeScript with a quick Google search.
+
+* Do you need to make money off your app directly?
+
+Consumers spending across app stores is [expected to top $110 billion in 2018](https://techcrunch.com/2017/12/05/consumer-spending-across-app-stores-worldwide-to-top-110-billion-in-2018/?utm_campaign=Fuse+Weekly&utm_medium=email&utm_source=Fuse_Weekly_106), so despite intense competition, there’s still money to be made by making applications.
+
+And if your app needs to take user’s money directly, either through charges for the app itself or for in-app purchases, it’s a whole lot easier to take that money using a JavaScript-driven native app.
+
+The [web payment API](https://developers.google.com/web/fundamentals/payments/) exists now, which is exciting, but web payments are still [only supported in some browsers](https://caniuse.com/#feat=payment-request). For native apps, many users already have a credit card registered with Apple or Google, so taking a user’s money is as easy as making an in-app payment request. 
+
+
+## Web or native—why not both?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 PWA
@@ -97,7 +139,7 @@ PWA
   * Painful iOS and Android deployment processes and update cycles
   * Large footprint (because they’re native apps)
 
-## Web or native—why not both?
+
 
 🌈 🦄
 
