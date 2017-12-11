@@ -59,11 +59,7 @@ JavaScript-driven native apps are native apps, and so they also suffer many of t
 
 Now that we’ve introduced both approaches to app development, let’s tackle the hard question of what platform you should build your next app on. For most situations you’ll want to consider the web platform first and build a PWA. The web is easier to build for and deploy to; you’ll reach far more users on the web; and it’s far easier to give your users a URL to reach your app than dealing with potentially unintuitive app store processes.
 
-That being said ,the web is not the best choice for all app usage scenarios, and there are some really compelling reasons to build native applications using JavaScript-driven native frameworks. Let’s look at the top few reasons.
-
-* Your app needs an API that is not available on the web
-
-The single biggest reason to build a native app, and not a web app, is your app must do something the web can’t do. Although the list of things the web can do today is pretty impressive, the web can’t keep up with what native platforms make possible.
+That being said, the web is not the best choice for all app usage scenarios. The single biggest reason to build a native app, and not a web app, is your app must do something the web can’t do. Although the list of things the web can do today is pretty impressive, the web can’t keep up with what native platforms make possible. If you want to work with IoT devices, build 
 
 Furthermore, even in cases where the web and native both allow a particular piece of functionality, you can almost always do more with that functionality in native applications.
 
@@ -81,10 +77,27 @@ Consumers spending across app stores is [expected to top $110 billion in 2018](h
 
 And if your app needs to take user’s money directly, either through charges for the app itself or for in-app purchases, it’s a whole lot easier to take that money using a JavaScript-driven native app.
 
-The [web payment API](https://developers.google.com/web/fundamentals/payments/) exists now, which is exciting, but web payments are still [only supported in some browsers](https://caniuse.com/#feat=payment-request). For native apps, many users already have a credit card registered with Apple or Google, so taking a user’s money is as easy as making an in-app payment request. 
+The [web payment API](https://developers.google.com/web/fundamentals/payments/) exists now, which is exciting, but web payments are still [only supported in some browsers](https://caniuse.com/#feat=payment-request). For native apps, many users already have a credit card registered with Apple or Google, so taking a user’s money is as easy as making an in-app payment request.
+
+In NativeScript, for example, there are plugins for [in-app purchasing](https://market.nativescript.org/plugins/nativescript-purchase), [for PayPal](https://market.nativescript.org/plugins/nativescript-paypal), and [for Stripe](https://market.nativescript.org/plugins/nativescript-stripe)—each of which you can easily install and use in an app.
+
 
 
 ## Web or native—why not both?
+
+Although PWA advocates like to say that all apps should be web apps, and iOS and Android advocates like to claim that all apps are best made with native code, the truth is each platform has a unique set of advantages. Luke Wroblewski might have [said it best in a 2016 article](https://www.lukew.com/ff/entry.asp?1954).
+
+> “The Web is for audience **reach** and native apps are for **rich** experiences. Both are strategic. Both are valuable. So when it comes to mobile, it's not Web vs. Native. It's both.”
+
+No one is going to argue that the web doesn’t have a greater reach. Because the web runs on all devices around the world, web applications aren’t restricted to app stores run by companies like Apple and Google.
+
+But it might be hard for web advocates to shallow just how much time users spend in native iOS and Android applications. [Data from Flurry Analytics](http://flurrymobile.tumblr.com/post/157921590345/us-consumers-time-spent-on-mobile-crosses-5) for example shows that mobile browser usage in the United States has fallen to a staggeringly low 8% of user’s time.
+
+![](flurry-data.png)
+
+Yes, this is only US data, and yes, most of this time is spent in a handful of apps like Facebok and Twitter—but still, that’s an 92% versus 8% is an enormous gap in usage.
+
+
 
 
 
@@ -162,3 +175,5 @@ OMG YOU GET THE BEST OF BOTH WORLD AMIRITE!?
 
 Stats to show increased mobile demand?
   https://techcrunch.com/2017/12/05/consumer-spending-across-app-stores-worldwide-to-top-110-billion-in-2018/?utm_campaign=Fuse%2BWeekly&utm_medium=email&utm_source=Fuse_Weekly_106
+
+http://flurrymobile.tumblr.com/post/157921590345/us-consumers-time-spent-on-mobile-crosses-5
