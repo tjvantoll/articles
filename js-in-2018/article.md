@@ -1,14 +1,17 @@
 # Choosing Between Progressive Web Apps, React Native, and NativeScript in 2018
 
-If you are a JavaScript developer looking to build a mobile app in 2018, you have never had more options. You can build for the web with a Progressive Web App, build a hybrid app using Cordova, build native iOS and Android apps using frameworks like [React Native](https://facebook.github.io/react-native/) or [NativeScript](https://www.nativescript.org/), or choose some combination of all of these things.
+If you are a JavaScript developer, you have never had more options for building mobile aps. You can build for the web with a Progressive Web App, build a hybrid app using Cordova, build native iOS and Android apps using frameworks like [NativeScript](https://www.nativescript.org/) or [React Native](https://facebook.github.io/react-native/), or choose some combination of all of these things.
 
-Here at Progress, we’ve been getting a lot of demand for a comparison between Progressive Web Apps and JavaScript-driven native frameworks like React Native and Progress’s own NativeScript, so that will be the focus of this article.
+Here at Progress, the two biggest approaches we see as on the rise are Progressive Web Apps, and JavaScript-driven native frameworks like NativeScript and React Native. We get a lot of requests to compare these two approaches to application development, so that will be the focus of this article.
 
-We’ll start by discussing Progressive Web Apps and the JavaScript-driven native approach in detail, and move on to give some clear guidelines on when each approach makes sense. Let’s start the conversation by looking at Progressive Web Apps.
+We’ll start by discussing the Progressive Web App and the JavaScript-driven native approaches in detail, and move on to give some clear guidelines on when each approach makes sense. Let’s start the conversation by looking at Progressive Web Apps.
 
 ## Progressive Web Apps
 
 [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) (PWAs) are a series of new APIs that add a number of new features to web applications. The PWA initiative has received a lot of attention in the JavaScript community in the last year, as Google, Microsoft, and Mozilla have all been pushing the technology heavily through their respective channels. It’s hard to attend a JavaScript conference without accidentally attending at least a few talks on PWAs.
+
+![](chrome-developer-summit.png)
+*Snippets from the [Chrome Developer Summit schedule](https://developer.chrome.com/devsummit/schedule). The conference had four PWA-related talks on day 1.*
 
 Why all the hype? The PWA APIs open the door to a lot of really useful functionality for web apps, including the following.
 
@@ -16,50 +19,84 @@ Why all the hype? The PWA APIs open the door to a lot of really useful functiona
 * **Offline**—PWAs work offline by default, and can employ advanced caching strategies.
 * **Push notifications**—PWAs give web apps the opportunity to send push notifications, even when the web app is not being actively viewed.
 
-This functionality has the ability to add a lot of value to a traditional web application. The site [pwastats.com](https://www.pwastats.com/) includes an impressive list of case studies from companies that have switched to Progressive Web Apps. As the stats show, many of these companies have not only improved performance metrics like load time, but also business-centric metrics like conversation and customer acquisition rates.
+The site [pwastats.com](https://www.pwastats.com/) includes an impressive list of case studies from companies that have switched to Progressive Web Apps. As the stats show, many of these companies have not only improved performance metrics like load time, but also business-centric metrics like conversation and customer acquisition rates.
+
+For example Twitter was able to decrease bounce rates by 20% by implementing the PWA APIs.
 
 ![](twitter-lite.png)
-_Twitter Lite case study from pwastats.com_
+_The Twitter Lite case study from pwastats.com_
+
+And the India-based e-commerce site Flipkart was able to increase its new customer acquisition by 50% using a PWA.
 
 ![](flipkart.png)
-_Flipkart case study from pwastats.com_
+_The Flipkart case study from pwastats.com_
 
-The design of the Progressive Web App APIs is one of the biggest factors behind the technology’s success. Unlike a lot of web APIs, which require potentially complex polyfills or workarounds for browsers that don’t support the new API, the PWA APIs were designed with graceful degradation in mind.
+Why have PWAs been so successful when many other attempts to make the mobile web more like native apps have failed?
 
-In practice, that means your app can use the two primary technologies behind PWAs—service workers, and web application manifest files—and and browsers that don’t support those APIs just ignore the relevant files and code.
+One reason is the design of the Progressive Web App APIs themselves, as the two primary technologies behind PWAs—service workers and web app manifest files—were designed with graceful degradation in mind. Meaning, you can start using service workers and manifest files files for browsers that support the APIs today, and not worry about breaking your app in browsers that have zero support.
 
-This design has been key to the success of PWAs, as iOS—aka the second biggest mobile platform out there—still does not support the service worker and web app manifest specifications. But because the PWA approach doesn’t degrade the experience on platforms that don’t support the necessary APIs, PWAs have been able to succeed where many similar technologies have failed. In fact, [many companies have even seen increased iOS conversion rates by rethinking their mobile experiences using a Progressive Web App](https://medium.com/dev-channel/why-progressive-web-apps-vs-native-is-the-wrong-question-to-ask-fb8555addcbb).
+This design has been key to the success of PWAs, as iOS—aka the second biggest mobile platform out there—still does not support the service worker and web app manifest specifications, as the following data from [caniuse.com](https://caniuse.com) shows.
+
+![](can-i-use-service-worker.png)
+![](can-i-use-manifest.png)
+*Browser support data for service workers from [caniuse.com](https://caniuse.com/#search=service%20workers). The noticeable browser with zero support is iOS Safari.*
+
+Despite this, because the PWA approach doesn’t degrade the experience on platforms that don’t support the necessary APIs, PWAs have been able to succeed where many similar technologies have failed.
+
+In fact, [many companies have seen increased iOS conversion rates by rethinking their mobile experiences using a Progressive Web App](https://medium.com/dev-channel/why-progressive-web-apps-vs-native-is-the-wrong-question-to-ask-fb8555addcbb). For example the e-commerce site AliExpress saw a 82% increase in iOS conversion rates with their PWA.
 
 ![](aliexpress.png)
-_A [Google case study](https://developers.google.com/web/showcase/2016/aliexpress) showing how AliExpress improved their conversation rates with a PWA—even on iOS._
+_A [Google case study](https://developers.google.com/web/showcase/2016/aliexpress) showing how the site AliExpress improved their conversation rates with a PWA—even on iOS._
 
-But despite being a well designed technology, PWAs are not the solution for all mobile needs. At the end of the day PWAs are web apps, and as such they are subject to the same limitations as any web app—such as having limited device API access, and having performance characteristics that are very reliant on the browser they’re running in.
+But despite being a well designed technology, PWAs are not the solution for all mobile needs. At the end of the day PWAs are web apps, and as such, they are subject to the same limitations as any web app—such as having limited device API access, and having performance characteristics that are very reliant on the browser they’re running in.
 
-Running on the web brings a ton of advantages as well, and we’ll discuss all of this in more detail when we compare PWAs with JavaScript-driven native approaches momentarily. For now let’s first take a look at how React Native and NativeScript work.
+Running on the web brings a ton of advantages as well, of course, and we’ll discuss all of this in more detail when we compare PWAs with JavaScript-driven native approaches momentarily. For now let’s first take a look at how JavaScript-driven native frameworks like NativeScript and React Native work.
 
 ## JavaScript-driven native
 
 Years ago, JavaScript developers that wanted to build for iOS and Android were forced to learn completely new languages and development approaches. The first technology to change this was Cordova, which allowed web developers to package their web apps into a native binary, and to access device APIs through plugins.
 
-Since Cordova was first released, developers have created a variety of alternative approaches to use JavaScript to drive native iOS and Android applications. In this article we’re going to cover the latest of these approaches, which we call JavaScript-driven native.
+Since Cordova was first released, developers have created a variety of alternative approaches to use JavaScript to drive native iOS and Android applications. In this article we’re going to cover the latest of these approaches, which we call [JavaScript-driven native](https://developer.telerik.com/featured/defining-a-new-breed-of-cross-platform-mobile-apps/).
 
-What separates JS-driven native frameworks from Cordova-based approaches is that JS-driven native frameworks use native user interface components, and therefore abandon web concepts like HTML and the DOM. This approach was popularized in 2015 by Facebook’s release of React Native, and Progress’s NativeScript, which are the two most popular frameworks for building JavaScript-driven native apps today.
+What separates JS-driven native frameworks from Cordova-based approaches is that JS-driven native frameworks use native user interface components, and therefore abandon web concepts like HTML and the DOM. For example, the following gif shows off a sample NativeScript app in action.
 
-For JavaScript developers, using native user interface components to build your applications is a great and horrible thing. It’s great because using native iOS and Android UI components means your applications automatically fit into the platform you’re building for. You don’t have to worry about styling your app to make your buttons look like an `UIButton` or an `android.widget.Button`, because you’re using those elements already.
+![](examples-nativescript.gif)
+_The [NativeScript examples app](https://www.nativescript.org/nativescript-example-application), which you can try for yourself by searching for “NativeScript Examples” in the iOS App Store or Google Play._
 
-Using native user interface components also means you can leverage some really powerful native constructs that aren’t present on the web. For example, suppose you want to build an endless scrolling list with thousand of items. On the web you have to concern yourself with frameworks and concepts like a virtual DOM; in native land this functionality is a built-in feature of `UITable` and (what’s the name of the Android API again).
+This approach was popularized in 2015 by the releases of Facebook’s React Native, and Progress’s NativeScript, which today are the two most popular frameworks for building JavaScript-driven native apps.
 
--- gif of endless lists --
+[_Insert State of JS 2017 survey results here to prove the previous point. Maybe include npm downloads to further solidify the argument._]
 
-The downside of using native user interface components is that JavaScript developers have a new set of components to learn. For instance, to build the list example in the previous gif you would have to learn how a `<ListView>` works in NativeScript or a `<FlatList>` in React Native.
+For JavaScript developers, using native user interface components to build your applications is both a great and a horrible thing. It’s great because using native iOS and Android UI components means your applications automatically look right on the platforms you’re building for. You don’t have to worry about styling your app to make your navigation bar look like a `UINavigationBar` on iOS or a `Toolbar` on Android, because you’re using those elements already.
 
-JavaScript-driven native apps are native apps, and so they also suffer many of the same difficulties inherent to native iOS and Android development. To discuss some of these limitations in detail, let’s shift our discussion to comparing the approaches we’ve discussed thusfar.
+For example, here is how the NativeScript `<ActionBar>` UI component renders on iOS and Android.
+
+![](action-bars.jpg)
+_The NativeScript `<ActionBar>` component renders a `UINavigationBar` on iOS (left), and as a `Toolbar` on Android (right)._
+
+Using native user interface components also means you can leverage some really powerful native constructs that aren’t present on the web. For example, suppose you want to build an endless scrolling list with tens of thousands of items. On the web you have to concern yourself with non-trivial concepts like virtual DOMs to avoid performance problems. But in native apps, iOS and Android both provide list controls that automatically handle the tasks of memory management for you. For example, here’s how a list in NativeScript performs if you casually throw 50,000 items in it (notice how little the scroll bar on the right moves).
+
+![](scrolling.gif)
+
+_A NativeScript app that lists 50,000 items. You can [see the source code for this app and try it for yourself on the NativeScript Playground](https://play.nativescript.org/?template=play-js&id=ieaS3B)._
+
+That’s not to say that using native iOS and Android user interface components is perfect. The downside of using native UI components, especially for JavaScript developers, is that you have a new set of components to learn. For instance, to build the example in the previous gif you would have to learn how a `<ListView>` works in NativeScript, or how a `<FlatList>` works in React Native. And if you want to customize your lists beyond what frameworks like NativeScript and React Native offer out of the box, you’ll have to deal with the not-especially-intuitive iOS and Android APIs that make these controls possible.
+
+At the end of the day, JavaScript-driven native apps are native apps, and so they also suffer many of the same difficulties inherent to native iOS and Android development. To discuss some of these limitations in detail, let’s shift our discussion to comparing PWAs to JavaScript-driven native apps directly.
 
 ## Which to choose
 
-Now that we’ve introduced both approaches to app development, let’s tackle the hard question of what platform you should build your next app on. For most situations you’ll want to consider the web platform first and build a PWA. The web is easier to build for and deploy to; you’ll reach far more users on the web; and it’s far easier to give your users a URL to reach your app than dealing with potentially unintuitive app store processes.
+Now that we’ve introduced both approaches to JavaScript app development, let’s tackle the hard question: what platform should you build your next app on?
 
-That being said, the web is not the best choice for all app usage scenarios. The single biggest reason to build a native app, and not a web app, is your app must do something the web can’t do. Although the list of things the web can do today is pretty impressive, the web can’t keep up with what native platforms make possible. If you want to work with IoT devices, build 
+For most situations your default platform should be the web, and therefore your default mobile app choice should be a PWA. The web is far easier to build for and deploy to than native apps; the web lets you reach more users because you don’t have to deal with app stores; and the web makes it easier for users to access your apps because of URLs.
+
+That being said, the web is not the best choice for all app usage scenarios. Although there are many situations where it makes sense to build a native app, the single biggest reason is that you need to do something the web simply can’t do.
+
+Whenever I make this argument to web advocates I’m inevitably sent to a 
+
+---
+
+Although the list of things the web can do today is pretty impressive, the web can’t keep up with what native platforms make possible. If you want to work with IoT devices, build 
 
 Furthermore, even in cases where the web and native both allow a particular piece of functionality, you can almost always do more with that functionality in native applications.
 
@@ -95,85 +132,28 @@ But it might be hard for web advocates to shallow just how much time users spend
 
 ![](flurry-data.png)
 
-Yes, this is only US data, and yes, most of this time is spent in a handful of apps like Facebok and Twitter—but still, that’s an 92% versus 8% is an enormous gap in usage.
+Yes, this is only US data, and yes, most of this time is spent in a handful of apps like Facebok and Twitter—but still 92% versus 8% is an absolutely enormous gap in usage.
 
+But there’s good news here: because of the rich in JavaScript-driven native frameworks, it’s now possible to build for both platforms using the same development language. You can even use the same framework, as React Native lets you use React and NativeScript lets you use Angular or Vue.
 
+One big trend we at Progress saw in 2017 was developers increasingly trying to build PWAs and native apps using not only the same language, but the same codebase. The NativeScript community has been hard at work creating a bunch of tooling to enable this exact sort of workflow.
 
+[Team Maestro’s Angular NativeScript seed](https://github.com/TeamMaestro/angular-native-seed) is the most popular of these options, and it provides a number of conventions and CLI scripts that simplify the process of building for multiple platforms.
 
+-- picture --
 
+The React Native world is experimenting with a number of solutions to enable this exact same sort of workflow using React instead of Angular. The [React Native for Web] project allows developers to render their react native projects on the web, and currently has well over six thousand stars on GitHub.
 
+-- picture --
 
+From a business perspective these approaches make a lot of sense, as the ability to consolidate your application development to one team and one language has the potential to save you a lot of time and hassle.
 
+That’s not to say these approaches are perfect by any means. Android, iOS, and the web are different platforms with different conventions 
 
+## Wrapping up
 
+In 2017 the biggest trends we at Progress see in the JavaScript mobile world are the rises of both Progressive Web Apps and JavaScript-driven native apps.
 
+Progressive Web Apps bring a series of features that make web apps feel more like native apps, and JavaScript-driven native frameworks allow you to use JavaScript to build completely native iOS and Android apps using native user interface components and APIs.
 
-
-
-
-
-
-
-
-
-
-
-
-PWA
-
-* Strengths
-  * Easy deployment and updates
-  * The broad reach of the web
-  * Linkability
-  * Graceful degradation
-  * Great online resources, tons of conference talks, etc.
-  * Small footprint (when compared to native apps)
-* Weaknesses
-  * Many features aren’t available on iOS (yet).
-  * Can’t use all mobile APIs and features.
-  * Can be hard to monetize (currently, web payment APIs are in the works)
-  * Limited by the performance of the web
-
--- {N} + RN
-
-* Intro & background
-  * Big players are React Native and NativeScript
-  * Large growth of both in npm in 2017.
-  * Show big case studies, like SAP using {N}. Give React Native some shout outs.
-  * Expanding to new frameworks, like {N} supporting Vue.
-
-* Strengths
-  * Familiar tech—JS, CSS, npm
-  * Native-like performance and native user interfaces
-  * Unlimited device API access
-  * Ability to use iOS and Android SDKs
-* Weaknesses
-  * Need to learn new markup components to build UI
-  * Painful iOS and Android deployment processes and update cycles
-  * Large footprint (because they’re native apps)
-
-
-
-🌈 🦄
-
-OMG YOU GET THE BEST OF BOTH WORLD AMIRITE!?
-
-* Intro & background
-  * Walk over common approaches to this today.
-    * Ionic
-    * {N}
-    * React Native
-  * This whole idea works because it’s all just JavaScript.
-  * Twitter lite
-
-* Strengths
-  * Building for three platforms from one codebase.
-* Weaknesses
-  * Building for three platforms from one codebase.
-
-
-
-Stats to show increased mobile demand?
-  https://techcrunch.com/2017/12/05/consumer-spending-across-app-stores-worldwide-to-top-110-billion-in-2018/?utm_campaign=Fuse%2BWeekly&utm_medium=email&utm_source=Fuse_Weekly_106
-
-http://flurrymobile.tumblr.com/post/157921590345/us-consumers-time-spent-on-mobile-crosses-5
+Which approach you want to use depends on your own application needs. Starting with a Progressive Web Apps makes a lot of sense unless your apps needs APIs or features of native development platforms. Building for _both_ web and native is growing trend, as it enables you to leverage the best features of each platform.
