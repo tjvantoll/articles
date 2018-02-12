@@ -334,7 +334,13 @@ Different mobile apps have different login requirements. If your login form has 
 
 * [nativescript-IQKeyboardManager](https://github.com/tjvantoll/nativescript-IQKeyboardManager)—IQKeyboardManager is a popular iOS framework for providing good keyboard UX out of the box, including a solution for preventing the iOS keyboard from covering `<TextField>` controls.
 * [nativescript-fingerprint-auth](https://github.com/EddyVerbruggen/nativescript-fingerprint-auth)—The `nativescript-fingerprint-auth` plugin makes adding fingerprint authentication to your app as easy as installing a plugin and implementing an [easy-to-use API](https://github.com/EddyVerbruggen/nativescript-fingerprint-auth#api). The plugin also supports Face ID for iPhone Xs.
+
+<img src="face-id.png" style="height: 400px;">
+
 * [nativescript-facebook](https://github.com/NativeScript/nativescript-facebook)—The NativeScript Facebook plugin makes it easy to allow your users to authenticate using their Facebook accounts.
+
+<img src="facebook-plugin.png" style="height: 400px;">
+
 * [nativescript-loading-indicator](https://github.com/NathanWalker/nativescript-loading-indicator)—The `nativescript-loading-indicator` shows an animated modal and blocks the user from interacting with the screen. The plugin is perfect for showing the user an activity indicator while you are performing calls to your backend during the login process.
 
 <img src="loading-plugin.png" style="height: 400px;">
