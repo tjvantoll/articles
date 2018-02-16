@@ -12,6 +12,10 @@ With the 1.0 release, NativeScript-Vue now supports all of NativeScript’s user
 
 In this article we’ll answer some common questions about NativeScript-Vue, talk about what’s next, and discuss how you can get involved. But let’s start by looking at how you can try NativeScript-Vue right now.
 
+> **NOTE**: Short on time and want to learn more? Next month we’re holding an online event where we’ll talk about NativeScript-Vue in detail. [Sign up!]()
+
+-- TODO: Make that a live link --
+
 ## Getting Started
 
 The best place to get started with NativeScript-Vue is in [NativeScript Playground](https://play.nativescript.org/), a browser-based NativeScript development environment that lets you start coding without setting up native iOS and Android SDKs on your development machine.
