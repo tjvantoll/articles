@@ -1,6 +1,6 @@
 # Announcing NativeScript-Vue 1.0
 
-Last week, Igor Randjelovic announced a 1.0 release of the [NativeScript-Vue plugin](https://nativescript-vue.org/), which allows you to build native iOS and Android apps using [NativeScript](https://www.nativescript.org/) and [Vue.js](https://vuejs.org/).
+Last week, Jen Looper and Igor Randjelovic announced a 1.0 release of the [NativeScript-Vue plugin](https://nativescript-vue.org/) (TODO: link or picture here), which allows you to build native iOS and Android apps using [NativeScript](https://www.nativescript.org/) and [Vue.js](https://vuejs.org/).
 
 <img src="site.png">
 
@@ -22,17 +22,17 @@ Follow the instructions to download and install the “NativeScript Playground�
 
 Next, open the NativeScript Playground app on your device and tap the “Scan QR Code” option.
 
--- image --
+-- TODO: image --
 
 Go ahead and scan your QR code in Playground (not the one in this article), and you should see an app that looks like this.
 
--- image --
+-- TODO: image --
 
 What you’re seeing is a completely native iOS and Android app, using native user interface components, all built with JavaScript and Vue.
 
 What’s cool about Playground is you can now start coding your app, and as you save changes you’ll see updates on your device automatically. For example, try dragging a button into your app’s template.
 
--- gif --
+-- TODO:  gif --
 
 Use `Cmd` + `S` (`Ctrl` + `S` on Windows) to save your changes, and you should see a button automatically appear on your device. Cool, huh?
 
@@ -72,9 +72,9 @@ There are also [additional NativeScript-Vue templates](https://nativescript-vue.
 
 Tiago Alves has an excellent recreation of the [NativeScript Groceries sample built with Vue](https://github.com/tralves/groceries-ns-vue).
 
--- image --
+-- TODO: image of Groceries --
 
-
+TODO: more technical background on the sample and how to use it.
 
 ### Is this Progress supported?
 
