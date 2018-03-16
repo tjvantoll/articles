@@ -12,9 +12,7 @@ With the 1.0 release, NativeScript-Vue now supports all of NativeScript’s user
 
 In this article we’ll answer some common questions about NativeScript-Vue, talk about what’s next, and discuss how you can get involved. But let’s start by looking at how you can try NativeScript-Vue right now.
 
-> **NOTE**: Short on time and want to learn more? Next month we’re holding an online event where we’ll talk about NativeScript-Vue in detail. [Sign up!]()
-
--- TODO: Make that a live link --
+> **NOTE**: Short on time and want to learn more? Next month we’re holding an online event where we’ll talk about NativeScript-Vue in detail. [Sign up!](https://attendee.gotowebinar.com/register/9059771692589680643?source=blog)
 
 ## Getting Started
 
@@ -178,6 +176,4 @@ If you’re the type that likes to dive straight into code, the entirety of Nati
 
 Excited and want to learn more? Excellent! Next month we’re holding an online event where we’ll talk about NativeScript-Vue in detail. We’ll have interviews with Igor, as well as some prominent Vue community members. (We might even have one very special surprise guest 😉)
 
-[Sign up now! 🎉]()
-
--- TODO: Make ^ a real link --
+[Sign up now! 🎉](https://attendee.gotowebinar.com/register/9059771692589680643?source=blog)

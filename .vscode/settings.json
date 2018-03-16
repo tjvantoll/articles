@@ -1,9 +1,5 @@
 {
   "editor.wordWrap": "on",
   "editor.quickSuggestions": false,
-  "markdown.preview.scrollEditorWithPreview": false,
-  "markdown.preview.scrollPreviewWithEditorSelection": false,
-  "markdown.styles": [
-    "file:///Users/tj/articles/.vscode/style.css"
-  ]
+  "markdown.preview.scrollEditorWithPreview": false
 }
