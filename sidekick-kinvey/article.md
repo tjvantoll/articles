@@ -4,7 +4,7 @@ In the development world there are tasks that are hard, and then there are tasks
 
 But enterprise authentication is important. Allowing users to log in with existing identity services, like Active Directory, is oftentimes a necessity for corporate applications.
 
-Today we’re happy to announce new functionality to make this process a little easier for NativeScript users, including a new Enterprise Auth template, and new functionality in [NativeScript Sidekick](https://www.nativescript.org/nativescript-sidekick) designed to help you connect to your authentication provider as fast as possible.
+Today we’re happy to announce new functionality to make this process a little easier for NativeScript users, including a new Enterprise Auth template, and new functionality in [NativeScript Sidekick](https://www.nativescript.org/nativescript-sidekick) designed to help you connect to your authentication provider as fast as possible. Sidekick supports SAML, OAuth 2 and OpenID Connect, and can connect to any provider that supports at least one of those protocols.
 
 Just to give you a quick visual, here’s what the workflow looks like when connecting to a sample Microsoft Azure-based Active Directory provider.
 
@@ -14,7 +14,7 @@ This workflow is great for any corporate app that needs users to sign in with th
 
 ## Starting from a new template
 
-Your enterprise authentication journey starts in NativeScript Sidekick, a desktop application with a variety of helpful features for NativeScript development.
+Your enterprise authentication journey starts in NativeScript Sidekick, our desktop application with a variety of helpful features for NativeScript development.
 
 One of those features is a collection of starter templates designed to help you get up and running fast. And as of today, you’ll see one brand new template specifically designed for enterprise authentication.
 
@@ -26,7 +26,7 @@ Select the **Enterprise Auth** template, give your app a name, and then hit the 
 
 ## Configuring your connection
 
-After starting an app from the new authentication template, Sidekick will take you to a new Enterprise Auth configuration page, where you need to provide details about the service you want to connect to. Here’s what that screen looks like.
+After starting an app from the new authentication template, Sidekick will take you to a new Enterprise Auth configuration page, where you need to provide details about the service to which you want to connect. Here’s what that screen looks like.
 
 ![](enterprise-auth-screen.png)
 
