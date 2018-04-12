@@ -8,10 +8,10 @@ _I seriously use this crap. Also, I think my skin is melting?_
 
 I do all of this because iOS provides marginally better software than Android, and as a software developer, I’ve been trained to take life-or-death stances over the most trivial of details. It’s what defines us.
 
-But there’s one part of iOS that even I cannot defend—its keyboard behavior. Specifically, iOS, a platform with over 2 million deployed applications, is surprisingly awful at providing a decent default keyboard for developers. If you’ve worked in NativeScript apps you’ve probably hit a situation like this at least once.
+But there’s one part of iOS that even I cannot defend, and that’s its bizarre keyboard behavior. Specifically, iOS, a platform with over 2 million deployed applications, is surprisingly awful at providing a decent default keyboard for developers. If you’ve worked in NativeScript apps for more than a few hours, you’ve probably hit the situation in the gif below at least once. (I move focus to the second form field, and then can’t see what I’m typing because the keyboard is covering the input.)
 
---image of the keyboard problem--
+![](keyboard.gif)
 
-_iOS, the operating system that lets you authenticate with your face, has trouble allowing users to see what they’re typing 🤦🏻‍♂️_
+_iOS, the operating system that lets you authenticate with your face, has trouble allowing users to see what they’re typing._
 
 > **NOTE**: For you Android lovers out there, yep, Android doesn’t have this problem. You’ve got this one, but if you bring it up in an argument with me prepare to answer for [this hot mess](https://developer.android.com/about/dashboards/index.html#Platform).
