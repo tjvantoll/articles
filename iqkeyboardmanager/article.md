@@ -15,4 +15,4 @@ If you’ve worked in NativeScript apps for more than a few hours, you’ve prob
 
 _iOS, the operating system that lets you authenticate with your face, has trouble allowing users to see what they’re typing._
 
-> **NOTE**: For you Android lovers out there, yes, Android doesn’t have this problem. You’ve got this one, but if you bring it up in an argument with me prepare to answer for [this hot mess](https://developer.android.com/about/dashboards/index.html#Platform).
+> **NOTE**: For you Android lovers out there, yes, Android [doesn’t have this problem](https://raw.githubusercontent.com/tjvantoll/articles/master/iqkeyboardmanager/android-keyboard.gif). You’ve got this one, but if you bring it up in an argument with me prepare to answer for [this hot mess](https://developer.android.com/about/dashboards/index.html#Platform).
