@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 360 222" style="enable-background:new 0 0 360 222;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#11CC71;}
+	.st1{font-family:'OpenSans';}
+	.st2{font-size:24px;}
+	.st3{fill:#3D5AFE;}
+	.st4{font-size:21px;}
+	.st5{font-size:16px;}
+	.st6{fill:#0169C9;}
+	.st7{fill:#FFFFFF;stroke:#455B66;stroke-width:0.5;stroke-miterlimit:10;}
+	.st8{enable-background:new    ;}
+	.st9{fill:#FFFFFF;stroke:#3D5AFE;stroke-width:0.5;stroke-miterlimit:10;}
+	.st10{fill:#231F20;}
+	.st11{display:none;}
+	.st12{display:inline;}
+	.st13{fill:#FDFDFD;}
+	.st14{fill:#ABABAB;}
+	.st15{fill:#9B9B9B;}
+	.st16{fill:#A0A0A0;}
+	.st17{fill:#9A9A9A;}
+	.st18{fill:#9D9D9D;}
+	.st19{fill:#9C9C9C;}
+	.st20{fill:#9E9E9E;}
+	.st21{fill:#A2A2A2;}
+	.st22{fill:#A9A9A9;}
+	.st23{fill:#AAAAAA;}
+	.st24{fill:#A8A8A8;}
+	.st25{fill:#FEFEFE;}
+	.st26{fill:#010101;}
+	.st27{fill:#9F9F9F;}
+	.st28{fill:#FCFCFC;}
+	.st29{fill:#040404;}
+	.st30{fill:#030303;}
+	.st31{fill:#F6F6F6;}
+	.st32{fill:#525252;}
+	.st33{fill:#A6A6A6;}
+	.st34{fill:#A3A3A3;}
+	.st35{fill:#A4A4A4;}
+	.st36{fill:#F4F4F4;}
+	.st37{fill:#A5A5A5;}
+	.st38{fill:#020202;}
+	.st39{fill:#999999;}
+	.st40{fill:#989898;}
+	.st41{fill:#EAEAEA;}
+	.st42{fill:#A1A1A1;}
+	.st43{fill:#F8F8F8;}
+	.st44{fill:#F5F5F5;}
+	.st45{fill:#FAFAFA;}
+	.st46{fill:#FBFBFB;}
+	.st47{fill:none;stroke:#E0E0E0;stroke-width:0.5;stroke-miterlimit:10;}
+	.st48{fill:none;stroke:#455B66;stroke-width:0.5;stroke-miterlimit:10;}
+	.st49{fill:#455B66;}
+	.st50{fill:none;stroke:#11CC71;stroke-width:0.5;stroke-miterlimit:10;}
+	.st51{fill:none;stroke:#455B66;stroke-width:0.5;stroke-miterlimit:10;stroke-dasharray:4;}
+	.st52{fill:none;stroke:#11CC71;stroke-width:0.5;stroke-miterlimit:10;stroke-dasharray:4;}
+	.st53{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st54{fill:none;stroke:#455B66;stroke-width:0.5;stroke-miterlimit:10;stroke-dasharray:3.7143,3.7143;}
+	.st55{fill:none;stroke:#3D5AFE;stroke-width:0.5;stroke-miterlimit:10;}
+	.st56{fill:none;stroke:#3D5AFE;stroke-width:0.5;stroke-miterlimit:10;stroke-dasharray:3.7143,3.7143;}
+</style>
+<text transform="matrix(1 0 0 1 40 180.5667)" class="st0 st1 st2">6</text>
+<text transform="matrix(1 0 0 1 40 210.5663)" class="st0 st1 st2">1</text>
+<text transform="matrix(1 0 0 1 30.0001 102.5662)" class="st0 st1 st2">6</text>
+<text transform="matrix(1 0 0 1 82.9998 102.5662)" class="st0 st1 st2">24</text>
+<text transform="matrix(1 0 0 1 58 102.5662)" class="st0 st1 st2">4</text>
+<text transform="matrix(1 0 0 1 9.9998 27.9956)" class="st3 st1 st4">Vector</text>
+<text transform="matrix(1 0 0 1 10 63.7111)" class="st1 st5">row</text>
+<text transform="matrix(1 0 0 1 9.9998 100.5668)" class="st6 st1 st2">[</text>
+<text transform="matrix(1 0 0 1 9.9998 100.5668)" class="st3 st1 st2">[</text>
+<text transform="matrix(1 0 0 1 119.9998 100.5668)" class="st6 st1 st2">]</text>
+<text transform="matrix(1 0 0 1 119.9998 100.5668)" class="st3 st1 st2">]</text>
+<text transform="matrix(1 0 0 1 230.0001 102.5662)" class="st0 st1 st2">6</text>
+<text transform="matrix(1 0 0 1 294.9998 102.5662)" class="st0 st1 st2">24</text>
+<text transform="matrix(1 0 0 1 266 102.5662)" class="st0 st1 st2">4</text>
+<text transform="matrix(1 0 0 1 230.0001 132.5661)" class="st0 st1 st2">1</text>
+<text transform="matrix(1 0 0 1 309.9998 132.5661)" class="st0 st1 st2">8</text>
+<text transform="matrix(1 0 0 1 260 132.5661)" class="st0 st1 st2">-9</text>
+<text transform="matrix(1 0 0 1 209.9998 27.9956)" class="st3 st1 st4">Matrix</text>
+<text transform="matrix(1 0 0 1 210 63.7111)" class="st1 st5">row(s) x column(s)</text>
+<g>
+	<path class="st3" d="M217.3,134.4h-5.4v-51h5.4v1.7h-3.4v47.6h3.4V134.4z"/>
+</g>
+<g>
+	<path class="st3" d="M330.6,132.7h3.4V85.1h-3.4v-1.7h5.4v50.9h-5.4V132.7z"/>
+</g>
+<text transform="matrix(1 0 0 1 10 143.7108)" class="st1 st5">column</text>
+<g>
+	<path class="st3" d="M17.3,212.4h-5.4v-50.9h5.4v1.7h-3.4v47.6h3.4V212.4z"/>
+</g>
+<g>
+	<path class="st3" d="M70.6,210.7H74v-47.6h-3.4v-1.7H76v50.9h-5.4V210.7z"/>
+</g>
+</svg>
