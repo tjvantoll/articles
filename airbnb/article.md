@@ -1,32 +1,26 @@
 # Would Airbnb Have Fared Better With NativeScript Instead of React Native?
 
-> **BACKGROUND**: Last week, Airbnb’s engineering team published a [5-part series on why they’re moving away from React Native](https://medium.com/airbnb-engineering/react-native-at-airbnb-f95aa460be1c). It’s well written, and worth reading through if you’re looking for some context for this article’s discussion. All quotes you see in this article are from the Airbnb writeup.
+> **BACKGROUND**: Last week, Airbnb’s engineering team published a [5-part series on why they’re moving away from React Native](https://medium.com/airbnb-engineering/react-native-at-airbnb-f95aa460be1c). It’s well written, and worth reading through if you’re looking for some context for this post’s discussion. All quotes you see in this article are from the Airbnb writeup.
 
 As you might imagine, Airbnb’s recent announcement piqued our interest on the NativeScript team. Airbnb’s feedback on React Native was very technical, and interestingly delved into areas where React Native and NativeScript take different approaches to app development. Therefore as we read through the series we couldn’t help but wonder—would Airbnb have fared better with NativeScript?
 
 ![](logos.png)
 
-Now, this is the NativeScript blog, so of course I’d love to tell you that NativeScript would have _totally_ worked way better. That NativeScript would’ve helped Airbnb built 300% faster apps that helped them acquire 500% more users.
+In this article we’ll walk through Airbnb’s complaints in detail, and talk about how some of those same problems could’ve been handled in NativeScript. We’ll start with things that NativeScript does well (this is the NativeScript blog after all), and then move on to things NativeScript does, well, less well.
 
-But, the truth is... NativeScript would almost certainly have suffered the same fate as React Native at Airbnb. Per their own words, Airbnb is trying to build “world-class apps” with a team of “more than 100 mobile engineers”. And, honestly, building the _absolute best_ applications with any cross-platform tool is not easy. That rule applies with NativeScript; it applies with React Native; and it even applies with tools like Electron.
-
-So we don’t necessarily think Airbnb would’ve succeeded with NativeScript, but we do think the topic of NativeScript at Airbnb is an interesting way to compare the architectures of React Native and NativeScript—something we get a lot of requests to do. Therefore, in this article we’ll walk through Airbnb’s complaints in detail, and talk about how some of those same problems could’ve been handled in NativeScript.
-
-We’ll start with the things NativeScript does well (this is the NativeScript blog after all), and move on to some of the things NativeScript does, well, less well.
+Let’s start with what is perhaps the single biggest difference between NativeScript and React Native—how each framework accesses native APIs.
 
 ## The bridge
 
 >  “React Native has a bridge API to communicate between native and React Native. While it works as expected, it is extremely cumbersome to write.”
 
-The way that React Native and NativeScript access native APIs is the perhaps the single biggest architectural difference between the two frameworks.
+Both React Native and NativeScript provide a series of cross-platform JavaScript APIs for common mobile tasks. For example, in [React Native you use an API named `Animated`](https://facebook.github.io/react-native/docs/network.html) for animations, and in [NativeScript you use an API named `Animation`](https://docs.nativescript.org/angular/ui/animation-code). But despite slightly different names, the APIs provide very similar functionality (animating user interface components). In most cases these frameworks’ cross-platform APIs are similar, and in some cases they’re even identical—for example, both frameworks provide support for the web’s `fetch()` and `XMLHttpRequest` APIs.
 
-Both React Native and NativeScript provide a series of cross-platform APIs for common mobile tasks. For example, in [React Native you use an API named `Animated`](https://facebook.github.io/react-native/docs/network.html) for animations, and in [NativeScript you use an API named `Animation`](https://docs.nativescript.org/angular/ui/animation-code). But despite slightly different names, the APIs provide very similar functionality (animating user interface components). In most cases these frameworks’ cross-platform APIs are similar, and in some cases they’re even identical—for example, both frameworks provide support for the web’s `fetch()` and `XMLHttpRequest` APIs.
-
-The architectural differences between the frameworks show up when you need to do something that _isn’t_ a common mobile task—aka, when you need native functionality that is _not_ provided by the frameworks’ cross-platform APIs.
+The architectural differences between the frameworks show up when you need to do something that _isn’t_ a common mobile task—aka, when you need native functionality that is _not_ provided by the frameworks’ cross-platform JavaScript APIs.
 
 In React Native, to access native iOS and Android APIs you need to use a series of APIs commonly referred to as the bridge APIs. (Here are [React Native’s bridging docs for iOS](https://facebook.github.io/react-native/docs/native-modules-ios.html); and here are [the same docs for Android](https://facebook.github.io/react-native/docs/native-modules-android.html)).
 
-A full breakdown of the bridging APIs is out of the scope of this article. The relevant thing to know for our discussion is that these bridging APIs require you to write both native and JavaScript code. As a concrete example of that, the image below shows the first example from React Native’s iOS bridging documentation—notice the iOS code on top, and the JavaScript code underneath.
+A full breakdown of the bridging APIs is out of the scope of this article. For our discussion, the relevant thing to know is that these bridging APIs require you to write both native and JavaScript code. As a concrete example of that, the image below shows the first example from React Native’s iOS bridging documentation—notice the iOS code on top, and the JavaScript code underneath.
 
 ![](react-native-example.png)
 
@@ -42,9 +36,9 @@ Another consequence of this architecture is organizational, as not only is your 
 
 > “In addition, large amounts of bridging infrastructure were required to enable product engineers to work effectively.”
 
-In NativeScript we took a completely different approach to accessing native APIs. Instead of a bridge, NativeScript injects all iOS and Android APIs into the JavaScript Virtual Machine directly. (The full technical details of how this works is out of the scope of this article, but it’s [worth a read](https://developer.telerik.com/featured/nativescript-works/) if you find the architectures of these frameworks at all interesting.)
+In NativeScript we took a completely different approach to accessing native APIs. Instead of a bridge, NativeScript injects all iOS and Android APIs into the JavaScript Virtual Machines we use directly. (The full technical details of how this works is out of the scope of this article, but it’s [worth a read](https://developer.telerik.com/featured/nativescript-works/) if you find the architectures of these frameworks at all interesting.)
 
-This means that if you want need to access a native API in NativeScript... you just do it. For example, the following code is valid NativeScript code that returns a JavaScript integer of `3` on Android.
+This means that if you need to access a native API in NativeScript... you just do it. For example, the following code is valid NativeScript code that returns a JavaScript integer of `3` on Android.
 
 ```
 java.lang.Math.min(3, 4)
@@ -56,9 +50,7 @@ Writing your code in one language has some auxillary benefits as well, such as l
 
 > “We began to investigate automatically generating bridge code from TypeScript definitions towards the end of 2017 but it was too little too late.”
 
-All that said, it’s not like NativeScript’s bridging approach is perfect. Although you can write native code in JavaScript using NativeScript, there’s a definite learning curve to figure out [NativeScript’s bridging conventions](https://docs.nativescript.org/angular/core-concepts/accessing-native-apis-with-javascript) once you move beyond simple one-line examples. (Look through the [source code of the NativeScript core modules](https://github.com/NativeScript/NativeScript/tree/master/tns-core-modules) if you want to see what that looks like at scale.)
-
-Furthermore, even though NativeScript allows you to write your code in one language, you’ll still need iOS and Android development expertise if you want to write non-trivial native code for your applications. And if you do need to write a ton of native code, React Native’s architecture might be a better fit for you, as native developers prefer to write in native languages rather than JavaScript or TypeScript.
+All that said, it’s worth noting that NativeScript’s bridging architecture isn’t a panacea for all your mobile woes. Although you can write native code in JavaScript using NativeScript, there’s a definite learning curve to figure out [NativeScript’s bridging conventions](https://docs.nativescript.org/angular/core-concepts/accessing-native-apis-with-javascript) once you move beyond simple one-line examples. (Look through the [source code of the NativeScript core modules](https://github.com/NativeScript/NativeScript/tree/master/tns-core-modules) if you want to see what that looks like at scale.) Furthermore, even though NativeScript allows you to write your code in one language, you’ll still need iOS and Android development expertise if you want to write non-trivial native code for your applications.
 
 NativeScript’s sweet spot is for apps that need the ability to easily leverage native code in their apps, but still want the majority of their functionality driven by cross-platform friendly JavaScript or TypeScript code.
 
@@ -74,7 +66,7 @@ Type conversion between multiple platforms is not fun regardless of what platfor
 
 ![](typescript.png)
 
-I have mixed feelings about using TypeScript in web apps, and I’ve even given [a talk on the subject](https://www.youtube.com/watch?v=w6rdLx2LYz8), but for mobile apps I now consider TypeScript an absolute necessity because of how well the language helps you work with unfamiliar APIs (which are super common to need in mobile apps).
+I have mixed feelings about using TypeScript in web apps, and I’ve even given [a talk on the subject](https://www.youtube.com/watch?v=w6rdLx2LYz8), but for mobile apps I now consider TypeScript an absolute necessity because of how well the language helps you work with unfamiliar APIs (which are hard to avoid in mobile apps).
 
 In NativeScript we built our [cross-platform modules](https://github.com/nativescript/nativescript) with TypeScript since day one, meaning, you can easily explore the APIs we offer right in your editor.
 
@@ -101,25 +93,25 @@ Let’s shift our discussion from working with native APIs over to a user interf
 
 ## Lists
 
-A whole lot of mobile apps are nothing more than glorified lists—Facebook, Twitter, etc. The list is a cornerstone of a mobile app development framework, and it’s something that has caused problems for React Native from the beginning.
+A whole lot of mobile apps are nothing more than glorified lists—think Facebook, Twitter, etc. The list is a cornerstone of a mobile app development framework, and it’s something that has caused problems for React Native from the beginning.
 
 > “[Long Lists] React Native has made some progress in this area with libraries like FlatList. However, they are nowhere near the maturity and flexibility of RecyclerView on Android or UICollectionView on iOS. Many of the limitations are difficult to overcome because of the threading. Adapter data can’t be accessed synchronously so it is possible to see views flash in as they get asynchronously rendered while scrolling quickly. Text also can’t be measured synchronously so iOS can’t make certain optimizations with pre-computed cell heights.”
 
 The key thing Airbnb mentions here is “threading”. React Native famously uses a [multi-threaded architecture](https://www.facebook.com/notes/andy-street/react-native-scheduling/10153916310914590/) where JavaScript and the user interface run on separate threads. While this has some definite advantages, mostly that JavaScript processing does not interfere with UI rendering, there are some tradeoffs as well.
 
-Take `RecyclerView` on Android or `UICollectionView` on iOS. These are extremely powerful built-in native APIs for building memory-efficient lists that asynchronously render rows as the user scrolls. However, React Native cannot use these APIs because the native components (`RecyclerView` or `UICollectionView`) cannot asynchronously access data stored in JavaScript—they’re on different threads. As Airbnb noted, React Native has thrown a lot of engineering muscle at solving this problem, and their [newer APIs like `FlatList`](https://facebook.github.io/react-native/docs/flatlist.html) are quite good, but it’s hard to build a custom solution that can compare with the built-in native controls.
+Take the `RecyclerView` or `UICollectionView` APIs that Airbnb mentions. These are extremely powerful built-in native APIs for building memory-efficient lists that asynchronously render rows as the user scrolls. However, React Native cannot use these APIs because the native components (`RecyclerView` or `UICollectionView`) cannot asynchronously access data stored in JavaScript—they’re on different threads. As Airbnb noted, React Native has thrown a lot of engineering muscle at solving this problem, and their [newer APIs like `FlatList`](https://facebook.github.io/react-native/docs/flatlist.html) are quite good, but it’s hard to build a custom solution that can compare with the built-in native controls.
 
-In NativeScript we use a [single threaded model](https://developer.telerik.com/featured/benefits-single-threading-model-nativescript/), as it’s what allows us to provide fast access to the native APIs that we discussed earlier. This means that we’re not subject to the same restrictions as React Native, and that we can absolutely leverage native APIs like `RecyclerView` and `UICollectionView`. To give you a sense of what that looks like, here’s what a sample NativeScript app looks like if I just casually toss 50,000 items into a list. It’s worth noting that what I’m showing here is not the power of NativeScript; it’s the power of the built-in native controls.
+In NativeScript we use a [single threaded model](https://developer.telerik.com/featured/benefits-single-threading-model-nativescript/), as it’s what allows us to provide fast access to the native APIs that we discussed earlier. This means that we’re not subject to the same restrictions as React Native, and that we can absolutely leverage native APIs like `RecyclerView` and `UICollectionView`. To give you a sense of what that looks like, the image below shows what happens if I just casually toss 50,000 items into a NativeScript list. It’s worth noting that what I’m showing here is not the power of NativeScript; it’s the power of the built-in native controls.
 
 ![](scrolling.gif)
 
-> **NOTE**: You Check out the above app’s source and run it for yourself in [NativeScript Playground](https://play.nativescript.org/?template=play-js&id=ieaS3B).
+> **NOTE**: You can check out the above app’s source and run it for yourself in [NativeScript Playground](https://play.nativescript.org/?template=play-js&id=ieaS3B).
 
-Now, there are downsides of using a single-threaded architecture like NativeScript does. If you try to run very processor-intensive JavaScript in your NativeScript app you could cause jank in your UI.
+The one thing that you need to be aware of in NativeScript is that very processor-intensive JavaScript does have the potential to cause jank in your UI. 
 
-Two things though. First, NativeScript does offer [APIs for offloading these processor-heavy tasks](https://docs.nativescript.org/core-concepts/multithreading-model) when you do hit them. And second, NativeScript’s architecture is consistent with “raw” native apps you write with Swift or Objective-C on iOS, or Java on Android. By default, native code runs on the same thread as native UI, so CPU-intensive operations in native code can also degrade app performance and cause dropped frames.
+Two things though. First, NativeScript does offer [APIs for offloading these CPU-heavy tasks](https://docs.nativescript.org/core-concepts/multithreading-model) when you do hit them. And second, NativeScript’s architecture is consistent with “raw” native apps you write with Swift or Objective-C on iOS, or Java on Android. By default, native code runs on the same thread as native UI, so CPU-intensive operations in native code can also degrade app performance and cause dropped frames.
 
-Furthermore, React Native must see some benefits in being able to make synchronous calls from JavaScript to native, as they recently announced that they’re [redesigning React Native’s threading model](https://facebook.github.io/react-native/blog/2018/06/14/state-of-react-native-2018) to allow for this exact use case that NativeScript does by default. Once implemented, it’s possible that React Native should be able to close the gap when it comes to list performance.
+Furthermore, React Native must see some benefits in being able to make synchronous calls from JavaScript to native, as the React Native team recently announced that they’re [redesigning their threading model](https://facebook.github.io/react-native/blog/2018/06/14/state-of-react-native-2018) to allow for this exact use case that NativeScript does by default. Once implemented, it’s possible that React Native should be able to close the gap when it comes to list performance.
 
 While on the topic of performance, let’s move on to one thing that you might not realize has a huge impact on the performance of JavaScript-driven native apps—JavaScript virtual machines.
 
@@ -127,7 +119,7 @@ While on the topic of performance, let’s move on to one thing that you might n
 
 NativeScript and React Native both use JavaScript virtual machines to drive your native apps. React Native uses Apple’s JavaScriptCore on both iOS and Android, and NativeScript uses JavaScriptCore on iOS and Google’s V8 on Android.
 
-And, just as a browser’s JavaScript engine can have a huge impact on its performance, the same is true of JavaScript-driven native frameworks like NativeScript and React Native as well.
+And, just as a browser’s JavaScript engine can have a huge impact on its performance, the same is true of JavaScript-driven native frameworks like NativeScript and React Native.
 
 > “Android doesn’t ship its own JavaScriptCore so React Native bundles its own. However, the one you get by default is ancient. As a result, we had to go out of our way to bundle a newer one.”
 
@@ -143,7 +135,7 @@ Updating a JavaScript VM also opens the door to new JavaScript language features
 
 So, between a new JavaScript VM, better type safety with TypeScript, access to built-in list controls, and easy usage of native APIs, hopefully you have some idea why a company like Airbnb might be interested in giving NativeScript a shot.
 
-But, to try to be fair here, I think it’s worth mentioning a few things that I think Airbnb would’ve not liked about NativeScript.
+But, to try to be fair here, I think it’s worth mentioning a few things that I think Airbnb would’ve not liked about NativeScript before we draw any conclusions.
 
 ## React support, or lack thereof
 
@@ -153,9 +145,13 @@ Airbnb talks extensively about how their use of React on the web contributed to 
 
 > “Late in the React Native exploration, we began building for web, iOS, and Android at once. Given that web also uses Redux, we found large swaths of code that could be shared across web and native platforms with no alterations.”
 
-Over at NativeScript we’ve seen how important framework consolidation can be for a company. The initial version of NativeScript offered no framework support, and although we certainly had usage, when we [unveiled integrated Angular support back in 2016](https://www.nativescript.org/blog/n-is-for-nativescript-at-ng-conf) we saw an enormous jump in NativeScript usage. We’ve seem the same jump in usage when the NativeScript community released [Vue.js support for NativeScript](https://nativescript-vue.org/). It’s amazing how much more productive developers can be when you already know navigation, data binding, and such work out of the box.
+Over at NativeScript we’ve seen how important framework consolidation can be for a company. The initial version of NativeScript offered no framework support, and although we certainly had usage, when we [unveiled integrated Angular support back in April of 2016](https://www.nativescript.org/blog/n-is-for-nativescript-at-ng-conf) we saw an enormous jump in NativeScript usage.
 
-That being said, NativeScript does not offer any support for React, which companies like Airbnb would probably not be happy with. Supporting frameworks is a lot of work, especially when you think about all the tooling, templates, documentation and such framework support entails, and we’re happy with our current workflow supporting Angular, and working with the community to support Vue.js. Plus, we don’t think we can do React better than Facebook 🙂
+![](downloads.png)
+
+We’ve seem a similar jump in usage when the NativeScript community released [Vue.js support for NativeScript](https://nativescript-vue.org/). It’s amazing how much more productive developers can be when you already know how concepts like navigation, data binding, and such work out of the box.
+
+That being said, NativeScript does not offer any support for React, which is not ideal for companies heavily invested in React like Airbnb. Supporting frameworks is a lot of work, especially when you think about all the tooling, templates, documentation and such framework support entails. Currently we’re happy with our current Angular integration, and working with the community to support Vue.js. Plus, we don’t think we can do React better than Facebook 🙂
 
 ## Hot reload
 
@@ -169,7 +165,9 @@ NativeScript and React Native are both able to take advantage these productivity
 
 Although NativeScript and React Native both leverage the benefits of JavaScript, React Native takes things farther with a feature they call [hot reloading](https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html). Hot reloading allows React Native to reload an app after a change without losing the application’s state. You can read through the [React Native team’s writeup on the feature](https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html) if you’re curious, but as a developer this feature essentially means you’re able to test your JavaScript changes incredibly fast.
 
-NativeScript does not offer hot reloading yet, but it’s something we’re actively working on. Stay tuned to the [NativeScript blog](https://www.nativescript.org/blog) for details on future plans and releases.
+That being said, NativeScript’s LiveSync (which you see in the gif above) is super fast and supports developing on as many devices as you can connect. With NativeScript you see most changes within a second, and not the 15–20 seconds common in native apps.
+
+NativeScript does not offer hot reloading yet, but it’s something we’re actively working on, and we’ll soon be able to measure our update cycles in milliseconds. Stay tuned to the [NativeScript blog](https://www.nativescript.org/blog) for details on future plans and releases. 
 
 ## Integrating into native apps
 
@@ -179,22 +177,17 @@ If you’re a company with large existing native iOS and Android apps, the idea 
 
 Although we at NativeScript do offer the ability to run within existing apps (here are [our iOS docs](https://docs.nativescript.org/angular/guides/integration-with-existing-ios-and-android-apps/extend-existing-ios-app); here are [our Android docs](https://docs.nativescript.org/angular/guides/integration-with-existing-ios-and-android-apps/extend-existing-android-app)), our support is currently experimental in nature, and not an officially supported usage scenario.
 
-Meanwhile, the React Native team has [heavily invested in this space](https://facebook.github.io/react-native/docs/integration-with-existing-apps.html) and has a lot of battle tested apps using this approach in production scenarios (including Airbnb). Furtermore, Facebook has [stated better integration with native apps will be a focus of their upcoming rearchitecture](https://facebook.github.io/react-native/blog/2018/06/14/state-of-react-native-2018), so theoretically the story will only get better for using React Native in native apps.
+Meanwhile, the React Native team has [heavily invested in this space](https://facebook.github.io/react-native/docs/integration-with-existing-apps.html) and has a lot of battle tested apps using this approach in production scenarios (including Airbnb). Furtermore, Facebook has [stated better integration with native apps will be a focus of their upcoming rearchitecture](https://facebook.github.io/react-native/blog/2018/06/14/state-of-react-native-2018).
 
-## Community
+Once again though React Native architecture is not without its problems. Integrating a framework like React Native or NativeScript into an existing app can be complex (just [skim the React Native docs to get an idea](https://facebook.github.io/react-native/docs/integration-with-existing-apps.html)), and the inherent complexity can cause problems, especially as iOS, Android, React Native, NativeScript, etc continue to evolve. We believe some of Airbnb’s problems came from trying to integrate React Native into a complex existing app, rather than starting a new React Native or NativeScript app from the ground up.
 
-Finally, perhaps the point we hear the most when developers compare NativeScript to React Native is in community size. And to be fair, there’s a lot of truth to this—React Native has an objectively larger community than NativeScript, and it’s therefore usually easier to find help on common issues that you hit during development, which is definitely important.
-
-But while this is true, that doesn’t mean we here at NativeScript are a small player. NativeScript [averages well over 100k downloads a month](https://npm-stat.com/charts.html?package=nativescript&from=2017-01-01&to=2018-06-24); we have a [very active community forum](https://discourse.nativescript.org/); we have [a community Slack channel with over 7k members](https://developer.telerik.com/wp-login.php?action=slack-invitation); and we have a [marketplace full of plugins](https://market.nativescript.org/) from a [over 300 plugin authors](https://market.nativescript.org/authors).
-
-Plus, if you pair NativeScript with Angular or Vue.js, which most of our users do, you also get to leverage two incredibly active JavaScript communities to help you solve common framework problems as well.
+At NativeScript, we listen to our users to help prioritize features like this. If you’re interested in seeing us invest more time and resources into this workflow, please [let us know on this GitHub issue](https://github.com/NativeScript/ios-runtime/issues/459).
 
 ## Closing thoughts
 
-As I mentioned in the beginning of this article, despite the advantages NativeScript can offer a company like Airbnb, ultimately I don’t think Airbnb would’ve been any more successful because their requirements (integrating into world-class apps) would be difficult for any cross-platform framework to meet.
+So given all of this, would Airbnb have been more successful with NativeScript?
 
-But the thing is,  most companies aren’t building world-class applications with 100s of mobile engineers. Most companies need a really good app; they need that app quickly; and they’d like their existing web developers to help build that app using a framework they already know.
-
-It’s situations like this where both React Native and NativeScript can both offer huge productivity gains to your average development team. And, although NativeScript and React Native are similar in their high-level approach to app development, there are some non-trivial architectural differences that can impact how successful your development processes will be. 
+Obviously we’ll never know, but we do believe NativeScript would’ve helped with several of the issues that Airbnb encountered, such as working with native APIs, dealing with types, and building fast lists. That being said, NativeScript doesn’t support React, and doesn’t offer the same level of integration into large existing mobile apps.
 
 Like any big technology decision, it’s usually a good idea to build proof-of-concept apps with all of your options before embarking on a full-blown development project. With that in mind, if you’d like to give NativeScript a shot, start with our [tutorials in NativeScript Playground](https://play.nativescript.org/?template=groceries-js&tutorial=groceries-js&autoStart=true), our browser-based experience that’ll help you get up and running quickly. And if you have any questions about NativeScript from this article, feel free to reach out in the comments.
+
