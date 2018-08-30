@@ -6,7 +6,7 @@
         {
             "label": "Compile Markdown",
             "type": "shell",
-            "command": "markdown-it article.md -o output.html",
+            "command": "markdown-it airbnb/article.md -o airbnb/output.html",
             "group": "build",
             "problemMatcher": []
         }
