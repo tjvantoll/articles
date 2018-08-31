@@ -1,15 +1,14 @@
-# How I Built a PWA, an iOS App, and an Android App in a Week—From One Codebase
+# How to Build a PWA, an iOS App, and an Android App—From One Codebase
 
-One of my favorite things about being a software developer is being able to take a simple idea and turn it into a useful app.
+I have a long history of choosing between web and native, often wrongly. I’ve built web apps that were scraped for outsourced native apps, and I’ve wasted time building native apps that found no audience.
 
-Last month, a problem keep coming up in my local Pokémon GO group (yes, the game is [alive and well](https://comicbook.com/gaming/2018/07/09/pokemon-go-revenue-2018/) 🙂)—people kept manually sharing a checklist image that looks a little something like this.
+Choosing between web and native is hard, and in my experience, oftentimes you won’t know which platform better meets your needs until after the fact. The good news is JavaScript developers no longer have to choose.
 
-<img src="checklist.jpg" style="height: 350px;">
+In this article I’m going to show how to use the recently announced [NativeScript and Angular integration](https://blog.angular.io/apps-that-work-natively-on-the-web-and-mobile-9b26852495e7) to build a PWA, a native iOS app, and a native Android app from one codebase. You’ll learn the steps you’ll need to take, as well as some tips and tricks I learned from building an Angular app for all three platforms.
 
-The software developer in me couldn’t handle the thought of so many people doing a manual task, so I decided to build ShinyDex, a dead-simple checklist app, and I deployed the app to both Google Play and the web. The app on Google Play already has over 5,000 installs and 50 reviews.
+## Starting your app
+
+Over the last month I built an app called ShinyDex and deployed it the App Store, Google Play, and the web. The app is a purposely simple checklist app designed to help teach how the NativeScript and Angular technology stack work.
 
 ![](apps.png)
 
-In this article I’m going to show you how I used the recently announced [NativeScript and Angular integration](https://blog.angular.io/apps-that-work-natively-on-the-web-and-mobile-9b26852495e7) to get all three of these apps out quickly. I’ll walk you through the same process I went through, and give you some tips and tricks for things I hit along the way.
-
-## Starting the Project
