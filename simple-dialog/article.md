@@ -2,20 +2,23 @@
 
 There are a few different ways to implement dialogs in NativeScript apps. The [NativeScript dialog module](https://docs.nativescript.org/ui/dialogs) lets you show a variety of dialogs using built-in APIs, and is great for simple use cases.
 
-![](https://raw.githubusercontent.com/NativeScript/code-samples/master/screens/dialogs-ios.gif)
+-- gif --
 _[Try this example in NativeScript Playground](https://play.nativescript.org/?template=play-ng&id=dWQhV7&v=5)_
 
 On the other end of the spectrum, you can also create dialogs that are completely modal pages, complete with native transitions. These are great when you want to have full control over how the dialogs look and work.
 
--- show it --
+-- gif --
+_[Try this example in NativeScript Playground](https://play.nativescript.org/?template=play-ng&id=iC2pnQ&v=27)
 
-In my experience though, sometime you want something in between these two options. That is, you want a simple dialog that you can style... without going through the hassle of creating an entire page. Basically you want something that looks like this.
+In my experience though, sometimes you want a simple dialog that you can style without going through the hassle of creating an entire page. Basically you want something that looks like this.
 
 <img src="dialog.gif" style="height: 450px;">
 
-In this article I’m going to walk you through how to create a simple dialog like the one above. I’ll be using Angular for my explanations, but the techniques are roughly the same whether you’re using Angular, Vue.js, or NativeScript Core.
+In this article I’m going to walk you through how to create a simple dialog like the one above. I’ll be using Angular for my explanations, but the techniques are roughly the same whether you’re using Angular, Vue.js, or NativeScript Core. Below are links to live examples of this article’s samples using each approach.
 
-> **TIP**: You can view the final state of this example in NativeScript Playground. Here’s the code for Angular, the code for Vue.js, and the code for NativeScript Core.
+* [Final code for Angular](https://play.nativescript.org/?template=play-ng&id=LfbvME&v=15)
+* [Final code for Vue.js](https://play.nativescript.org/?template=play-vue&id=7YrUzj&v=3)
+* [Final code for NativeScript Core](https://play.nativescript.org/?template=play-tsc&id=ixN0xD)
 
 ## Building the markup
 
@@ -29,7 +32,7 @@ Here is what the markup to make this simple dialog looks like at a high level.
     </StackLayout>
   </GridLayout>
 
-  <AbsoluteLayout>
+  <AbsoluteLayout class="dialog-wrapper">
     <StackLayout class="dialog">
       <!-- Dialog content goes here -->
     </StackLayout>
@@ -79,7 +82,7 @@ Now that you have the property in place, your next step is to use that property 
     </StackLayout>
   </GridLayout>
 
-  <AbsoluteLayout>
+  <AbsoluteLayout class="dialog-wrapper">
     <StackLayout class="dialog">
       <Label textWrap="true" text="Are you sure you want to continue?"></Label>
       <Button class="btn btn-primary" text="Yes"></Button>
@@ -95,29 +98,31 @@ Second, you use Angular’s `[]` syntax to conditionally apply a `dialogOpen` CS
 
 ## Adding styling
 
-Believe it or not you already have all the markup and code you need to make this example work, as the real magic of this example happens in CSS. Here’s the minimum CSS code you’ll need.
+Believe it or not, you already have all the markup and code you need to make this example work, as the real magic of this example happens in CSS. Here’s the minimum CSS code you’ll need.
 
 ``` CSS
 .dialogOpen .content {
   opacity: 0.2;
 }
+.dialogOpen .dialog-wrapper {
+  visibility: visible;
+}
+.dialog-wrapper {
+  visibility: collapse;
+}
 .dialog {
-  opacity: 0;
   border-width: 1 0 1 0;
   border-color: black;
   width: 100%;
   margin-top: 100;
 }
-.dialogOpen .dialog {
-  opacity: 1;
-}
 ```
 
-By default the dialog element is set to an `opacity` of `0`, which hides it from the user.
+By default the dialog wrapper element is set to a `visibility` of `collapse`, which hides the dialog from the user.
 
-But when the `dialogOpen` class gets applied, the `.dialogOpen .dialog` selector now applies, and the dialog’s `opacity` is set to `1`, which shows the dialog to the user. Additionally, the `.dialogOpen .content` now applies and changes the `opacity` of the main content to `0.2`, which gives it a bit of a dim appearance so the user’s attention gets focused on the dialog itself.
+But when the `dialogOpen` class gets applied, the `.dialogOpen .dialog-wrapper` selector now applies, and the dialog wrapper’s `visibility` is set to `visible`, which shows the dialog to the user. Additionally, the `.dialogOpen .content` now applies and changes the `opacity` of the main content to `0.2`, which gives it a bit of a dim appearance so the user’s attention gets focused on the dialog itself.
 
-When you put this all together you should now have a dialog that looks a little something like this.
+When you put this all together, you should now have a dialog that looks a little something like this.
 
 --- gif ---
 
@@ -134,10 +139,15 @@ There are a few different ways you can improve on this simple design. First, you
 .dialogOpen .content {
   opacity: 0.2;
 }
-.dialogOpen .dialog {
+.dialogOpen .dialog-wrapper {
+  visibility: visible;
   animation-name: show;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
+}
+.dialog-wrapper {
+  visibility: collapse;
+  opacity: 0;
 }
 .dialog {
   opacity: 0;
@@ -148,11 +158,31 @@ There are a few different ways you can improve on this simple design. First, you
 }
 ```
 
-Now, when you open your dialog you’ll see a little face-in effect that looks like this.
+Now, when you set the `dialogOpen` class name, the `show` CSS animation will change the opacity of the dialog wrapper from `0` to `1` over 0.3 seconds. The result is a nice little fade-in effect that looks like this.
 
 --- gif ---
 
-One downside of using the technique described in this article is that your dialogs are not modal. That is, the user is still able to access content that lives underneath the dialog when the dialog displays. To work around this, you will need to guard other actions the user can take in your UI.
+Before I leave you there’s one last tip I need to mention. Let’s return to this sample’s basic markup.
+
+``` XML
+<GridLayout class="page">
+  <GridLayout class="content">
+    <StackLayout>
+      <!-- Page content goes here -->
+    </StackLayout>
+  </GridLayout>
+
+  <AbsoluteLayout class="dialog-wrapper">
+    <StackLayout class="dialog">
+      <!-- Dialog content goes here -->
+    </StackLayout>
+  </AbsoluteLayout>
+</GridLayout>
+```
+
+Here, because the dialog wrapper is a child of the parent page, it inherits the page’s dimensions—aka the wrapper takes up the same dimensions as the page. This is by design, as it means when the dialog is open, the user cannot tap on elements behind the dialog. Essentially the wrapper turns this dialog into a modal dialog.
+
+There is one exception to this though. While the wrapper blocks the main page from taps, it’s dimensions do not extend over the page’s `<ActionBar>`. Therefore if your page uses an `<ActionBar>`, the user will be able to interact with any controls you put in it while the dialog is open.
 
 For example, suppose you had an `<ActionItem>` in your app that performed a sharing action. Something like this.
 
@@ -178,7 +208,7 @@ export class HomeComponent {
 }
 ```
 
-To prevent the sharing action from happening when your dialog is open, you could add a simple `if` check like this.
+In this example the user could perform the sharing action while the dialog is open. This might be ok for your app and your scenario. But if it isn’t, the simplest way to prevent the action is with a simple `if` check. For example note the use of `if (this.dialogOpen)` in the example below.
 
 ``` TypeScript
 import { Component } from "@angular/core";
@@ -201,28 +231,12 @@ export class HomeComponent {
 }
 ```
 
-Another approach you could take is hiding the dialog when the user taps outside of the dialog. You can do that by adding a `tap` event handler to your content that closes the dialog.
+## Wrapping up
 
-``` XML
-<GridLayout class="page">
-  <GridLayout class="content" (tap)="closeDialog()">
-    <StackLayout>
-      <!-- Page content goes here -->
-    </StackLayout>
-  </GridLayout>
-
-  <AbsoluteLayout>
-    <StackLayout class="dialog">
-      <!-- Dialog content goes here -->
-    </StackLayout>
-  </AbsoluteLayout>
-</GridLayout>
-```
-
-Ultimately how you choose to configure is up to you based on the needs of you app. Feel free to copy this approach verbatim, or to customize this structure to meet your needs.
+Ultimately how you choose to configure this sample is up to you based on the needs of your app. Feel free to copy this approach verbatim, or to customize this structure to meet your needs.
 
 A polished version of this sample is available for Angular, Vue.js, and NativeScript Core using the links below. Feel free to use them, and if you come up with any fun customizations, please list them in the comments below.
 
-* [Final code for Angular]()
-* [Final code for Vue.js]()
-* [Final code for NativeScript Core]()
+* [Final code for Angular](https://play.nativescript.org/?template=play-ng&id=LfbvME&v=15)
+* [Final code for Vue.js](https://play.nativescript.org/?template=play-vue&id=7YrUzj&v=3)
+* [Final code for NativeScript Core](https://play.nativescript.org/?template=play-tsc&id=ixN0xD)
