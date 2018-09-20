@@ -241,3 +241,5 @@ A polished version of this sample is available for Angular, Vue.js, and NativeSc
 * [Final code for Angular](https://play.nativescript.org/?template=play-ng&id=LfbvME&v=15)
 * [Final code for Vue.js](https://play.nativescript.org/?template=play-vue&id=7YrUzj&v=3)
 * [Final code for NativeScript Core](https://play.nativescript.org/?template=play-tsc&id=ixN0xD)
+
+> **TIP** This simple dialog is one of many samples available for free in [NativeScript Marketplace](https://market.nativescript.org/). Check out the [full list of samples](https://market.nativescript.org/?tab=samples&framework=all_frameworks&category=all_samples), and maybe even [contribute your own](https://github.com/NativeScript/code-samples/blob/master/CONTRIBUTING.md) 😉
