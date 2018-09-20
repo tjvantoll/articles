@@ -2,17 +2,17 @@
 
 There are a few different ways to implement dialogs in NativeScript apps. The [NativeScript dialog module](https://docs.nativescript.org/ui/dialogs) lets you show a variety of dialogs using built-in APIs, and is great for simple use cases.
 
--- gif --
+![](dialog-module.gif)
 _[Try this example in NativeScript Playground](https://play.nativescript.org/?template=play-ng&id=dWQhV7&v=5)_
 
 On the other end of the spectrum, you can also create dialogs that are completely modal pages, complete with native transitions. These are great when you want to have full control over how the dialogs look and work.
 
--- gif --
+![](modal-page.gif)
 _[Try this example in NativeScript Playground](https://play.nativescript.org/?template=play-ng&id=iC2pnQ&v=27)
 
 In my experience though, sometimes you want a simple dialog that you can style without going through the hassle of creating an entire page. Basically you want something that looks like this.
 
-<img src="dialog.gif" style="height: 450px;">
+![](dialog.gif)
 
 In this article I’m going to walk you through how to create a simple dialog like the one above. I’ll be using Angular for my explanations, but the techniques are roughly the same whether you’re using Angular, Vue.js, or NativeScript Core. Below are links to live examples of this article’s samples using each approach.
 
@@ -124,7 +124,7 @@ But when the `dialogOpen` class gets applied, the `.dialogOpen .dialog-wrapper` 
 
 When you put this all together, you should now have a dialog that looks a little something like this.
 
---- gif ---
+![](dialog-in-progress.gif)
 
 ## Further improvements
 
@@ -150,7 +150,6 @@ There are a few different ways you can improve on this simple design. First, you
   opacity: 0;
 }
 .dialog {
-  opacity: 0;
   border-width: 1 0 1 0;
   border-color: black;
   width: 100%;
@@ -160,9 +159,11 @@ There are a few different ways you can improve on this simple design. First, you
 
 Now, when you set the `dialogOpen` class name, the `show` CSS animation will change the opacity of the dialog wrapper from `0` to `1` over 0.3 seconds. The result is a nice little fade-in effect that looks like this.
 
---- gif ---
+![](dialog-in-progress-2.gif)
 
-Before I leave you there’s one last tip I need to mention. Let’s return to this sample’s basic markup.
+At this point you’ll probably want to write some CSS to clean up the spacing in this UI based on what you want to show in the dialog. You can refer to the full code samples listed at the end of this article for an example of this.
+
+Before I leave you though there’s one last tip I need to mention. To discuss let’s return to this sample’s basic markup.
 
 ``` XML
 <GridLayout class="page">
@@ -180,7 +181,7 @@ Before I leave you there’s one last tip I need to mention. Let’s return to t
 </GridLayout>
 ```
 
-Here, because the dialog wrapper is a child of the parent page, it inherits the page’s dimensions—aka the wrapper takes up the same dimensions as the page. This is by design, as it means when the dialog is open, the user cannot tap on elements behind the dialog. Essentially the wrapper turns this dialog into a modal dialog.
+Focus on the dialog wrapper. Because the dialog wrapper is a child of the parent page, it inherits the page’s dimensions—aka the wrapper takes up the same dimensions as the page. This is by design, as it means when the dialog is open, the user cannot tap on elements behind the dialog. Essentially the wrapper turns this dialog into a modal dialog.
 
 There is one exception to this though. While the wrapper blocks the main page from taps, it’s dimensions do not extend over the page’s `<ActionBar>`. Therefore if your page uses an `<ActionBar>`, the user will be able to interact with any controls you put in it while the dialog is open.
 
