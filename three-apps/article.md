@@ -708,4 +708,5 @@ After all, the power from using NativeScript schematics is not just code sharing
 ## Resources
 
 * [NativeScript documentation on code sharing](https://docs.nativescript.org/angular/code-sharing/intro)
-* [Full source code of ShinyDex]()
+* [Final source code for this article’s sample](https://github.com/tjvantoll/shinydex/tree/article)
+* [Full source code of ShinyDex](https://github.com/tjvantoll/ShinyDex)
