@@ -43,7 +43,7 @@ Here’s what these tools do.
 With installation out of the way, your next step is to create an app. To do that, run the following command from your terminal or command prompt.
 
 ```
-ng new Checklist --collection @nativescript/schematics --shared
+ng new Checklist --collection @nativescript/schematics --shared --sample
 ```
 
 Let’s break down what’s happening here.
@@ -51,7 +51,8 @@ Let’s break down what’s happening here.
 * `ng new` is the Angular CLI command you use to start new Angular apps.
 * `Checklist` is your app name. For you own apps you’ll want to provide your own value here.
 * The `--collection @nativescript/schematics` flag tells the Angular CLI about NativeScript schematics, which makes it possible for this app to run on iOS and Android through NativeScript.
-* The `--shared` flag tells the Angular CLI you wish to share code between your web and native apps.
+* The `--shared` flag tells NativeScript schematics you wish to start with a code-sharing project template.
+* The `--sample` flag has NativeScript schematics scaffold a few sample components which we’ll look at momentarily. You’ll want to omit this flag when you go to build your own apps.
 
 Now that you have an app let’s look at how to run it.
 
@@ -184,15 +185,17 @@ Next, make a new folder named `list`, and create the following files in that fol
     └── list.service.ts
 ```
 
+> **TIP**: When you get more comfortable working with NativeScript schematics, there are a series of commands you can use to help generate components and modules. See the [NativeScript schematics documentation](https://github.com/NativeScript/nativescript-schematics#generating-components-modules-directives-etc) for more information.
+
 Here’s what to put in those files as a first step. Don’t worry too much about exactly what this code is doing, as we’ll discuss the important things to note momentarily.
 
 `list.common.ts`
 
 ``` TypeScript
-import { Routes } from "@angular/router";
+import { Routes } from '@angular/router';
 
-import { ListComponent } from "./list.component";
-import { ListService } from "./list.service";
+import { ListComponent } from './list.component';
+import { ListService } from './list.service';
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ListComponent
@@ -203,7 +206,7 @@ export const PROVIDERS_DECLARATIONS: any[] = [
 ];
 
 export const ROUTES: Routes = [
-  { path: "list", component: ListComponent },
+  { path: 'list', component: ListComponent },
 ];
 ```
 
@@ -249,14 +252,14 @@ img {
 `list.component.ts`
 
 ``` TypeScript
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import { ListService } from "./list.service";
+import { ListService } from './list.service';
 
 @Component({
-  selector: "app-list",
-  templateUrl: "./list.component.html",
-  styleUrls: ["./list.component.css"]
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
   items: any[];
@@ -278,10 +281,10 @@ export class ListComponent implements OnInit {
 `list.module.ts`
 
 ``` TypeScript
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
-import { RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { ROUTES, COMPONENT_DECLARATIONS, PROVIDERS_DECLARATIONS } from './list.common';
 
@@ -307,16 +310,16 @@ export class ListModule { }
 `list.service.ts`
 
 ``` TypeScript
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ListService {
-  saved;
+  saved: any[];
 
   constructor(private http: HttpClient) {
-    let saved = localStorage.getItem("items");
+    let saved = localStorage.getItem('items');
     if (saved) {
       this.saved = JSON.parse(saved);
     } else {
@@ -325,7 +328,7 @@ export class ListService {
   }
 
   get() {
-    return this.http.get("https://rawgit.com/tjvantoll/ShinyDex/master/assets/151.json")
+    return this.http.get('https://rawgit.com/tjvantoll/ShinyDex/master/assets/151.json')
       .pipe(
         map((data: any) => {
           const returnData = [];
@@ -350,7 +353,7 @@ export class ListService {
   }
 
   save() {
-    localStorage.setItem("items", JSON.stringify(this.saved));
+    localStorage.setItem('items', JSON.stringify(this.saved));
   }
 }
 ```
@@ -360,12 +363,12 @@ Again, don’t worry if you don’t understand everything that’s going on in t
 To activate this new component so you can try it out, first, add this new component to your `app.module.ts` file so Angular knows about it. Here’s what your new `app.module.ts` file should look like.
 
 ``` TypeScript
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from "./app.routing";
-import { AppComponent } from "./app.component";
-import { ListModule } from "./list/list.module";
+import { AppRoutingModule } from './app.routing';
+import { AppComponent } from './app.component';
+import { ListModule } from './list/list.module';
 
 @NgModule({
   declarations: [
@@ -385,10 +388,10 @@ export class AppModule { }
 Next, change the default path in your `app.routes.ts` file, so Angular navigates to the new list component by default. The new `app.routes.ts` file should look like this.
 
 ``` TypeScript
-import { Routes } from "@angular/router";
+import { Routes } from '@angular/router';
 
 export const ROUTES: Routes = [
-  { path: "", redirectTo: "/list", pathMatch: "full" },
+  { path: '', redirectTo: '/list', pathMatch: 'full' },
 ];
 ```
 
@@ -447,12 +450,12 @@ Remember that the Angular CLI will automatically grab the code in your `.tns.*` 
 To do that, start by opening your `list.module.tns.ts` file and paste in the following code.
 
 ``` TypeScript
-import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptCommonModule } from "nativescript-angular/common";
-import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
-import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NativeScriptCommonModule } from 'nativescript-angular/common';
+import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
-import { ROUTES, COMPONENT_DECLARATIONS, PROVIDERS_DECLARATIONS } from "./list.common";
+import { ROUTES, COMPONENT_DECLARATIONS, PROVIDERS_DECLARATIONS } from './list.common';
 
 @NgModule({
   imports: [
@@ -515,12 +518,12 @@ Image {
 With all this in place, your last step is to import your `ListModule` in your `app.module.tns.ts` file, exactly like you did with your `app.module.ts` file. To do so, replace the contents of your `app.component.tns.ts` file with the following code.
 
 ``` TypeScript
-import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptModule } from "nativescript-angular/nativescript.module";
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 
-import { AppRoutingModule } from "./app.routing";
-import { AppComponent } from "./app.component";
-import { ListModule } from "./list/list.module";
+import { AppRoutingModule } from './app.routing';
+import { AppComponent } from './app.component';
+import { ListModule } from './list/list.module';
 
 @NgModule({
   bootstrap: [
@@ -554,13 +557,13 @@ However, there are often times where you can share almost all of your code, but 
 If you open `list.service.ts`, you’ll see two different references to `localStorage`—one in the constructor...
 
 ``` TypeScript
-let saved = localStorage.getItem("items");
+let saved = localStorage.getItem('items');
 ```
 
 ...and another in the `save()` method.
 
 ``` TypeScript
-localStorage.setItem("items", JSON.stringify(this.saved));
+localStorage.setItem('items', JSON.stringify(this.saved));
 ```
 
 The problem here is `localStorage` is a browser API. It works great on the web, but it does not exist in NativeScript apps because NativeScript apps do not run in a browser.
@@ -594,7 +597,7 @@ Open your `list.helper.ts` file and paste in the following code. This is the sam
 ``` TypeScript
 export class ListHelper {
   readItems() {
-    let saved = localStorage.getItem("items");
+    let saved = localStorage.getItem('items');
     if (saved) {
       return JSON.parse(saved);
     } else {
@@ -603,7 +606,7 @@ export class ListHelper {
   }
 
   writeItems(items) {
-    localStorage.setItem("items", JSON.stringify(items));
+    localStorage.setItem('items', JSON.stringify(items));
   }
 }
 ```
@@ -611,13 +614,13 @@ export class ListHelper {
 Next, open your `list.helper.tns.ts` file and paste in the following code. This code follows the same API as the web helper, but instead uses some of NativeScript’s built-in modules to accomplish the same task for your iOS and Andorid apps.
 
 ``` TypeScript
-import { knownFolders, File } from "tns-core-modules/file-system";
+import { knownFolders, File } from 'tns-core-modules/file-system';
 
 export class ListHelper {
   saveFile: File;
 
   constructor() {
-    this.saveFile = knownFolders.documents().getFile("items.json");
+    this.saveFile = knownFolders.documents().getFile('items.json');
   }
 
   readItems() {
@@ -634,16 +637,16 @@ export class ListHelper {
 Your last step here is changing your service to utilize these new helpers, which you can do by replacing the code in your `list.service.ts` file with the code below, which makes use of the new helpers.
 
 ``` TypeScript
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
-import { ListHelper } from "./list.helper";
+import { ListHelper } from './list.helper';
 
 @Injectable()
 export class ListService {
-  saved;
-  helper;
+  saved: any[];
+  helper: ListHelper;
 
   constructor(private http: HttpClient) {
     this.helper = new ListHelper();
@@ -651,7 +654,7 @@ export class ListService {
   }
 
   get() {
-    return this.http.get("https://rawgit.com/tjvantoll/ShinyDex/master/assets/151.json")
+    return this.http.get('https://rawgit.com/tjvantoll/ShinyDex/master/assets/151.json')
       .pipe(
         map((data: any) => {
           const returnData = [];
@@ -696,6 +699,8 @@ You should see an app that looks something like this.
 ![](apps-in-action.gif)
 
 Although this app is simple it’s important to remember what you’re seeing here. These are _native_ iOS and Andorid apps, using native iOS and Android user interface controls. And not only did you build these apps with Angular and TypeScript, you even shared a good chunk the code behind this app with your web app.
+
+> **NOTE**: You can learn more about using helper files to split your code from [this article on the NativeScript documentation](https://docs.nativescript.org/angular/code-sharing/code-splitting#partial-differences).
 
 ## The big picture
 
