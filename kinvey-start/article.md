@@ -4,7 +4,7 @@
 
 In this article we’ll take an opinionated look at how to get up and running with NativeScript and Kinvey as fast as possible. If you follow along through the whole article, you’ll set up a new Kinvey account, configure a NativeScript development environment, and start to take advantage of some of the powerful backend features Kinvey offers. At the end you’ll have that looks like this.
 
--- full app gif --
+<img src="final-app.gif" style="height: 450px;">
 
 Let’s get started.
 
@@ -12,8 +12,9 @@ Let’s get started.
 * [Step 2: Set up your NativeScript environment](#step-2)
 * [Step 3: Connect your NativeScript app to your Kinvey account](#step-3)
 * [Step 4: Configure your auth](#step-4)
-* [Step 5: Connect to your data](#step-5)
-* [Step 6: Do cool stuff](#step-6)
+* [Step 5: Configure your data](#step-5)
+* [Step 6: Use your data](#step-6)
+* [Step 7: Do cool stuff](#step-7)
 
 <h2 id="step-1">Step 1: Set up your Kinvey account</h2>
 
@@ -153,7 +154,7 @@ Regardless of how you choose to implement authentication for your apps, Kinvey h
 
 > **TIP**: For a more in-depth look at how users work in Kinvey, check out [_Understanding Users in Kinvey_](https://www.progress.com/blogs/understanding-users-kinvey) by Brian Rinaldi.
 
-<h2 id="step-5">Step 5: Connect to your data</h2>
+<h2 id="step-5">Step 5: Configure your data</h2>
 
 Now that you have Kinvey and NativeScript set up, and you have your user management in place, let’s look at how to work with data.
 
@@ -173,7 +174,27 @@ On the next screen you’ll see a UI allows you to select between Kinvey’s bui
 
 Kinvey data connectors are known as _RapidData_, and they’re worth checking out if you have existing data in [SharePoint](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforSharePoint), [SQL Server](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforMicrosoftSQLServer), [Salesforce](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforSalesforce), [SAP](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforSAP), or if you have [existing REST APIs](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforRESTAPIs). For the purposes of this article we’ll keep things simple, and use Kinvey’s built-in data for the new “Tasks” collection you just started.
 
-To use the new collection let’s head back to your app in NativeScript Playground. There are a few changes you need to make. Start by creating a new `tasks.service.ts` file in your app’s `shared` folder. In Playground, you can do this by giving focus, to the `shared` folder, clicking the **+** button in the explorer, and selecting **Add File** and then **TypeScript**.
+As one last step before we use this collection, let’s configure its permissions. Kinvey offers a robust set of role-based permissions that determine which users are able to access collections, and also, what actions they’re allowed to take on that data. To enter this configuration for your new collection, find and click the gear icon in the Kinvey Console UI (see screenshot below).
+
+![](permissions-1.png)
+
+On the following screen, first click the permissions menu option, and then, the pencil that allows you to change your collection’s default permissions.
+
+![](permissions-2.png)
+
+On this screen you can view and change your new collection’s permissions for creating, reading, updating, and deleting. Find the read dropdown, change its value from **Grant** to **Entity**, and then click the **Update Role Access** button. This makes it so that users can only read tasks that they created, and not other users tasks.
+
+![](permissions-3.png)
+
+> **TIP**: You can [read a detailed write up on exactly how access control works in Kinvey in the Kinvey docs](https://devcenter.kinvey.com/nativescript/guides/security#).
+
+And with that your collection is now setup and ready to go. In the next step let’s look at how you can use your new collection in your app.
+
+<h2 id="step-6">Step 6: Use your data</h2>
+
+Like with authentication, using Kinvey data in NativeScript apps is as easy as making a few simple calls to the Kinvey SDK. To see this, head back to your app in NativeScript Playground.
+
+There are a few changes you need to make to use your new collection. Start by creating a new `tasks.service.ts` file in your app’s `shared` folder. In Playground, you can do this by giving focus, to the `shared` folder, clicking the **+** button in the explorer, and selecting **Add File** and then **TypeScript**.
 
 ![](create-new-file.png)
 
@@ -450,7 +471,7 @@ Cool, huh? Starting with a simple to-do list app like this is a great way to lea
 
 If you got lost at all during this section, here’s a [**complete version of the sample app in Playground**](https://play.nativescript.org/?template=play-ng&id=Hqp5UQ&v=2978) you can refer to.
 
-<h2 id="step-6">Step 6: Do cool stuff</h2>
+<h2 id="step-7">Step 7: Do cool stuff</h2>
 
 In this article we looked at how to get up and running with NativeScript and Kinvey fast. But we’re only scratching the surface of what these two technologies can do.
 
