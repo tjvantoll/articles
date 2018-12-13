@@ -2,7 +2,7 @@
 
 [NativeScript](https://www.nativescript.org/) allows you to build native iOS and Android apps from a single codebase, and [Progress Kinvey](https://www.progress.com/kinvey) makes it easy to add the backend plumbing that makes your app work. Together, the two technologies let you build modern mobile apps fast.
 
-In this article we’ll take an opinionated look at how to get up and running with NativeScript and Kinvey as fast as possible. If you follow along through the whole article, you’ll set up a new Kinvey account, configure a NativeScript development environment, and start to take advantage of some of the powerful backend features Kinvey offers. At the end you’ll have that looks like this.
+In this article we’ll take an opinionated look at how to get up and running with NativeScript and Kinvey as fast as possible. If you follow along through the whole article, you’ll set up a new Kinvey account, configure a NativeScript development environment, and start to take advantage of some of the powerful backend features Kinvey offers. At the end you’ll have an app that looks like this.
 
 <img src="final-app.gif" style="height: 450px;">
 
