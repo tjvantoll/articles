@@ -144,7 +144,7 @@ On the **Password Reset** portion of the settings you can similarly configure yo
 
 While all of this is functionality is powerful, perhaps Kinvey’s most powerful feature is its **Mobile Identity Connect**, which allows you to connect to a wide variety of existing authentication providers, such as LDAP, Active Directory, Facebook, or really, any provider that supports common protocols like SAML, OpenID, or OAuth.
 
-A full in-depth discussion of Mobile Identity Connect is out of the scope of this article, but if you’re interested, check out [Kinvey’s documentation on setting up Mobile Identity Connect](https://devcenter.kinvey.com/nativescript/guides/mobile-identity-connect# or this [tutorial by Brian Rinaldi](https://www.progress.com/blogs/enterprise-authentication-kinvey)) for your apps. When you’re done, you’ll be able to leverage your existing auth provider directly in your apps. For example, here’s what the workflow looks like with an Active Directory setup.
+A full in-depth discussion of Mobile Identity Connect is out of the scope of this article, but if you’re interested, check out [Kinvey’s documentation on setting up MIC](https://devcenter.kinvey.com/nativescript/guides/mobile-identity-connect#) or this [tutorial by Brian Rinaldi](https://www.progress.com/blogs/enterprise-authentication-kinvey). When you’re done, you’ll be able to leverage your existing auth provider directly in your apps. For example, here’s what the workflow looks like with an Active Directory setup.
 
 <img src="mic-sample.gif" style="height: 500px;">
 
