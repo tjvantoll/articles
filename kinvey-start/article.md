@@ -2,7 +2,7 @@
 
 [NativeScript](https://www.nativescript.org/) allows you to build native iOS and Android apps from a single codebase, and [Progress Kinvey](https://www.progress.com/kinvey) makes it easy to add the backend plumbing that makes your app work. Together, the two technologies let you build modern mobile apps fast.
 
-In this article we’ll take an opinionated look at how to get up and running with NativeScript and Kinvey as fast as possible. If you follow along through the whole article, you’ll set up a new Kinvey account, configure a NativeScript development environment, and start to take advantage of some of the powerful backend features Kinvey offers. At the end you’ll have an app that looks like this.
+In this article we’ll take an opinionated look at how to get up and running with NativeScript and Kinvey as fast as possible. If you follow along through the whole article, you’ll set up a new Kinvey account, configure a NativeScript development environment, and start to take advantage of some of the powerful backend features Kinvey offers. At the end you’ll have an app that looks like this:
 
 <img src="final-app.gif" style="height: 450px;">
 
@@ -34,7 +34,7 @@ You can use Kinvey on many different platforms (and switch between those platfor
 
 > **TIP**: [Check out the Kinvey documentation](https://devcenter.kinvey.com) to learn about using Kinvey in other environments, such as in your web apps.
 
-Finally, on the next screen, copy your app key and app secret, and paste them somewhere convenient. (If do lose these keys, I’ll show you where to find them again later in this article.)
+Finally, on the next screen, copy your app key and app secret, and paste them somewhere convenient. (If you do lose these keys, I’ll show you where to find them again later in this article.)
 
 ![](app-keys.png)
 
@@ -42,7 +42,7 @@ And with that, you now have your Kinvey account set up and a new app ready to go
 
 <h2 id="step-2">Step 2: Set up your NativeScript environment</h2>
 
-NativeScript is a framework for building iOS and Android apps using JavaScript, and as such, to start using NativeScript you must set up an environment to write your code.
+NativeScript is a framework for building iOS and Android apps using JavaScript, and, as such, to start using NativeScript you must set up an environment to write your code.
 
 There are a few different ways to do this, but the easiest—and the one we’ll use for this article—is NativeScript Playground. [NativeScript Playground](https://play.nativescript.org/) is a browser-based environment for developing NativeScript apps without installing any local dependencies. All you need is an iOS or Android device.
 
@@ -90,7 +90,7 @@ Now that you have a Kinvey account set up and a NativeScript environment ready, 
 
 The easiest way to connect NativeScript apps to Kinvey functionality is through the [Kinvey SDK for NativeScript](https://github.com/Kinvey/nativescript-sdk), which provides a series of easy-to-use JavaScript APIs. NativeScript Playground includes the Kinvey SDK in every app you build, so you can immediately start using the SDK APIs with no additional setup necessary.
 
-The first API you need to use is `Kinvey.init()`, which is the method that makes the connection from your NativeScript front end to your Kinvey backend. Remember the code snippet you copied during the Kinvey sign-up process earlier? That code is a call to `Kinvey.init()` with the values you need to make the connection.
+The first API you need to use is `Kinvey.init()`, which is the method that makes the connection from your NativeScript front end to your Kinvey backend. Remember the code snippet you copied during the Kinvey sign-up process earlier? That code is a call to `Kinvey.init()` with the values you need to make the connection. It looked like this but it included your `appKey` and `appSecret` values:
 
 ```
 Kinvey.init({
@@ -144,7 +144,7 @@ On the **Password Reset** portion of the settings you can similarly configure yo
 
 While all of this is functionality is powerful, perhaps Kinvey’s most powerful feature is its **Mobile Identity Connect**, which allows you to connect to a wide variety of existing authentication providers, such as LDAP, Active Directory, Facebook, or really, any provider that supports common protocols like SAML, OpenID, or OAuth.
 
-A full in-depth discussion of Mobile Identity Connect is out of the scope of this article, but if you’re interested, check out [Kinvey’s documentation on setting up Mobile Identity Connect](https://devcenter.kinvey.com/nativescript/guides/mobile-identity-connect#) for your apps. When you’re done, you’ll be able to leverage your existing auth provider directly in your apps. For example, here’s what the workflow looks like with an Active Directory setup.
+A full in-depth discussion of Mobile Identity Connect is out of the scope of this article, but if you’re interested, check out [Kinvey’s documentation on setting up Mobile Identity Connect](https://devcenter.kinvey.com/nativescript/guides/mobile-identity-connect# or this [tutorial by Brian Rinaldi](https://www.progress.com/blogs/enterprise-authentication-kinvey)) for your apps. When you’re done, you’ll be able to leverage your existing auth provider directly in your apps. For example, here’s what the workflow looks like with an Active Directory setup.
 
 <img src="mic-sample.gif" style="height: 500px;">
 
@@ -174,7 +174,7 @@ On the next screen you’ll see a UI allows you to select between Kinvey’s bui
 
 Kinvey data connectors are known as _RapidData_, and they’re worth checking out if you have existing data in [SharePoint](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforSharePoint), [SQL Server](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforMicrosoftSQLServer), [Salesforce](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforSalesforce), [SAP](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforSAP), or if you have [existing REST APIs](https://devcenter.kinvey.com/nativescript/guides/rapid-data#ConnectorforRESTAPIs). For the purposes of this article we’ll keep things simple, and use Kinvey’s built-in data for the new “Tasks” collection you just started.
 
-As one last step before we use this collection, let’s configure its permissions. Kinvey offers a robust set of role-based permissions that determine which users are able to access collections, and also, what actions they’re allowed to take on that data. To enter this configuration for your new collection, find and click the gear icon in the Kinvey Console UI (see screenshot below).
+As one last step before we use this collection, let’s configure its permissions. Kinvey offers a robust set of role-based permissions that determine which users are able to access collections, and also what actions they’re allowed to take on that data. To enter this configuration for your new collection, find and click the gear icon in the Kinvey Console UI (see screenshot below).
 
 ![](permissions-1.png)
 
