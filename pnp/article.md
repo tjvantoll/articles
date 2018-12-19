@@ -13,7 +13,7 @@ UGroupMedia uses NativeScript to build and deploy Portable North Pole from a sin
     <img src="play-ratings.png" style="border: 1px solid black;">
 </div>
 
-Since this is the NativeScript blog, let’s take a look at just how the team at UGroupMedia built Portable North Pole.
+Since this is the NativeScript blog, let’s take a quick look at how the team at UGroupMedia built Portable North Pole.
 
 ## Architecture
 
