@@ -2,7 +2,7 @@
 
 The holidays are busy times for many, myself included, but for most of us, holiday planning doesn’t including architecting an app that can handle more than 100,000 simultaneous users.
 
-This is the challenge [uGroupMedia](http://ugroupmedia.com/) faces every year with their absurdly popular [Portable North Pole app](https://www.portablenorthpole.com), which allows users to create personalized Santa video content in a number of really cool ways.
+This is the challenge [UGroupMedia](http://ugroupmedia.com/) faces every year with their absurdly popular [Portable North Pole app](https://www.portablenorthpole.com), which allows users to create personalized Santa video content in a number of really cool ways.
 
 ![](banner.png)
 
