@@ -274,7 +274,7 @@ CustomEndpoint.execute("BudgetScore", {}, {})
   })
 ```
 
-Let’s take a step back and look at the big picture here though. In just a few minutes, you now have a secure Node library that lives in the cloud, which gives you all sorts of potential. For one, you’ve met the requirement of moving your sensitive code to the cloud—without having to rewrite your code to a more traditional server-side language like .NET or Java.
+Let’s take a step back and look at the big picture here though. In just a few minutes, you created a secure Node library that lives in the cloud, which gives you all sorts of potential. For one, you’ve met the requirement of moving your sensitive code to the cloud—without having to rewrite your code to a more traditional server-side language like .NET or Java.
 
 But that’s just the beginning. With Kinvey Flex Services you have a fully functional Node environment, meaning, you can install npm modules, reuse JavaScript code, and architect your services any way you’d like. When you’re done, you can deploy and manage your service outside of your applications—meaning, you can change update your production services without having to redeploy your applications.
 
@@ -332,14 +332,12 @@ sdk.service((err, flex) => {
 
 Overall, Kinvey Flex Services makes it possible to secure your source code in the cloud, while giving you the potential to do a whole lot more. To see the above Flex Service in action, check out this [complete BudgetScore application](https://play.nativescript.org/?template=play-ng&id=4XX1Ox&v=178).
 
-> **TIP** To get an idea of what else is possible, see [Brian Rinaldi’s intro to Flex Services](https://www.progress.com/blogs/getting-started-with-kinvey-flexservices), as well as his [collection of Flex Service examples on GitHub](https://github.com/remotesynth/flex-service-samples).
+> **TIP**: To get an idea of what else is possible, see [Brian Rinaldi’s intro to Flex Services](https://www.progress.com/blogs/getting-started-with-kinvey-flexservices), as well as his [collection of Flex Service examples on GitHub](https://github.com/remotesynth/flex-service-samples). You can also read more about security in Kinvey with this [security overview of the Kinvey platform](https://www.progress.com/papers/kinvey-cloud-services-security-overview).
 
 ## Wrapping up
 
-It’s never been easier to secure your front-end code by moving it to the cloud. Serverless providers make it trivial to not only move your code, but to also leverage powerful functionality, such as the ability to hit third-party APIs.
+It’s never been easier to secure your front-end code by moving it to the cloud. Serverless providers make it trivial to not only move your code, but to also leverage powerful backend functionality, such as the ability to hit third-party APIs.
 
-Plus, moving to a serverless approach gives you a number of other benefits, such as not having to worry about server maintenance, giving you the ability to access your code across applications and platforms, and giving you the ability to deploy your code independent of application deployments.
+Moving to a serverless approach gives you a number of auxillary benefits, such as not having to worry about server maintenance, giving you the ability to access your code across applications and platforms, and giving you the ability to deploy your code independent of application deployments.
 
 To try serverless with Kinvey, get started today at [progress.com/kinvey](https://www.progress.com/kinvey).
-
-> **TIP**: Read more about security in Kinvey with this [security overview of the Kinvey platform](https://www.progress.com/papers/kinvey-cloud-services-security-overview).
