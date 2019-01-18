@@ -14,7 +14,7 @@ For our first scenario, suppose you’re working on an app that has a screen tha
 
 <img src="weather-app.png" style="height: 450px;">
 
-To get this data you use an API provided by [OpenWeatherMap](https://openweathermap.org/), which allows you to get weather data after signing up for an API key. Because OpenWeatherMap charges based off the number of calls you make, you don’t want your API key to fall into the wrong hands, and you therefore don’t want to ship that key in your client-side code.
+To get this data you use an API provided by [OpenWeatherMap](https://openweathermap.org/), a service which allows you to get weather data after signing up for an API key. Because OpenWeatherMap charges based off the number of calls you make to their backend, you don’t want your API key to fall into the wrong hands—and you therefore don’t want to ship that key in your client-side code.
 
 This is a scenario where a serverless approach works really well. By leveraging the cloud, you can quickly and easily move this functionality out of your client-side code. Not only do you get to move your key to a safe location, you also get a cloud function on a server you don’t have to maintain, and you get a function you can use across multiple applications.
 
@@ -40,7 +40,7 @@ After you finish those steps you’ll see the Kinvey business logic editor, whic
 
 ![](business-logic-editor.png)
 
-The default serverless function is a bit of boilerplate code that returns an empty response. In this example you want to include an OpenWeatherMap API key in your response, so to do that, copy the code below, paste it in the Kinvey business logic editor, and then hit the **Save** button. (Feel free to use a placeholder for the API key for now.)
+The default serverless function is a bit of boilerplate code that returns an empty response. For our example scenario you want to include an OpenWeatherMap API key in your response, so to do that, copy the code below, paste it in the Kinvey business logic editor, and then hit the **Save** button. (Feel free to use a placeholder for the API key for now.)
 
 ```
 function onRequest(request, response, modules) {
@@ -49,7 +49,7 @@ function onRequest(request, response, modules) {
 }
 ```
 
-With this code in place all you need to do is send an HTTP POST request to your new endpoint with the correct headers. The easiest place to do that is in the Kinvey API Console, which you can access from using the link shown below.
+With this code in place all you need to do is send an HTTP POST request to your new endpoint with the correct headers. The easiest place to do that is in the Kinvey API Console, which you can access using the link shown below.
 
 ![](kinvey-api-console.png)
 
@@ -78,7 +78,7 @@ Now that you have your first first serverless function in place, let’s take th
 
 ### Making HTTP calls in serverless functions
 
-With your current function you have to make an HTTP POST request to get your OpenWeatherMap API key, and then make a second HTTP request to actually hit OpenWeatherMap for your weather data. While this works, you could simplify things for your apps if you just put the entire call to OpenWeatherMap inside your serverless function.
+With your current function your apps have to make an HTTP POST request to get your OpenWeatherMap API key, and then make a second HTTP request to actually hit OpenWeatherMap for weather data. While this works, you could simplify things for your apps if you just put the entire call to OpenWeatherMap inside your serverless function.
 
 To do that, all you have to do is go back to the Custom Endpoint editor in Kinvey, select your “WeatherWrapper” endpoint, and swap out the current code to use the following.
 
@@ -98,9 +98,9 @@ function onRequest(request, response, modules) {
 }
 ```
 
-This code expects there to be `lat` and `long` parameters in the request body, passes that data to the OpenWeatherMap API directly, and returns the result.
+This code expects there to be `lat` and `long` parameters in the request body, formats the data as necessary, calls the OpenWeatherMap API directly, and then returns the result in the response body.
 
-To test these updates, head back to Kinvey’s API console, and select “POST” and your “WeatherWrapper” endpoint from the two dropdowns (exactly like you did the last time you tested this endpoint). This time though, include a request body that includes both `lat` and `long` parameters as shown in the image below.
+To test your updated function, head back to Kinvey’s API console, then select “POST” and the “WeatherWrapper” endpoint from the two dropdowns (exactly like you did the last time you tested this endpoint). This time though, include a request body that includes both `lat` and `long` parameters as shown in the image below.
 
 ![](testing-api-console-weather.png)
 
@@ -265,7 +265,7 @@ And with that you’re ready to go! To test this out, head back to the Kinvey AP
 
 ![](api-console-budget.png)
 
-To use your new flex service in an app you again have a couple of options. As with the previous example, you could again manually send HTTP post requests in your app, using the endpoints and headers specified in the Kinvey API console you just used. Or, you could again use one of the Kinvey SDKs to make your life easier. For example, the following code uses the Kinvey SDK to hit your new endpoint.
+To use your new flex service in an app you again have a couple of options. As with the previous example, you could again manually send HTTP post requests in your app, using the endpoints and headers specified in the Kinvey API console. Or, you could again use one of the Kinvey SDKs to make your life easier. For example, the following code uses the Kinvey SDK to hit your new endpoint.
 
 ``` JavaScript
 CustomEndpoint.execute("BudgetScore", {}, {})
