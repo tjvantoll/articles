@@ -1,0 +1,146 @@
+[
+    {
+        "CaseNumber": "00001002",
+        "Type": "Electrical",
+        "Status": "Open",
+        "Reason": "Installation",
+        "Origin": "Web",
+        "Subject": "Seeking guidance on electrical wiring",
+        "Priority": "Low",
+        "Description": "Electrical wiring installation for GC5060 is working oddly",
+        "_id": "50061000000oTqpAAE",
+        "_kmd": {
+            "ect": "2015-08-14T14:37:13.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    },
+    {
+        "CaseNumber": "00001016",
+        "Type": "Other",
+        "Status": "Open",
+        "Reason": "Performance",
+        "Origin": "Web",
+        "Subject": "Maintenance needed on main generator",
+        "Priority": "Low",
+        "Description": "The guidelines are unclear. Please help",
+        "_id": "50061000000oTr3AAE",
+        "_kmd": {
+            "ect": "2015-08-14T14:37:13.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    },
+    {
+        "CaseNumber": "00001022",
+        "Type": "Electronic",
+        "Status": "Open",
+        "Reason": "Performance",
+        "Origin": "Web",
+        "Subject": "Signal panel on GC5060 blinks intermittently",
+        "Priority": "Medium",
+        "Description": "Please help\r\nThe Signal panel on GC5060 blinks intermittently for 3 hours.",
+        "_id": "50061000000oTr9AAE",
+        "_kmd": {
+            "ect": "2015-08-14T14:37:13.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    },
+    {
+        "CaseNumber": "00001023",
+        "Type": "Electrical",
+        "Status": "Closed",
+        "Reason": "Other",
+        "Origin": "Phone",
+        "Subject": "Electric surge damaging adjacent equipment",
+        "Priority": "High",
+        "Description": "Help please.\r\nElectric surge damaging adjacent equipment\r\n\r\nThis is stopping us from working effectively.",
+        "_id": "50061000000oTrAAAU",
+        "_kmd": {
+            "ect": "2015-08-14T14:37:13.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    },
+    {
+        "CaseNumber": "00001024",
+        "Type": "Mechanical",
+        "Status": "Closed",
+        "Reason": "Equipment Design",
+        "Origin": "Web",
+        "Subject": "Design issue with mechanical rotor",
+        "Priority": "Low",
+        "Description": "The design does not consider the friction between the motor and the AC",
+        "_id": "50061000000oTrBAAU",
+        "_kmd": {
+            "ect": "2015-08-14T14:37:13.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    },
+    {
+        "CaseNumber": "00001025",
+        "Type": "Electrical",
+        "Status": "Open",
+        "Reason": "Equipment Design",
+        "Origin": "Phone",
+        "Subject": "Motor design hindering performance",
+        "Priority": "Medium",
+        "Description": "Help please. Motor design hindering performance to deliver product",
+        "_id": "50061000000oTrCAAU",
+        "_kmd": {
+            "ect": "2015-08-14T14:37:13.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    },
+    {
+        "CaseNumber": "00001029",
+        "Type": "Electrical",
+        "Status": "Closed",
+        "Reason": "Equipment Design",
+        "Origin": "Email",
+        "Subject": "Electrical malfunction",
+        "Priority": "Medium",
+        "Description": "Having issues with the generator at facility 3",
+        "_id": "50061000009lpRYAAY",
+        "_kmd": {
+            "ect": "2017-03-23T17:26:24.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    },
+    {
+        "CaseNumber": "00001030",
+        "Type": "Other",
+        "Status": "New",
+        "Reason": "Installation",
+        "Origin": "Email",
+        "Subject": "Please describe your problem",
+        "Priority": "Medium",
+        "Description": "Help. My rotor does not work.\r\n\r\nPlease call me 8572569988",
+        "_id": "5006100000KaDzbAAF",
+        "_kmd": {
+            "ect": "2018-05-16T18:50:08.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    },
+    {
+        "CaseNumber": "00001031",
+        "Type": "Mechanical",
+        "Status": "New",
+        "Reason": "Installation",
+        "Origin": "Phone",
+        "Subject": "The valve makes odd noise at night",
+        "Priority": "Medium",
+        "Description": "Overtime workers report a weird noise is coming from the main valve",
+        "_id": "5006100000PMXsXAAX",
+        "_kmd": {
+            "ect": "2018-09-05T19:11:30.000+0000",
+            "lmt": "2019-01-31T18:05:01.946Z"
+        },
+        "_acl": {}
+    }
+]
