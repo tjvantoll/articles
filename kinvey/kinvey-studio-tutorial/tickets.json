@@ -1,146 +1,162 @@
 [
     {
-        "CaseNumber": "00001002",
+        "CaseNumber": "00001020",
         "Type": "Electrical",
-        "Status": "Open",
-        "Reason": "Installation",
-        "Origin": "Web",
+        "Status": "Closed",
         "Subject": "Seeking guidance on electrical wiring",
         "Priority": "Low",
-        "Description": "Electrical wiring installation for GC5060 is working oddly",
-        "_id": "50061000000oTqpAAE",
-        "_kmd": {
-            "ect": "2015-08-14T14:37:13.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Description": "Electrical wiring installation for GC5060 is working oddly."
     },
     {
-        "CaseNumber": "00001016",
+        "CaseNumber": "00001021",
         "Type": "Other",
-        "Status": "Open",
-        "Reason": "Performance",
-        "Origin": "Web",
+        "Status": "Closed",
         "Subject": "Maintenance needed on main generator",
         "Priority": "Low",
-        "Description": "The guidelines are unclear. Please help",
-        "_id": "50061000000oTr3AAE",
-        "_kmd": {
-            "ect": "2015-08-14T14:37:13.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Description": "The guidelines are unclear. Please help."
     },
     {
         "CaseNumber": "00001022",
-        "Type": "Electronic",
-        "Status": "Open",
-        "Reason": "Performance",
-        "Origin": "Web",
-        "Subject": "Signal panel on GC5060 blinks intermittently",
+        "Type": "Electrical",
+        "Status": "Closed",
+        "Subject": "Signal panel blinks intermittently",
         "Priority": "Medium",
-        "Description": "Please help\r\nThe Signal panel on GC5060 blinks intermittently for 3 hours.",
-        "_id": "50061000000oTr9AAE",
-        "_kmd": {
-            "ect": "2015-08-14T14:37:13.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Description": "Please help. The Signal panel on GC5060 blinks intermittently for 3 hours."
     },
     {
         "CaseNumber": "00001023",
         "Type": "Electrical",
-        "Status": "Closed",
-        "Reason": "Other",
-        "Origin": "Phone",
+        "Status": "Open",
         "Subject": "Electric surge damaging adjacent equipment",
         "Priority": "High",
-        "Description": "Help please.\r\nElectric surge damaging adjacent equipment\r\n\r\nThis is stopping us from working effectively.",
-        "_id": "50061000000oTrAAAU",
-        "_kmd": {
-            "ect": "2015-08-14T14:37:13.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Description": "Electric surge damaging adjacent equipment. This is stopping us from working effectively."
     },
     {
         "CaseNumber": "00001024",
         "Type": "Mechanical",
         "Status": "Closed",
-        "Reason": "Equipment Design",
-        "Origin": "Web",
         "Subject": "Design issue with mechanical rotor",
         "Priority": "Low",
-        "Description": "The design does not consider the friction between the motor and the AC",
-        "_id": "50061000000oTrBAAU",
-        "_kmd": {
-            "ect": "2015-08-14T14:37:13.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Description": "The design does not consider the friction between the motor and the AC."
     },
     {
         "CaseNumber": "00001025",
         "Type": "Electrical",
         "Status": "Open",
-        "Reason": "Equipment Design",
-        "Origin": "Phone",
         "Subject": "Motor design hindering performance",
         "Priority": "Medium",
-        "Description": "Help please. Motor design hindering performance to deliver product",
-        "_id": "50061000000oTrCAAU",
-        "_kmd": {
-            "ect": "2015-08-14T14:37:13.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Description": "Help please. Motor design hindering performance to deliver product."
+    },
+    {
+        "CaseNumber": "00001026",
+        "Type": "Electrical",
+        "Status": "Closed",
+        "Subject": "Electrical malfunction",
+        "Priority": "Medium",
+        "Description": "Having issues with the generator at facility 3."
+    },
+    {
+        "CaseNumber": "00001027",
+        "Type": "Mechanical",
+        "Status": "Closed",
+        "Subject": "Issues with rotor",
+        "Priority": "Medium",
+        "Description": "Rotor not working on part 57G at facility 4. Please help."
+    },
+    {
+        "CaseNumber": "00001028",
+        "Type": "Mechanical",
+        "Status": "Open",
+        "Subject": "The valve makes odd noise at night",
+        "Priority": "Medium",
+        "Description": "Overtime workers report a weird noise is coming from the main valve."
     },
     {
         "CaseNumber": "00001029",
-        "Type": "Electrical",
-        "Status": "Closed",
-        "Reason": "Equipment Design",
-        "Origin": "Email",
-        "Subject": "Electrical malfunction",
+        "Type": "Other",
+        "Status": "Open",
+        "Subject": "Leak from equipment",
         "Priority": "Medium",
-        "Description": "Having issues with the generator at facility 3",
-        "_id": "50061000009lpRYAAY",
-        "_kmd": {
-            "ect": "2017-03-23T17:26:24.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Description": "G07A has been leaking fluid for two days. Not sure what to do."
     },
     {
         "CaseNumber": "00001030",
-        "Type": "Other",
-        "Status": "New",
-        "Reason": "Installation",
-        "Origin": "Email",
-        "Subject": "Please describe your problem",
-        "Priority": "Medium",
-        "Description": "Help. My rotor does not work.\r\n\r\nPlease call me 8572569988",
-        "_id": "5006100000KaDzbAAF",
-        "_kmd": {
-            "ect": "2018-05-16T18:50:08.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Type": "Electrical",
+        "Status": "Open",
+        "Subject": "Light bulb replacement needed",
+        "Priority": "Low",
+        "Description": "Need new bulbs on the main processor in facility 5."
     },
     {
         "CaseNumber": "00001031",
         "Type": "Mechanical",
-        "Status": "New",
-        "Reason": "Installation",
-        "Origin": "Phone",
-        "Subject": "The valve makes odd noise at night",
+        "Status": "Open",
+        "Subject": "Maintenance on generator",
         "Priority": "Medium",
-        "Description": "Overtime workers report a weird noise is coming from the main valve",
-        "_id": "5006100000PMXsXAAX",
-        "_kmd": {
-            "ect": "2018-09-05T19:11:30.000+0000",
-            "lmt": "2019-01-31T18:05:01.946Z"
-        },
-        "_acl": {}
+        "Description": "Need someone to take a look at the generator at facility 6."
+    },
+    {
+        "CaseNumber": "00001032",
+        "Type": "Electrical",
+        "Status": "Closed",
+        "Subject": "Downed lines",
+        "Priority": "High",
+        "Description": "Downed lines at facility 3 after the storm. We need immediate attention."
+    },
+    {
+        "CaseNumber": "00001033",
+        "Type": "Other",
+        "Status": "Closed",
+        "Subject": "Installation help needed",
+        "Priority": "Low",
+        "Description": "We require help installing a new part on the main processor."
+    },
+    {
+        "CaseNumber": "00001034",
+        "Type": "Electrical",
+        "Status": "Open",
+        "Subject": "New outlets needed",
+        "Priority": "Low",
+        "Description": "Need new outlets installed on the main floor for easier access."
+    },
+    {
+        "CaseNumber": "00001035",
+        "Type": "Electrical",
+        "Status": "Closed",
+        "Subject": "Lights blinking",
+        "Priority": "Medium",
+        "Description": "The maintenance lights on the generator have been blinking for the last 8 hours."
+    },
+    {
+        "CaseNumber": "00001036",
+        "Type": "Mechanical",
+        "Status": "Open",
+        "Subject": "Maintenance request for line",
+        "Priority": "Low",
+        "Description": "The main line at facility 6 has been making odd noises the last few days. Can someone come out to take a look?"
+    },
+    {
+        "CaseNumber": "00001037",
+        "Type": "Mechanical",
+        "Status": "New",
+        "Subject": "Installation request",
+        "Priority": "Low",
+        "Description": "Facility 7 has a new part for G05 and needs someone from the team to install it."
+    },
+    {
+        "CaseNumber": "00001038",
+        "Type": "Other",
+        "Status": "New",
+        "Subject": "Equipment move request",
+        "Priority": "Medium",
+        "Description": "We’ve got some heavy cabinets at facility 6 that we need moved up to the third floor."
+    },
+    {
+        "CaseNumber": "00001039",
+        "Type": "Electrical",
+        "Status": "New",
+        "Subject": "Electrical failure on G07A",
+        "Priority": "High",
+        "Description": "G07A is out at facility 4 and we need immediate assistance to get it back up and running."
     }
 ]
