@@ -1,42 +1,49 @@
-# Biometric Authentication for Enterprise Apps
+# Biometric Authentication for Enterprise Apps Made Easy
 
 > “My favorite part of development is building login screens.” - No developer, ever
 
 > “My favorite part of this app is the login screen.” - No user, ever
 
-Login screens are the worst. They’re mundane to build, full of potential security vulnerabilities, and often require developers to make complex integrations they don’t want to make. Add enterprise terms like SAML and Sharepoint to the login process and you’ll quickly have a developer riot on your hands.
+Login screens are mundane to build, full of potential security vulnerabilities, and often require developers to make complex integrations they don’t want to make.
 
-But here’s the thing—login screens are important, and designing a solid login experience can be an enormous productivity boost for your organization. Specifically, biometric authentication, aka logging in with something like your fingerprint or face, can greatly streamline the login process for your internal apps.
+But login screens are also important, and designing a solid login experience can be an enormous productivity boost for your organization. In this article we’ll look at two features that can greatly streamline the login process:
 
-In this article we’ll look at how to build enterprise login screens that leverage biometric authentication driven by [NativeScript](https://www.nativescript.org/) and [Kinvey](https://www.progress.com/kinvey). We’ll also look at how to connect to existing enterprise auth providers like Active Directory, so that you can see how to build a complete enterprise authentication workflow for your companies’ apps. Here’s a gif showing this article’s final app in action.
+1) The ability to **reuse your existing authentication setup**, which keeps you from having to create a wholly new system for each app you build.
+2) **Biometric authentication**, aka logging in with something like your fingerprint or face, which can greatly streamline the login process for your internal apps.
 
--- image --
-
-One note—don’t feel the need to follow along with every step of this article step-by-step, as the full source code is available on GitHub for you to peruse at any time. With that out of the way, let’s get started.
+In this article you’ll build enterprise login screens that meet these requirements using [NativeScript](https://www.nativescript.org/) and [Kinvey](https://www.progress.com/kinvey) in three steps.
 
 * [Step #1: Getting an app up and running](#step-1)
 * [Step #2: Setting up enterprise auth](#step-2)
 * [Step #3: Tying in biometric auth](#step-3)
 
+So that you have a visual of what you’ll be building, here’s a gif showing this article’s final app in action.
+
+![](final-app.gif)
+
+Let’s get started by looking at how to get your app up and running.
+
+> **NOTE**: Don’t feel the need to follow along with every step of this article step-by-step, as the this article’s full source code is [available on GitHub for you to peruse](https://github.com/tjvantoll/BiometricAuth) at any time.
+
 <h2 id="step-1">Step #1: Getting an app up and running</h2>
 
-One of the first decisions you have when building any app is deciding which platforms the app should run on. When it comes to biometric authentication this decision is rather simple, as mobile platforms are currently the only platforms that allow developers to access fingerprint and face sensors.
+As a developer, one of the first decisions you have to make when building an app is deciding which platforms the app should run on. When it comes to biometric authentication this decision is rather simple, as mobile platforms (aka iOS and Android) are currently the only platforms that allow developers to access fingerprint and face sensors.
 
-With that in mind, in this article you’ll use two technologies to make building this login screen as easy as possible: NativeScript, a framework for building native iOS and Android apps using JavaScript, and Kinvey, a powerful backend that will help you automate a number of the trickier authentication tasks.
+With that in mind, in this article you’ll use NativeScript to make building a cross-platform iOS and Android app as easy as possible, and Kinvey, a powerful backend that integrates well with NativeScript and which will help with some of the trickier authentication tasks you’ll tackle in the next step.
 
-> **TIP**: If you’re new to NativeScript and Kinvey, you might want to read [_How to Get Started With Kinvey and NativeScript—Fast_](https://www.progress.com/blogs/how-to-get-started-with-kinvey-and-nativescript-fast), for some background on each of the technologies.
+> **TIP**: If you’re new to NativeScript and Kinvey, you might want to read [_How to Get Started With Kinvey and NativeScript—Fast_](https://www.progress.com/blogs/how-to-get-started-with-kinvey-and-nativescript-fast) for some background on each of the technologies.
 
-In this step you’ll learn about the starter apps NativeScript provides, and then look at how to run those apps locally using the NativeScript command-line interface.
+Let’s start by looking at the starter apps NativeScript provides, and then look at how to run those apps locally using the NativeScript command-line interface.
 
 ### Finding NativeScript samples
 
-NativeScript offers a number of templates and samples to help you get apps up and running quickly on the [NativeScript Marketplace](https://market.nativescript.org/?tab=templates&category=all_templates).
+NativeScript offers a number of templates and samples to help you get apps up and running quickly, and you can view them on the [NativeScript Marketplace](https://market.nativescript.org/?tab=templates&category=all_templates).
 
 ![](marketplace.png)
 
-On the listing you’ll see an app for building a good-looking login form. Clicking on that listing will take you to [this sample on NativeScript Playground](https://play.nativescript.org/?template=play-ng&id=Hqp5UQ&v=3073), a browser-based environment for developing apps.
+On the sample listing you’ll see an app for building a good-looking login form. Clicking on that sample will [open it in NativeScript Playground](https://play.nativescript.org/?template=play-ng&id=Hqp5UQ&v=3073), a browser-based environment for developing NativeScript apps.
 
-NativeScript Playground is a powerful environment that’s worth experimenting with, especially if you’re interested in building iOS and Android apps with JavaScript. But for today’s purposes you’ll want to use the **Download** button (see image below) to get sample’s files locally.
+NativeScript Playground is a powerful environment that’s worth experimenting with, especially if you’re interested in building iOS and Android apps with JavaScript. But for today’s purposes you’ll want to use the **Download** button (see image below) to download the sample’s files locally.
 
 ![](playground.png)
 
@@ -44,13 +51,13 @@ When the download finishes, go ahead and unzip the `NSPlayground.zip` folder. (F
 
 ### Using the NativeScript CLI
 
-The NativeScript CLI allows you to build, install, and run NativeScript apps on iOS and Android devices. You can install the NativeScript CLI by installing [Node.js](https://nodejs.org/en/), and running the following command on your terminal or command prompt.
+The [NativeScript CLI](https://docs.nativescript.org/angular/start/cli-basics) allows you to build, install, and run NativeScript apps on iOS and Android devices. You can install the NativeScript CLI by installing [Node.js](https://nodejs.org/en/), and running the following command on your terminal or command prompt.
 
 ```
 npm install -g nativescript
 ```
 
-> **TIP**: You can develop NativeScript apps using the NativeScript CLI on Windows, macOS, and Linux.
+> **TIP**: You can use the NativeScript CLI on Windows, macOS, and Linux. However, to build apps for iOS devices you’ll need to use a macOS machine, or use [NativeScript Sidekick](https://www.nativescript.org/nativescript-sidekick), which provides the ability to deploy iOS apps from Windows or Linux machines.
 
 Next, you’ll need to install the appropriate iOS and Android dependencies that allow NativeScript to perform builds of your apps. The full instructions on how to set this up are out of scope for this article, but you can find a thorough guide on the NativeScript documentation.
 
@@ -63,36 +70,43 @@ tns run android
 tns run ios
 ```
 
-> **NOTE** By default you can only build iOS apps on macOS machines. NativeScript does allow you to build and deploy iOS apps on Windows using [NativeScript Sidekick](https://www.nativescript.org/nativescript-sidekick).
-
 After you run your app you should see the following UI on your device.
 
--- images --
+<div style="display: flex;">
+    <img src="android-start.jpg" style="height: 500px; border: 1px solid black; margin-right: 10px;">
+    <img src="ios-start2.png" style="height: 500px; border: 1px solid black;">
+</div>
 
-At this point you now have your app set up and ready to go. With this out of the way, let’s look at how to set up the enterprise auth.
+At this point you now have your app set up and ready to go. With this out of the way, let’s move on to the next step and implement the first of this article’s two requirements—reusing an enterprise auth setup.
 
 <h2 id="step-2">Step #2: Setting up enterprise auth</h2>
 
-In this step we’ll look at how to perform the authentication piece of the login workflow. Although there are tons of potential login workflows, it’s uncommon for enterprise apps completely new authentication mechanisms. That is, most companies already have an auth provider in place, with one of the more common solutions being Active Directory.
+In this step we’ll look at how to perform the authentication piece of the login workflow. Although there are tons of potential login workflows, it’s uncommon for enterprise apps to use completely new authentication mechanisms. That is, most companies already have an auth provider like Active Directory in place.
 
 To make connecting to your existing authentication provider as easy as possible, in this step we’ll use Progress Kinvey. Kinvey offers a feature called Mobile Identity Connect, which allows you to connect to a wide variety of existing authentication providers, such as Active Directory, Facebook, or really, any provider that supports common protocols like SAML, OpenID or OAuth.
 
+Let’s look at how to set up a connection to your existing provider, and then how to implement that connection in your NativeScript app.
+
 ### Setting up Mobile Identity Connect
 
-Mobile Identity Connect (MIC) is a service that bridges mobile applications with existing enterprise identity and single sign-on solutions. MIC enables mobile applications to integrate with a variety of identity solutions using a single OAuth2-based interface.
+Mobile Identity Connect (MIC) is a service that lets mobile applications use existing enterprise identity and single sign-on solutions. MIC enables mobile applications to integrate with a variety of identity solutions using a single OAuth2-based interface.
 
-To set up MIC for your own apps you’ll have to set up a new service in [Kinvey Console](https://console.kinvey.com), your dashboard for doing all things Kinvey. Here are a few resources that will help you set that up as easily as possible.
+To set up MIC for your own apps. you’ll first have to set up a new service in [Kinvey Console](https://console.kinvey.com), your dashboard for doing all things Kinvey.
 
-* [Kinvey documentation on MIC](https://devcenter.kinvey.com/nativescript/guides/mobile-identity-connect)—Start here, as the documentation walks you through background information on MIC, as well as the steps you need to take to set up your own connection.
-* [Enterprise Authentication with Kinvey](https://www.progress.com/blogs/enterprise-authentication-kinvey)—Read this next, as it’s a tutorial that walks you through setting up MIC with a sample Azure Active Directory instance.
+> **TIP**: If you’re new to Kinvey you can sign up for a free account at [console.kinvey.com/signup](https://console.kinvey.com/signup).
 
-When you have your MIC service set up and ready to go, let’s look at how to connect your Kinvey backend to your NativeScript app.
+Next, you’ll want to use the following two guides to set up the connection to your existing provider.
+
+* [Kinvey documentation on MIC](https://devcenter.kinvey.com/nativescript/guides/mobile-identity-connect)—Start here, as the documentation walks you through the steps you need to take to set up your connection, and covers a number of different providers you might be using.
+* [Enterprise Authentication with Kinvey](https://www.progress.com/blogs/enterprise-authentication-kinvey)—Read this next, as it’s a tutorial that walks you through setting up MIC with a sample Azure Active Directory instance. It’s a good reference to refer to as you’re going through the process.
+
+When you have your MIC service set up and ready to go, let’s next look at how to connect your Kinvey backend to your NativeScript app.
 
 ### Connecting your app to Kinvey
 
-Connecting NativeScript apps to Kinvey is simple, especially if your apps come NativeScript Playground (which if you’ll recall our login sample did), as Kinvey is already set up in these apps by default.
+Connecting NativeScript apps to Kinvey is simple, especially if your apps come from NativeScript Playground (which, if you’ll recall, our login sample did), as Kinvey is already installed in Playground apps by default.
 
-Because of this, the only step you need to take is adding your Kinvey **App Key** and **App Secret** in the appropriate place so that NativeScript can make the connection. To do that, open your NativeScript app’s `app/package.json` file, and a new `"pluginsData"` key with the following contents.
+Because of this, the only step you need to take to connect your NativeScript to your Kinvey instance is to add an **App Key** and **App Secret** in the appropriate place. To do that, open your NativeScript app’s `app/package.json` file, and a new `"pluginsData"` key with the following contents.
 
 ```
 "pluginsData": {
@@ -106,11 +120,11 @@ Because of this, the only step you need to take is adding your Kinvey **App Key*
 }
 ```
 
-Next, you’ll need to replace the two placeholder values in the configuration above with your own values. To get them, visit [Kinvey Console](https://console.kinvey.com/) for your app, and tap the three vertical dots in the top-left corner. There you’ll see both the **App Key** and **App Secret** values you need.
+Next, you need to replace the two placeholder values in the configuration above with your own values. To get them, visit [Kinvey Console](https://console.kinvey.com/) for your app, and tap the three vertical dots in the top-left corner (see image below). There you’ll see both the **App Key** and **App Secret** values you need.
 
 ![](config-values.png)
 
-When you’re done, you complete `app/package.json` file should look something like this.
+When you’re done, your complete `app/package.json` file should look something like this.
 
 ```
 {
@@ -133,7 +147,7 @@ When you’re done, you complete `app/package.json` file should look something l
 }
 ```
 
-To see what this authentication setup looks like in action, let’s move on to the final step and add some code to tie everything together.
+To see what this authentication setup looks like in action, let’s move on to this article’s final step and add some code to tie everything together.
 
 <h2 id="step-3">Step #3: Tying in biometric auth</h2>
 
@@ -143,7 +157,10 @@ In this step you’ll use NativeScript to build a login screen that can both lev
 
 The default app that you downloaded from NativeScript Playground is set up for a login process where the user provides a user name and password, and currently looks like this.
 
--- same images from earlier--
+<div style="display: flex;">
+    <img src="android-start.jpg" style="height: 500px; border: 1px solid black; margin-right: 10px;">
+    <img src="ios-start2.png" style="height: 500px; border: 1px solid black;">
+</div>
 
 In this case though, you’re delegating the login process to your own enterprise auth mechanism, and as such, you can simply the current login code considerably. To do so, start by opening up your `app/login/login.component.html` file and replacing its contents with the following code.
 
@@ -249,4 +266,187 @@ Let’s look at how you can add even more power to this setup by integrating bio
 
 ### Adding biometric auth
 
+One of the big benefits of using NativeScript is you have access to a huge library of free and open source plugins in NativeScript Marketplace. Each plugin allows NativeScript developers to tie into native functionality through JavaScript or TypeScript APIs.
+
+![](marketplace-plugins.png)
+
+For biometric authentication, you’ll want to search for the [NativeScript “Fingerprint Auth” plugin](https://market.nativescript.org/plugins/nativescript-fingerprint-auth), which is a plugin that gives you access to fingerprint sensors, Touch ID, and Face ID. Once you have the plugin’s page up, copy the installation command on the right-hand side of the screen.
+
+![](fingerprint-auth-plugin.png)
+
+> **NOTE**: The Fingerprint Auth plugin uses Face ID for authentication on iPhone X and XS devices.
+
+With that command copied, return to your terminal or command prompt, use `Ctrl` + `C` to stop the existing `tns run` command (if it’s still running), paste in the `tns plugin` command, and hit `Enter` to kick off the installation.
+
+![](terminal-plugin-install.png)
+
+With the plugin installed, go ahead and re-execute either `tns run ios` or `tns run android` to get the app running on your device again. When the app is ready to go, reopen your `app/login/login.component.ts` file and replace its contents with the following code. (We’ll look at what’s happening here in a minute.)
+
+``` TypeScript
+import { Component } from "@angular/core";
+import { alert, confirm } from "tns-core-modules/ui/dialogs";
+import { Page } from "tns-core-modules/ui/page";
+import { RouterExtensions } from "nativescript-angular/router";
+import { FingerprintAuth, BiometricIDAvailableResult } from "nativescript-fingerprint-auth";
+
+import { UserService } from "../shared/user.service";
+
+const APP_NAME = "APP NAME";
+
+@Component({
+    selector: "app-login",
+    moduleId: module.id,
+    templateUrl: "./login.component.html",
+    styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+    fingerprintAuth: FingerprintAuth;
+
+    constructor(private page: Page, private userService: UserService, private routerExtensions: RouterExtensions) {
+        this.page.actionBarHidden = true;
+        this.fingerprintAuth = new FingerprintAuth();
+    }
+
+    login() {
+        if (this.userService.getBiometricAuthOptIn() && this.userService.isLoggedIn()) {
+            this.biometricAuth();
+            return;
+        }
+
+        this.userService.login()
+            .catch(() => {
+                alert({
+                    title: APP_NAME,
+                    okButtonText: "OK",
+                    message: "Unfortunately we could not find your account."
+                });
+            })
+            .then(() => {
+                this.fingerprintAuth.available()
+                    .then((result: BiometricIDAvailableResult) => {
+                        // Biometric auth is not available. Just navigate them to the home page.
+                        if (!result.any) {
+                            this.navigateHome();
+                            return;
+                        }
+
+                        var authName = result.face ? "Face ID" : "your fingerprint";
+                        confirm({
+                            title: APP_NAME,
+                            message: `Would you like to use ${authName} to authenticate on future visits?`,
+                            okButtonText: "Yes",
+                            cancelButtonText: "No"
+                        }).then((result) => {
+                            this.userService.setBiometricAuthOptIn(result);
+                            if (result) {
+                                this.biometricAuth();
+                            } else {
+                                // User doesn’t want to use biometric auth. Just navigate them to the home page.
+                                this.navigateHome();
+                            }
+                        });
+                    });
+            });
+    }
+
+    private navigateHome() {
+        this.routerExtensions.navigate(["/home"], { clearHistory: true });
+    }
+
+    private biometricAuth() {
+        return this.fingerprintAuth.verifyFingerprint({
+            title: APP_NAME,
+            message: ""
+        }).then((enteredPassword: string) => {
+            if (enteredPassword === undefined) {
+                this.navigateHome();
+            }
+        });
+    }
+}
+```
+
+Let’s break down what’s happening here, starting with this new block of code that happens after a user successfully logs in.
+
+``` TypeScript
+this.fingerprintAuth.available()
+    .then((result: BiometricIDAvailableResult) => {
+        // Biometric auth is not available. Just navigate them to the home page.
+        if (!result.any) {
+            this.navigateHome();
+            return;
+        }
+
+        ...
+    });
+```
+
+Here you’re using the fingerprint auth plugin’s `available()` method, which checks whether a biometric sensor is available on the user’s device. If there’s not (`!result.any`), you just navigate the user to the home page of your app. If the user does have a sensor of some sort available, however, you next run the following code.
+
+``` TypeScript
+var authName = result.face ? "Face ID" : "your fingerprint";
+confirm({
+    title: APP_NAME,
+    message: `Would you like to use ${authName} to authenticate on future visits?`,
+    okButtonText: "Yes",
+    cancelButtonText: "No"
+}).then((result) => {
+    this.userService.setBiometricAuthOptIn(result);
+    if (result) {
+        this.biometricAuth();
+    } else {
+        // User doesn’t want to use biometric auth. Just navigate them to the home page.
+        this.navigateHome();
+    }
+});
+```
+
+Here you use NativeScript’s `confirm()` method to ask the user whether they’d like to use their biometric sensor to authenticate on future visits. You first save the user’s preference (`this.userService.setBiometricAuthOptIn()`), as you’ll use that preference here in a minute. Next, if the user does want to use biometric auth (`if (result)`), you call a `this.biometricAuth` method (below). If not, you again have no work to do so you just navigate the user to the home screen (`this.navigateHome()`).
+
+``` TypeScript
+private biometricAuth() {
+    return this.fingerprintAuth.verifyFingerprint({
+        title: APP_NAME,
+        message: ""
+    }).then((enteredPassword: string) => {
+        if (enteredPassword === undefined) {
+            this.navigateHome();
+        }
+    });
+}
+```
+
+Finally, if you reach this point in your code you know the user wants to use biometric auth for authentication, so you call the fingerprint auth plugin’s `verifyFingerprint()` method to perform the actual check. If the user passes the check `if (enteredPassword === undefined)` you go ahead and navigate the user to the home page. If the user fails the check they’ll need to reauthenticate to continue.
+
+To see what this all looks like in action return to your app and run through the login process again. After you complete the login, you should see the confirmation prompt asking you if you want to use a fingerprint or face sensor.
+
+-- image --
+
+When you answer **Yes**, you should be prompted to authenticate using a biometric sensor, and when that passes you should be redirected to the app’s home screen.
+
+--- gif ---
+
+As you can see, NativeScript makes it trivial to tie into biometric sensors through easy-to-use JavaScript APIs. But before we wrap up, let’s cover one last piece of functionality this app has. If you look at the start of the login component’s `login()` method you’ll see the following chunk of code.
+
+``` TypeScript
+if (this.userService.getBiometricAuthOptIn() && this.userService.isLoggedIn()) {
+    this.biometricAuth();
+    return;
+}
+```
+
+Remember that earlier you stored whether the user wanted to authenticate using biometric authentication. Here, you’re now checking two things: first, whether the user opted in to biometric auth, and second, whether the user is still logged in (aka they still have a valid token).
+
+Why do this? Suppose the user closes your app and returns several hours later. When the user clicks **Login**, normally they’d have to go through your enterprise authentication process, which can be a bit tedious. So instead, here, you’re using the user’s biometric sensor to verify their identity. If it matches, the user can skip the enterprise auth process, and go straight to the home screen.
+
+--- gif ---
+
+There are a number of ways you might want to alter this code to meet the needs of your app or corporate requirements. For example, you could store a timestamp each time the user successfully authenticates. You could then use that timestamp to determine when the user needs to re-authenticate.
+
+Overall, the NativeScript fingerprint auth plugin makes it easy to tap into the biometric sensor available in today’s iOS and Android devices, to allow you to build the best possible login experience for your users.
+
 ## Wrapping up
+
+In this article you learned how to use NativeScript and Kinvey to build a login screen that leverages both your existing authentication mechanism and biometric sensors. Combined, you now have the tools you need to create a powerful login process for your organization.
+
+You can find the full code for this article on GitHub at <link>. And if you have any questions, feel free to reach out in the comments.
