@@ -151,7 +151,7 @@ To see what this authentication setup looks like in action, let’s move on to t
 
 <h2 id="step-3">Step #3: Tying in biometric auth</h2>
 
-In this step you’ll use NativeScript to build a login screen that can both leverage your Kinvey MIC setup, as well as add in biometric auth to allow users to login with their fingerprint or face. Let’s start by getting the authentication workflow working, and then move on to the biometric piece.
+In this step you’ll switch your app’s login screen to leverage your Kinvey MIC setup, as well as add a biometric auth worflow that allows users to log in with their fingerprint or face. Let’s start by getting the authentication workflow working, and then move on to the biometric piece.
 
 ### Wiring up the login process
 
@@ -162,7 +162,7 @@ The default app that you downloaded from NativeScript Playground is set up for a
     <img src="ios-start2.png" style="height: 500px; border: 1px solid black;">
 </div>
 
-In this case though, you’re delegating the login process to your own enterprise auth mechanism, and as such, you can simply the current login code considerably. To do so, start by opening up your `app/login/login.component.html` file and replacing its contents with the following code.
+In this article’s example though, you’re delegating the login process to your own enterprise auth mechanism, and as such, you can simplify the current login code considerably. To do so, start by opening up your `app/login/login.component.html` file and replacing its contents with the following code.
 
 ``` XML
 <GridLayout>
@@ -204,9 +204,12 @@ Next, open your `app/login/login.component.css` file and replace its contents wi
 }
 ```
 
-If your NativeScript app is still running you should see these changes immediately. If not, head back to your terminal or command prompt and use `tns run ios` or `tns run android` to redeploy the app to your device. When you’re done, you’ll see that the app now has a simplified look.
+If your NativeScript app is still running you should see these changes immediately. If not, head back to your terminal or command prompt and use `tns run ios` or `tns run android` command to redeploy the app to your device. When you’re done, you’ll see that the app now has a simplified look.
 
--- images --
+<div style="display: flex;">
+    <img src="android-simplified.jpg" style="height: 500px; border: 1px solid black; margin-right: 10px;">
+    <img src="ios-simplified.png" style="height: 500px; border: 1px solid black;">
+</div>
 
 > **NOTE**: The diamond logo and “APP NAME” heading are placeholders. Feel free to replace these with your own company logo and name.
 
@@ -248,19 +251,53 @@ export class UserService {
 }
 ```
 
-Finally, open your `app/login/login.component.ts` file, and replace its contents with the following code.
-
-> **TODO**: Add note about what changed.
+Finally, open your `app/login/login.component.ts` file, and replace its contents with the following code, which removes a bunch of unneeded sample code, and calls off to the UserService’s `login()` method.
 
 ``` TypeScript
-// TODO: Add this
+import { Component } from "@angular/core";
+import { alert, confirm } from "tns-core-modules/ui/dialogs";
+import { Page } from "tns-core-modules/ui/page";
+import { RouterExtensions } from "nativescript-angular/router";
+
+import { UserService } from "../shared/user.service";
+
+const APP_NAME = "APP NAME";
+
+@Component({
+    selector: "app-login",
+    moduleId: module.id,
+    templateUrl: "./login.component.html",
+    styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+    constructor(private page: Page, private userService: UserService, private routerExtensions: RouterExtensions) {
+        this.page.actionBarHidden = true;
+    }
+
+    login() {
+        this.userService.login()
+            .catch(() => {
+                alert({
+                    title: APP_NAME,
+                    okButtonText: "OK",
+                    message: "Unfortunately we could not find your account."
+                });
+            })
+            .then(() => {
+                this.routerExtensions.navigate(["/home"], { clearHistory: true });
+            });
+    }
+}
 ```
 
 When you save these changes the NativeScript CLI should automatically update your app on your device. When it does, try your new app out. If all went well, you should now have a mobile app that leverages your existing auth provider.
 
--- gifs --
+<div style="display: flex;">
+    <img src="android-auth.gif" style="height: 500px; border: 1px solid black; margin-right: 10px;">
+    <img src="ios-auth.gif" style="height: 500px; border: 1px solid black;">
+</div>
 
-You now have a cross-platform iOS and Android app that reuses your existing authentication system. Pretty cool, huh?
+You now have a cross-platform iOS and Android app that reuses your existing enterprise authentication system. Pretty cool, huh?
 
 Let’s look at how you can add even more power to this setup by integrating biometric authentication.
 
@@ -366,7 +403,7 @@ export class LoginComponent {
 }
 ```
 
-Let’s break down what’s happening here, starting with this new block of code that happens after a user successfully logs in.
+Let’s break down what’s happening in this file, starting with this new block of code that happens after a user successfully logs in.
 
 ``` TypeScript
 this.fingerprintAuth.available()
@@ -420,11 +457,14 @@ Finally, if you reach this point in your code you know the user wants to use bio
 
 To see what this all looks like in action return to your app and run through the login process again. After you complete the login, you should see the confirmation prompt asking you if you want to use a fingerprint or face sensor.
 
--- image --
+<div style="display: flex;">
+    <img src="android-prompt.jpg" style="height: 500px; border: 1px solid black; margin-right: 10px;">
+    <img src="ios-prompt.png" style="height: 500px; border: 1px solid black;">
+</div>
 
 When you answer **Yes**, you should be prompted to authenticate using a biometric sensor, and when that passes you should be redirected to the app’s home screen.
 
---- gif ---
+![](ios-workflow.gif)
 
 As you can see, NativeScript makes it trivial to tie into biometric sensors through easy-to-use JavaScript APIs. But before we wrap up, let’s cover one last piece of functionality this app has. If you look at the start of the login component’s `login()` method you’ll see the following chunk of code.
 
@@ -439,14 +479,14 @@ Remember that earlier you stored whether the user wanted to authenticate using b
 
 Why do this? Suppose the user closes your app and returns several hours later. When the user clicks **Login**, normally they’d have to go through your enterprise authentication process, which can be a bit tedious. So instead, here, you’re using the user’s biometric sensor to verify their identity. If it matches, the user can skip the enterprise auth process, and go straight to the home screen.
 
---- gif ---
+![](enhanced-workflow.gif)
 
-There are a number of ways you might want to alter this code to meet the needs of your app or corporate requirements. For example, you could store a timestamp each time the user successfully authenticates. You could then use that timestamp to determine when the user needs to re-authenticate.
+There are a number of ways you might want to alter this code to meet the needs of your app or corporate requirements. For example, you could store a timestamp each time the user successfully authenticates. You could then use that timestamp to determine when the user needs to re-authenticate. You could also require users to re-authenticate using biometric sensors before taking any important actions, such as charging a credit card, or deleting large chunks of data.
 
-Overall, the NativeScript fingerprint auth plugin makes it easy to tap into the biometric sensor available in today’s iOS and Android devices, to allow you to build the best possible login experience for your users.
+Overall, the NativeScript fingerprint auth plugin makes it easy to tap into the biometric sensor available in today’s iOS and Android devices, to allow you to build the best possible authentication experience for your users.
 
 ## Wrapping up
 
 In this article you learned how to use NativeScript and Kinvey to build a login screen that leverages both your existing authentication mechanism and biometric sensors. Combined, you now have the tools you need to create a powerful login process for your organization.
 
-You can find the full code for this article on GitHub at <link>. And if you have any questions, feel free to reach out in the comments.
+You can find the [full code for this article on GitHub](https://github.com/tjvantoll/BiometricAuth). And if you have any questions, feel free to reach out in the comments.
