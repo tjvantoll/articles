@@ -16,11 +16,13 @@ The court ruled against Apple, and in a 5–4 decision, allowed iOS customers to
 
 ## What effect does this ruling have?
 
-Let’s start with one important point: this ruling only _allows_ iOS customers to sue Apple for their app-distribution business model; it did not rule that the App Store violates anti-trust law. However, this ruling opened the door to further legal proceedings to attack the App Store’s business model directly, which could force Apple to fundamentally change the way app distribution on iOS works.
+Let’s start with one important point: this ruling only _allows_ iOS customers to sue Apple for their app-distribution business model; it did not rule that the App Store violates anti-trust law. However, this ruling clears the way for legal proceedings that attack the App Store’s business model directly, which could force Apple to fundamentally change the way app distribution on iOS works.
 
 That being said, it’s possible (likely even) that the subsequent cases that challenge this model will take years to play out. After all, [the initial court procedures that started the just-resolved case were made in December of 2013](https://www.courtlistener.com/recap/gov.uscourts.cand.249697.124.0.pdf). Therefore, don’t expect this ruling to have any short-term effect on way you build and distribute iOS applications.
 
-Long term, these rulings are likely to have a positive effect on iOS developers. We might see a future where Apple is forced to permit third-party app stores, or to provide ways for users to side load apps—each of which would give developers more control in how they get their apps to their users.
+One reason the proceedings may take longer than expecting is dealing with the finer points of the law. For example, suppose the court rules that Apple indeed violated anti-trust policies, and that they unfairly raised prices. How do you determine the amount the prices were raised? And who does the extra money go to? Customers? Developers? The current suit was done on behalf of customers, but it’s very possible that a class-action lawsuit on the behalf of developers could complicate the issue.
+
+Long term, if legal restrictions do come down on Apple they’re likely positive effect on iOS developers. We might see a future where Apple is forced to permit third-party app stores, or to provide ways for users to side load apps—each of which would give developers more control in how they get their apps to their users.
 
 Interestingly, these changes would make iOS work a lot more like Android, which already allows for alternative app stores and side loading, and is therefore not subject to these legal actions.
 
@@ -30,11 +32,15 @@ Although these court proceedings have centered around Apple, this ruling has con
 
 Consider Rokus, Fire TVs, and basically all smart TVs platforms. In each of these, the only way to get apps is through a single vendor-controlled store.
 
-Here’s another interesting one: Microsoft [recently announced an Xbox that doesn’t come with a disc drive](https://www.theguardian.com/games/2019/apr/16/discless-xbox-one-release-date-price). Presumably the only way to purchase games for this new Xbox will be through a Microsoft-provided store; therefore, does that new Xbox violate US anti-trust law? We don’t know, but this week’s ruling makes it kind of feel like yes.
+Here’s another interesting one: Microsoft [recently announced an Xbox that doesn’t come with a disc drive](https://www.theguardian.com/games/2019/apr/16/discless-xbox-one-release-date-price). Presumably the only way to purchase games for this new Xbox will be through a Microsoft-provided store; therefore, does that new Xbox violate US anti-trust law?
+
+These cases will depend on how each platform makes money. For example, if Microsoft doesn’t make any additional money from digital purposes, there’s not much reason for developers or customers to file a lawsuit, but this action against Apple opens the door for these sort of class-action lawsuits against platforms with a business model similar to Apple’s.
+
+We don’t know, and it depends on the exact sort of arrangement Microsoft has with game developers, but this week’s ruling could potential affect platforms like this.
 
 ## Quick takeaways
 
 If you’re still confused by all of this here’s a quick wrap up: the US Supreme Court ruled that customers have the ability to sue Apple for its monopolistic control over iOS app distribution, alleging that this monopoly unfairly raises prices for consumers.
 
-This ruling doesn’t have any immediate effect on iOS users or developers, but it opens the door for future lawsuits that could fundamentally change iOS app distribution works, and could have a broader effect on how much control platforms can have over app distribution.
+This ruling doesn’t have any immediate effect on iOS users or developers, but it allows for further lawsuits to proceed—lawsuits that could fundamentally change how iOS app distribution works, and could have a broader effect on how all platforms control app distribution.
 
