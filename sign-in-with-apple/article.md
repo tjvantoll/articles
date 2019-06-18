@@ -98,5 +98,7 @@ It’ll be interesting to see how things play out, but I’m excited to see Appl
 
 ---
 
-Here at Progress we already have you covered to work with Apple’s new APIs. [NativeScript](https://www.nativescript.org/) users can start experimenting with ‘Sign in with Apple’ today with the new [nativescript-apple-sign-in plugin](https://github.com/EddyVerbruggen/nativescript-apple-sign-in). And because ‘Sign in with Apple’ is based on OAuth 2.0, you’ll be able to use it with [Kinvey’s Mobile Identity Connect](https://devcenter.kinvey.com/nativescript/guides/mobile-identity-connect) later this fall.
+Here at Progress we already have you covered to work with Apple’s new APIs. [NativeScript](https://www.nativescript.org/) users can start experimenting with ‘Sign in with Apple’ today with the new [nativescript-apple-sign-in plugin](https://github.com/EddyVerbruggen/nativescript-apple-sign-in).
+
+And because ‘Sign in with Apple’ is based on OAuth 2.0, [Kinvey](https://www.progress.com/kinvey) users will be able to work with Apple’s new workflow with [Kinvey’s Mobile Identity Connect](https://devcenter.kinvey.com/nativescript/guides/mobile-identity-connect) later this fall.
 
