@@ -2,7 +2,7 @@
 
 I believe that Apple’s [recently announced ‘Sign in with Apple’ workflow](https://www.zdnet.com/article/wwdc-2019-apple-announces-sign-in-with-apple-feature/) is an important step for improving the security and usability of login screens.
 
-In this article I’ll explain what ‘Sign in with Apple’ is, why I believe it’s a great thing for users, and the drama around Apple’s implementation.
+In this article I’ll explain what ‘Sign in with Apple’ is, why I believe it’s a great thing for users, the drama around Apple’s implementation, and some of the lingering concerns I have.
 
 The crux of my argument is that Apple’s new workflow provides badly needed innovation for a process everyone hates—logging in. Even if Apple’s implementation is flawed (which we’ll get to), hopefully this effort will spur other ideas from other tech giants in response, ideally making the login process better for everyone. To show what I’m talking about let’s start with a bit of background.
 
@@ -30,7 +30,7 @@ _An example of Single Sign-On in an iOS app. The user can use Google or Facebook
 
 The main appeal of SSO is that users don’t have to create and remember a new set of credentials, allowing them to maintain a one-password lifestyle, without the normal downsides of password reuse.
 
-However, despite its appeal, SSO has its drawbacks as well. Specifically, most SSO providers require that you give the service you’re authenticating with your email address (and sometimes other information as well).
+However, despite its appeal, SSO has its drawbacks as well. Specifically, most SSO providers require that you provide your email address (and sometimes other information as well) to the service you’re authenticating with.
 
 While providing an email address seems innocuous, shady services will often sell lists of email addresses to advertisers or spammers, greatly increasing the spam mail you have to deal with. Far worse, even if a service has no malicious intentions, data breaches can expose your email to hackers worldwide, opening up the possibility of attacks on accounts you’ve created around the Web with that same email.
 
@@ -43,11 +43,11 @@ However, Apple’s new authentication workflow offers one innovative twist: when
 ![An example of ‘Sign in with Apple’ in action in a sample app](sign-in-with-apple.jpg)
 _An example of ‘Sign in with Apple’ in action in a sample app._
 
-If you choose to hide you email, Apple will generate a randomly generated Apple-hosted email address, which will receive all messages on your behalf, and forward them to your legitimate email address.
+If you choose to hide your email, Apple will create a randomly generated Apple-hosted email address, which will receive all messages on your behalf, and forward them to your legitimate email address.
 
 This workflow alleviates many of the privacy concerns associated with similar SSO solutions from companies like Google and Facebook. If a shady service sells your email to an advertiser, you’ll be able to easily turn off email forwarding to stop the unwanted spam. Even better, if your generated email address gets exposed in a data breach, you can rest assured, as your Apple-generated email address is unique, therefore hackers will be unable to use that address in subsequent attacks.
 
-It’s an elegant solution to a common problem, a solution that the likes of Google and Facebook might be hesitant to replicate, because each are companies that earn the bulk of their revenue from advertisers—advertisers that very much like to track users by their email address around the Web. Because Apple does not rely on a similar revenue model, they’re uniquely positioned to innovate and offer users a privacy-focused authentication option. That being said, Apple is not without its own motives.
+It’s an elegant solution to a common problem; a solution that the likes of Google and Facebook might be hesitant to replicate, because each are companies that earn the bulk of their revenue from advertisers—advertisers that very much like to track users by their email address around the Web. Because Apple does not rely on a similar revenue model, they’re uniquely positioned to innovate and offer users a privacy-focused authentication option. That being said, Apple is not without its own motives.
 
 ## The drama
 
@@ -67,7 +67,7 @@ This controversial decision immediately sparked a heated debate in the tech worl
 <blockquote class="twitter-tweet" data-lang="en"><p lang="hu" dir="ltr">Monopolist gonna monopolist</p>&mdash; Caitlin Fitzharris (@caitlintackles) <a href="https://twitter.com/caitlintackles/status/1136101790112395265?ref_src=twsrc%5Etfw">June 5, 2019</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-The timing is indeed interesting, as [Apple is actively being sued by developers and consumers for its App Store policies](https://www.progress.com/blogs/is-the-ios-app-store-a-monopoly-and-is-that-a-good-thing). You might think the company would want to avoid potentially monopolistic moves while other parts of their platform have active anti-trust lawsuits against them, but apparently Apple isn’t worried, or doesn’t think their actions here are monopolistic.
+The timing is indeed interesting, as [Apple is actively being sued by developers and consumers for its App Store policies](https://www.progress.com/blogs/is-the-ios-app-store-a-monopoly-and-is-that-a-good-thing). You might think the company would avoid potentially monopolistic moves while other parts of iOS have active anti-trust lawsuits pending—but apparently Apple isn’t worried, or they don’t believe their actions here are monopolistic.
 
 On the other side of the argument, those in favor of Apple’s decision to require ‘Sign in with Apple’ argue that Apple _has_ to require their new workflow for apps to actually use the feature.
 
@@ -84,7 +84,7 @@ This side of the argument is compelling. For better or worse, there’s very lit
 
 Remember BrowserID? It was a [feature championed by Mozilla to provide SSO across the web using your email address](https://hacks.mozilla.org/2011/07/introducing-browserid-easier-and-safer-authentication-on-the-web/). It was a great idea, and had some real benefits for users, but it never took off because [very few developers actually integrated it](https://techcrunch.com/2014/03/08/mozilla-stops-developing-its-persona-sign-in-system-because-of-low-adoption/).
 
-If you’re an app maker, why would you implement BrowserID or ‘Sign in with Apple’ when you have a roadmap full of backlogged tasks? Moreover, the Apple-based workflow potentially prevents your service from gathering user data, which is something all marketing and sales departments will have a hard time accepting unless forced.
+If you’re an app maker, why would you implement BrowserID or ‘Sign in with Apple’ when you have a roadmap full of backlogged tasks? Moreover, the Apple-based workflow aims to prevent your service from gathering user data—data that all marketing and sales departments will have a hard time giving up unless forced.
 
 So although ‘Sign in with Apple’ isn’t perfect, and although it’s concerning to give Apple even more control over iOS users, at least the mandate will force all apps that use third-party logins to seriously reassess how they handle their user’s data.
 
@@ -92,9 +92,9 @@ So although ‘Sign in with Apple’ isn’t perfect, and although it’s concer
 
 More broadly speaking, my hope is that Apple’s push here will lead to further advancements into the password management world. It’s 2019 and most people are buying password managers, buying books to write down their passwords, or just giving up and logging in with their cat’s name across the Web. I think we have every right to demand more of the tech giants to help fix this.
 
-For example, both Google and Facebook claim to care about their users’ privacy, and both have the resources to create similar systems, so why shouldn’t we demand they provide a way to authenticate into third-party apps with similar privacy protections?
+For example, both Google and Facebook claim to care about their users’ privacy, and both have the resources to create similar systems, so why shouldn’t we demand they provide a way to authenticate into third-party apps with similar privacy protections? Better yet, what if a tech company reimagined a BrowserID-like solution that avoids one company having total control?
 
-It’ll be interesting to see how things play out, but I’m excited to see Apple taking an assertive step forward. 
+There’s no easy win here, but hopefully Apple’s assertive move will spark innovations that move user security and privacy forward.
 
 ---
 
