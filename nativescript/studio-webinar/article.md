@@ -46,7 +46,7 @@ Another awesome feature of Kinvey is a [fully featured chatbot development platf
 
 If you’ve been considering integrating a chatbot into your applications, Kinvey Chat is a great place to start, as it allows you to build bots that run the on the web, in mobile apps, and even places like Facebook Messenger.
 
-New to Studio is a chat view, that allows you to connect to any Kinvey Chat instances with a simple dropdown.
+New to Studio is a chat view, that allows you to connect to Kinvey Chat instances with a simple dropdown.
 
 ![](kinvey-chat-studio.png)
 
@@ -60,7 +60,7 @@ Studio builds app using open source and standard tools, such as TypeScript, Angu
 
 ![](code.png)
 
-New in Studio is a Custom Code View, which you can use when to build code-only views that work with Studio’s other visual tooling.
+New in Studio is a Custom Code View, which you can use to build code-only views that work with Studio’s other visual tooling.
 
 ![](custom-code-view.png)
 
