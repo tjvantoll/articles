@@ -10,11 +10,11 @@ In this article I want to go beyond the basic demo, and answer some common quest
 
 ## Why use this?
 
-Everyone that has updated an Android or iOS app hates the process. Each update involves a number of manual steps, like creating a new release build, updating a number of different versions numbers correctly, writing release notes, and, on iOS, waiting for a review before your updates go live.
+Everyone that has updated an Android or iOS app hates the process. Each update involves a number of manual steps, like creating a new release build, changing a bunch of configuration like version numbers, writing release notes, and, on iOS, waiting for a review before your updates go live.
 
-And the problems go beyond developer productivity. Suppose you discover an error in your production app that’s costing your business money. To fix that error with the normal deployment processes you have to: manually create the build, upload that build to the stores, wait for an approval (on iOS), and then wait for your users to download and install that update on their devices.
+And the problems go beyond developer productivity. Suppose you discover an error in your production app that’s costing your business money. To fix that error with the normal deployment processes you have to: manually create a release build of your app, upload that build to the stores, wait for an approval (on iOS), and then wait for your users to download and install that update on their devices.
 
-That process can easily take days, and in the meantime, your business is losing money, and your users are getting frustrated with your buggy app. With NativeScript AppSync you can make updates immediately.
+That process can easily take days, and in the meantime, your business is losing money, and your users are getting frustrated with your buggy app. With NativeScript AppSync you can speed up the update process considerably.
 
 ## How exactly does AppSync work?
 
@@ -26,7 +26,7 @@ The AppSync service has its [own command-line interface](https://github.com/eddy
 
 ![](terminal.png)
 
-This includes registering for the AppSync service, adding the applications you want to use the service with, and uploading code updates for those apps.
+The CLI allow you to register for the AppSync service, add the applications you want to use the service with, upload code updates for those apps, and a whole lot more.
 
 **AppSync Server**
 
@@ -34,7 +34,7 @@ The [NativeScript AppSync server](https://appsync.nativescript.org/) provides a 
 
 ![](server.png)
 
-The server also serves as the location your code updates themselves live, from which your apps will check for updates and download them as necessary.
+The server also hold your app updates (aka your actual app files) when you upload them through the AppSync CLI.
 
 **AppSync Plugin**
 
@@ -54,11 +54,11 @@ AppSync.sync({
 });
 ```
 
-The `AppSync.sync()` method calls the AppSync server to check if any new updates are available for your app. If it finds one, it silently downloads that update in the background so it’s available the next time the user restarts the app.
+The `AppSync.sync()` method calls the AppSync server to check if any new updates are available for your app. If it finds one, the plugin method silently downloads that update in the background, and applies the update the next time the user restarts the app.
 
 ## How should I use this in a real app?
 
-Technically you can call `AppSync.sync()` anywhere in your app, and call it as many times as you’d like. However, the most common approach is to place the code below in your `app.js` file for NativeScript Core and NativeScript-Vue apps, and in your `main.ts` file for NativeScript Angular apps.
+Technically you can call `AppSync.sync()` anywhere in your app, and call it as many times as you’d like. However, the most common approach is to place the below code snippet in your `app.js` file (for NativeScript Core and NativeScript-Vue), or in your `main.ts` file (for NativeScript Angular).
 
 ``` TypeScript
 import * as application from "tns-core-modules/application";
@@ -69,7 +69,9 @@ application.on(application.resumeEvent, () => {
 });
 ```
 
-This code attaches an event handler to NativeScript’s application resume event, which NativeScript triggers every time your user resumes using an app (which can either happen when they unlock their device, or when they switch to your app from another app).
+This code attaches an event handler to your NativeScript’s application `resume` event, which NativeScript triggers every time users resume your app.
+
+> **NOTE**: A `resume` even occurs when the user opens your app, or when they switch to your app from a different application on their device.
 
 What’s important to note is that `AppSync.sync()` only determines whether an update is available, and if so, downloads that update in the background. The `sync()` method does _not_ actually apply the update—after all, it’s the app’s source code itself that needs to change, which isn’t something you can do while the app is running.
 
@@ -77,16 +79,20 @@ That being said, there are some options you can use to confirm exactly how your 
 
 ## What options should I use?
 
-The AppSync plugin’s `sync()` method allows you to confirm that way your syncs happen in a number of different ways. Here’s a quick look at some of the options available, along with their default values.
+The AppSync plugin’s `sync()` method allows you to configure how your application syncs work in a number of different ways. Here’s a quick look at some of the options available, along with their default values.
 
 ``` TypeScript
 import { AppSync, InstallMode, SyncStatus } from "nativescript-app-sync";
 import { isIOS } from "tns-core-modules/platform";
  
 AppSync.sync({
+
   deploymentKey: isIOS ? "your-ios-deployment-key" : "your-android-deployment-key",
+
   installMode: InstallMode.ON_NEXT_RESTART,
+
   mandatoryInstallMode: isIOS ? InstallMode.ON_NEXT_RESUME : InstallMode.IMMEDIATE,
+
   updateDialog: {
     updateTitle: "Please restart the app",
     optionalUpdateMessage: "Optional update msg",
@@ -98,9 +104,11 @@ AppSync.sync({
 });
 ```
 
-* `deploymentKey`: The `deploymentKey` is required as its what connects your application code to the AppSync server. You will have different keys for iOS and Android, so the same code includes a ternary check so you can provide both values.
+Here’s some more information on how each of these options work.
 
-* `installMode`: By default, AppSync only installs updates when the user restarts an app. AppSync does, however, have the ability to immediately apply updates, and will if set your `installMode` to `InstallMode.IMMEDIATE`. There is one big caveat to this: `InstallMode.IMMEDIATE` shows an installation prompt (see image below), which Apple does not allow for iOS apps distributed through the App Store. Therefore, only set `InstallMode.IMMEDIATE` for iOS if you’re building enterprise-distributed iOS apps.
+* `deploymentKey`: The `deploymentKey` is required as it’s what connects your application code to the AppSync server. You will have different keys for iOS and Android, so the sample code includes a ternary check that allows you to paste in both values.
+
+* `installMode`: By default, AppSync only installs updates when the user restarts an app. AppSync does, however, have the ability to immediately apply updates, and will if you set your `installMode` to `InstallMode.IMMEDIATE`. There is one big caveat to this: `InstallMode.IMMEDIATE` shows an installation prompt (see images below), which Apple does not allow for iOS apps distributed through the App Store. Therefore, only set `InstallMode.IMMEDIATE` on iOS if you’re building enterprise-distributed iOS apps.
 
 * `mandatoryInstallMode`: When you release AppSync updates through the AppSync CLI (`nativescript-app-sync release`), you can optionally designate that release as mandatory using the `--mandatory` flag. The `mandatoryInstallMode` option gives you the ability to immediately install updates you mark mandatory, while allowing non-mandatory updates to wait until the next app restart. Once again, do not use immediate releases for App-Store-distributed iOS apps.
 
@@ -122,7 +130,7 @@ application.on(application.resumeEvent, () => {
     if (syncStatus === SyncStatus.UP_TO_DATE) {
       console.log("No pending updates; you’re running the latest version.");
     } else if (syncStatus === SyncStatus.UPDATE_INSTALLED) {
-      console.log("Updated found and installed. It will be activated upon next cold reboot");
+      console.log("Update found and installed. It will be activated upon next cold reboot");
     }
   });
 });
@@ -150,11 +158,11 @@ It’s worth noting that NativeScript AppSync is based on Microsoft’s CodePush
 
 ## What else can AppSync do?
 
-There are a lot of other tweaks you may want to make to AppSync to meet your needs.
+There are a lot of other AppSync features you may want to incorporate into your development workflow.
 
-For example, the AppSync CLI and server have the ability to handle staging and production releases, giving you the ability to test your updates locally before sending them out to your production users.
+For example, the AppSync CLI and server have the ability to handle staging and production releases separately, giving you the ability to test your updates locally before sending them out to your production users.
 
-Additionally, both the AppSync CLI and Server offer data on your deployment history, including which numbers on exactly how many users have received the updates you push out. You can even rollback updates using `nativescript-app-sync rollback` if something goes wrong.
+Additionally, both the AppSync CLI and Server offer data on your deployment history, including numbers on exactly how many users have received the updates you push out. You can even rollback updates using `nativescript-app-sync rollback` if something goes wrong.
 
 ```
 $ nativescript-app-sync deployment history ACMEAndroid Staging
