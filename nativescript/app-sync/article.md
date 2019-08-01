@@ -71,11 +71,11 @@ application.on(application.resumeEvent, () => {
 
 This code attaches an event handler to your NativeScript’s application `resume` event, which NativeScript triggers every time users resume your app.
 
-> **NOTE**: A `resume` even occurs when the user opens your app, or when they switch to your app from a different application on their device.
+> **NOTE**: A `resume` event occurs when the user starts your app, or when they switch to your app from a different application on their device.
 
 What’s important to note is that `AppSync.sync()` only determines whether an update is available, and if so, downloads that update in the background. The `sync()` method does _not_ actually apply the update—after all, it’s the app’s source code itself that needs to change, which isn’t something you can do while the app is running.
 
-That being said, there are some options you can use to confirm exactly how your application synching works.
+That being said, there are some options you can use to confirm exactly how your application syncing works.
 
 ## What options should I use?
 
@@ -112,12 +112,12 @@ Here’s some more information on how each of these options work.
 
 * `mandatoryInstallMode`: When you release AppSync updates through the AppSync CLI (`nativescript-app-sync release`), you can optionally designate that release as mandatory using the `--mandatory` flag. The `mandatoryInstallMode` option gives you the ability to immediately install updates you mark mandatory, while allowing non-mandatory updates to wait until the next app restart. Once again, do not use immediate releases for App-Store-distributed iOS apps.
 
-* `updateDialog`: The AppSync plugin has a built-in mechanism for displaying a dialog informing users about updates when using `InstallMode.IMMEDIATE`. The gifs below show the dialogs in action on Android and iOS. On Android, the plugin is able to immediately restart your app with the new changes in place. On iOS, apps are not allowed to restart themselves, and as such, the plugin dialog instead instructs users to restart the app manually. (Presumably, this poor user experience is why Apple doesn’t want you to use this sort of workflow for App-Store-distributed apps.
+* `updateDialog`: The AppSync plugin has a built-in mechanism for displaying a dialog informing users about updates when using `InstallMode.IMMEDIATE`. The gifs below show the dialogs in action on Android and iOS. On Android, the plugin is able to immediately restart your app with the new changes in place. On iOS, apps are not allowed to restart themselves, and as such, the plugin dialog instead instructs users to restart the app manually. (Presumably, this poor user experience is why Apple doesn’t want you to use this sort of workflow for App-Store-distributed apps.)
 
 ![](appsync-android.gif)
 ![](appsync-ios.gif)
 
-The AppSync plugin’s `sync()` method also accepts a callback function as a second parameter. Here’s what that looks like in action.
+The AppSync plugin’s `sync()` method also accepts a callback function as a second parameter which reports progress of the `sync` function. Here’s what that looks like in action.
 
 ``` TypeScript
 import * as application from "tns-core-modules/application";
