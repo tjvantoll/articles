@@ -117,7 +117,7 @@ Here’s some more information on how each of these options work.
 ![](appsync-android.gif)
 ![](appsync-ios.gif)
 
-The AppSync plugin’s `sync()` method also accepts a callback function as a second parameter which reports progress of the `sync` function. Here’s what that looks like in action.
+The AppSync plugin’s `sync()` method also accepts a callback function as a second parameter, which reports on the `sync()` method’s progress. Here’s what that looks like in action.
 
 ``` TypeScript
 import * as application from "tns-core-modules/application";
@@ -154,7 +154,7 @@ Basically, as long as your app isn’t distributing code as a feature of the app
 
 It’s worth noting that NativeScript AppSync is based on Microsoft’s CodePush project, which has been used by thousands of developers to deploy and update iOS applications.
 
-> **NOTE**: Apple has made it clear that they don’t want your apps showing update dialogs to users, so once again, make sure you’re not using `InstallMode.IMMEDIATE` on iOS.
+> **NOTE**: Apple has made it clear that they don’t want your apps showing update dialogs to users, so once again, make sure you’re not using `InstallMode.IMMEDIATE` on App-Store-distributed iOS apps.
 
 ## What else can AppSync do?
 
