@@ -95,7 +95,7 @@ When creating slides most people start with the introduction, because, well, it�
 
 And because of this, it’s really easy to waste a lot of time searching for the perfect way to introduce your topic, when in reality it’s fairly insignificant.
 
-Your introduction can be as simple as stating the following point, especially when you’re just getting started.
+Your introduction can be as simple as stating the following points, especially when you’re just getting started.
 
 - I’m _\<your name\>_.
 - State topic
@@ -103,11 +103,11 @@ Your introduction can be as simple as stating the following point, especially wh
 - Show agenda
 - Start talking about topic 1.
 
-By saving the introduction until the end, you’ll have a better idea of what you might want to say to open up your talk. You can also rest assured that the bulk of your work is done, and know that you just have to add a few superficial touches.
+By saving the introduction until the end you’ll have a better idea of what you might want to say to start your talk with. You can also rest assured that the bulk of your work is done.
 
-And I don’t mean to imply introductions aren’t worth spending time on, because done well they can be way to engage the audience and draw them into your talk. I would just save them for last.
+All that being said, I don’t mean to imply introductions aren’t worth spending _any_ time on, because done well they can be way to engage the audience and draw them into your talk. I would just save them for last.
 
-When you do get around to creating an introduction you need to experiment a bit and find what works for you. For now, my go-to introduction is to tell a story that relates to my topic or the place I’m speaking. For example, to open my AR talk I told a story about my love for Pokémon GO, and how that’s what got me interested in AR in the first place.
+When you do create an introduction you need to experiment a bit and find what works for you. My go-to introduction is to telling a story that relates to my topic or the place I’m speaking. For example, to open my AR talk I told a story about my love for Pokémon GO, and how that’s what got me interested in AR in the first place.
 
 ![](go.png)
 
@@ -127,7 +127,7 @@ Walk into a room halfway through a random tech talk and you’ll likely see at l
 
 The thing is, it’s hard to keep people’s attention on anything, and tech topics aren’t the world’s most engaging material. As a speaker there are a few things you can do to help keep your audience’s attention.
 
-The simplest things you can do is to poll the audience at given points in your talks. I often do this before I introduce a new topic. For example, in a talk I recently gave called _One Project. One Language. Three Apps._ I used the slide below to introduce two frameworks, NativeScript and React Native.
+The simplest thing you can do is poll your audience at given points in your talks. I often do this before I introduce a new topic. For example, in a talk I recently gave called _One Project. One Language. Three Apps._ I used the slide below to introduce two frameworks, NativeScript and React Native.
 
 ![](frameworks.png)
 
@@ -173,7 +173,7 @@ In addition to watching yourself speak, it’s good to get feedback from others 
 
 **Reason #1**: **Some people are horrible**, and will leave negative feedback on your talk for silly reasons, like not liking the framework you’re using (seriously).
 
-The problem here is the human brain has an unfortunate tendency to fixate on the negative, even if you get an onslaught of positive feedback to go with it.
+And even if you know the feedback is unreasonable, the human brain has an unfortunate tendency to fixate on the negative, even if you get an onslaught of positive feedback to go with it.
 
 And I can say this from many personal experiences. Remember the talk I mentioned earlier that I gave in Denmark? It’s the most well received talk I’ve ever given. I’ve had random people at conferences compliment me on it; it’s shown up in all sorts of positive tweets, and has gotten numerous mentions in popular newsletters and such.
 
