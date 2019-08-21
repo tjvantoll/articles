@@ -196,3 +196,5 @@ If you’re having trouble finding that blunt person in your life try being blun
 Ok that’s it for now. I have a lot to say because speaking has been very important to me over the last 6–7 years of my life, and it’s opened up a ton of opportunities that I wouldn’t have had otherwise.
 
 Hopefully you found these tips helpful. If so let me know, because I could easily come up with 5 more 😉
+
+> **TIP**: If you want to see me speak in person I’ll be at [DevReach in Sofia, Bulgaria in October](https://www.telerik.com/devreach), and at at [jsMobileConf in Boston in November](https://jsmobileconf.com/). Both are great events.
