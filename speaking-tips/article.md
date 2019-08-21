@@ -6,7 +6,13 @@ I hope these tips help new speakers prepare their first talk, and help give expe
 
 On to the tips!
 
-## Tip #1: Don’t worry about slide design
+* [Tip #1: Don’t worry about slide design](#tip-1)
+* [Tip #2: Make an outline](#tip-2)
+* [Tip #3: During slide creation, make your intro slides last](#tip-3)
+* [Tip #4: Make the audience do stuff](#tip-4)
+* [Tip #5: Speak—a lot](#tip-5)
+
+<h2 id="tip-1">Tip #1: Don’t worry about slide design</h2>
 
 I’ve never cared about slide design and you probably shouldn’t either.
 
@@ -40,7 +46,7 @@ Unless you’re an actual designer and want to spend the time to create somethin
 
 My second tip deals with what to do next.
 
-## Tip #2: Make an outline
+<h2 id="tip-2">Tip #2: Make an outline</h2>
 
 I make an outline for every talk I give. The outline is dead simple, and includes only three things: the talk’s main audience takeaway, 3–4 topics that help support that takeaway, and an actionable next step.
 
@@ -83,7 +89,7 @@ When I show this slide at the beginning of my talk I say something like, _“Thi
 
 Once you have this basic outline in place you’re ready to start developing your introduction and your main content.
 
-## Tip #3: During slide creation, make your intro slides last
+<h2 id="tip-3">Tip #3: During slide creation, make your intro slides last</h2>
 
 When creating slides most people start with the introduction, because, well, it’s the first thing you actually present. The problem is that creating compelling introductions can be hard, even for experienced speakers.
 
@@ -115,7 +121,7 @@ But if you don’t have an idea don’t worry either. Save the intro for the end
 
 And when you’re delivering the bulk of your content I have a tip for that as well.
 
-## Tip #4: Make the audience do stuff
+<h2 id="tip-4">Tip #4: Make the audience do stuff</h2>
 
 Walk into a room halfway through a random tech talk and you’ll likely see at least half the attendees looking at their phones or laptops.
 
@@ -145,7 +151,7 @@ There are professional tools out there to make this sort of audience quizzing ev
 
 Overall, the specific tool or approach doesn’t really matter. What does matter is finding some way to break up the inherent monotony of a tech talk by engaging the audience.
 
-## Tip #5: Speak—a lot
+<h2 id="tip-5">Tip #5: Speak—a lot</h2>
 
 The phrase _practice makes perfect_ applies more to public speaking than any other life skill. No amount of practicing in front of a mirror will prepare you for the experience of delivering a talk in front of a live audience, and the only best way to improve is continue to do just that—deliver talks, repeatedly.
 
