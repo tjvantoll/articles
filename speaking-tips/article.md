@@ -1,10 +1,10 @@
 # My Top 5 Tech Speaking Tips
 
-This article is an eclectic set of speaking tips I’ve learned from giving [dozens of tech talks at conferences around the world](https://www.tjvantoll.com/speaking/).
+This article is an eclectic set of speaking tips I’ve learned from giving [dozens of tech talks at conferences around the world](https://www.tjvantoll.com/speaking/). I hope these tips help new speakers prepare their first talk, and help give experienced speakers ideas to potentially improve.
 
-I hope these tips help new speakers prepare their first talk, and help give experienced speakers ideas to potentially improve.
+One thing I’ll note though: these are tips that I’ve found work for _me_, which doesn’t necessarily mean they’ll work for you. Each speaker needs to find their own style and workflow, so try to take inspiration from these tips and don’t interpret them as hard and fast rules.
 
-On to the tips!
+With that disclaimer out of the way, on to the tips!
 
 * [Tip #1: Don’t worry about slide design](#tip-1)
 * [Tip #2: Make an outline](#tip-2)
