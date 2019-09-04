@@ -112,7 +112,7 @@ A number of the other theme class names have been shortened to make them easier 
 
 And here’s what those buttons look like in that same NativeScript app using the blue color scheme.
 
-![](ios-button-options-3.png)
+![](ios-button-options-4.png)
 ![](android-button-options-3.png)
 
 One super important note before we go further: **the NativeScript 2.0 theme provides full backwards compatibility with the 1.0 theme class names** through additional CSS files. Therefore, you can update to the new theme without having to change all the class names by adding the following imports to your `app.css ` file.
@@ -148,7 +148,7 @@ Twitter has a dark mode, iOS is getting a dark mode, and now your NativeScript a
 For example, here’s what our simple button app looks like with the new theme’s dark mode applied.
 
 ![](android-dark-mode-2.png)
-![](ios-dark-mode-2.png)
+![](ios-dark-mode-3.png)
 
 Enabling this dark mode is as easy as adding a `ns-dark` class name to the root element of your NativeScript app. 
 
@@ -184,7 +184,7 @@ Theme.setMode(Theme.Dark); // Or Theme.Light
 
 Here’s what that API looks like in action in our sample app.
 
-![](dark-mode-2.gif)
+![](dark-mode-3.gif)
 
 > **TIP**: You can [detect whether the user has dark mode enabled on their iOS device](https://github.com/EddyVerbruggen/nativescript-dark-mode), and conditionally apply a dark mode in your app based on the user’s global iOS preference. Pretty cool, huh?
 
