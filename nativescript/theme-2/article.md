@@ -16,13 +16,15 @@ tns plugin update nativescript-theme-core
 
 > **NOTE**: Because the 2.0 theme is still in beta, all NativeScript app templates still use version 1.x of the theme by default. Therefore, if you start a new NativeScript app today you still need to run `tns plugin update` to try out the updated theme.
 
-Next, add the following line of code to your JavaScript or TypeScript code. This will be your `app.js` or `app.ts` file if you’re using NativeScript Core or NativeScript-Vue apps, and your `main.ts` file if you’re using NativeScript Angular.
+The NativeScript 2.0 theme leverages a number of global class names that we added in NativeScript 6.1. Therefore, if you’re using a version of NativeScript earlier than 6.1, you’ll also need to add the following line of code to your app, which takes care of adding the appropriate class names manually.
 
 ``` TypeScript
 import "nativescript-theme-core";
 ```
 
-This line of code adds the class names below to the root element of your app, and the theme utilizes these class names for styling purposes. You might also find these class names useful for your own custom styling.
+> **NOTE**: Add the above code to your `app.js` or `app.ts` file if you’re using NativeScript Core or NativeScript-Vue apps, and your `main.ts` file if you’re using NativeScript Angular.
+
+Here are the list of class names that are now globally available for your app. The theme utilizes these class names for styling purposes, and you might also find these class names useful for your own custom styling.
 
 * `ns-root`
 * `ns-ios`: Present on iOS only
@@ -32,22 +34,20 @@ This line of code adds the class names below to the root element of your app, an
 * `ns-os-dark`: Present when your user has an OS-level dark mode enabled on their device.
 * `ns-os-light`: Present when your user does _not_ have an OS-level dark mode enabled on their device.
 
-> **NOTE**: In the NativeScript 6.1 release the above class names [will be present by default in all apps](https://github.com/NativeScript/NativeScript/issues/7313), meaning, you will no longer need to explicitly add `import "nativescript-theme-core";` in your JavaScript or TypeScript code.
-
-Finally, in your `app.css` file you need to update the syntax to include the theme’s CSS file. Find your current import which will look something like this.
+There’s one final change you have to make to finish updating to the new theme. To make that change, open your `app.css` file and find your current theme import, which will look something like this.
 
 ```
 @import '~nativescript-theme-core/css/<skin-name>.css';
 ```
 
-And replace it with the following.
+Replace that line of code with the following imports.
 
 ```
 @import "~nativescript-theme-core/css/core.css";
 @import "~nativescript-theme-core/css/blue.css";
 ```
 
-> **NOTE**: If you use SASS your imports will instead be `@import "~nativescript-theme-core/core";` and `@import "~nativescript-theme-core/blue";`.
+> **NOTE**: If you use SASS, your imports will instead be `@import "~nativescript-theme-core/core";` and `@import "~nativescript-theme-core/blue";`.
 
 The second file (e.g. `blue.css`) determines your app’s color scheme. You must include a color scheme in order for the theme to work correctly, and you can choose between the following options: `aqua.css`, `blue.css`, `brown.css`, `forest.css`, `grey.css`, `lemon.css`, `lime.css`, `orange.css`, `purple.css`, `ruby.css`, or `sky.css`.
 
@@ -89,8 +89,8 @@ Before, the NativeScript theme required you to explicitly provide a class name t
 
 This is no longer necessary, and all NativeScript components get a base set of styles without any class names at all. For example, here’s what the default button looks like in a NativeScript app using the new theme and the blue color scheme.
 
-![](ios-button.png)
-![](android-button.png)
+![](ios-button-3.png)
+![](android-button-3.png)
 
 A number of the other theme class names have been shortened to make them easier to use. For example, here’s a before and after of how to use the various NativeScript button class names.
 
@@ -112,12 +112,26 @@ A number of the other theme class names have been shortened to make them easier 
 
 And here’s what those buttons look like in that same NativeScript app using the blue color scheme.
 
-![](ios-button-options.png)
-![](android-button-options.png)
+![](ios-button-options-3.png)
+![](android-button-options-3.png)
 
-One super important note before we go further: **the NativeScript 2.0 theme provides full backwards compatibility with the 1.0 theme class names**. Therefore, you can update to the new theme without having to change all the class names throughout your apps.
+One super important note before we go further: **the NativeScript 2.0 theme provides full backwards compatibility with the 1.0 theme class names** through additional CSS files. Therefore, you can update to the new theme without having to change all the class names by adding the following imports to your `app.css ` file.
 
-That being said, you will likely need to make CSS changes in your app when updating to the new theme. For example, suppose you use this button in your app.
+``` CSS
+@import "~nativescript-theme-core/core.compat";
+@import "~nativescript-theme-core/<your-color-scheme-name>.compat";
+```
+
+For example a full `app.css` file for an app that uses the blue color scheme in compatability mode should look like this.
+
+``` CSS
+@import "~nativescript-theme-core/css/core.css";
+@import "~nativescript-theme-core/css/core.compat.css";
+@import "~nativescript-theme-core/css/blue.css";
+@import "~nativescript-theme-core/css/blue.compat.css";
+```
+
+The compatibility CSS files will help you get your apps converted, but to finish updating you’ll likely have a few additional CSS changes to make. For example, suppose you use this button in your app.
 
 ``` XML
 <Button text="Confirm your choice"></Button>
@@ -133,8 +147,8 @@ Twitter has a dark mode, iOS is getting a dark mode, and now your NativeScript a
 
 For example, here’s what our simple button app looks like with the new theme’s dark mode applied.
 
-![](android-dark-mode.png)
-![](ios-dark-mode.png)
+![](android-dark-mode-2.png)
+![](ios-dark-mode-2.png)
 
 Enabling this dark mode is as easy as adding a `ns-dark` class name to the root element of your NativeScript app. 
 
@@ -170,7 +184,7 @@ Theme.setMode(Theme.Dark); // Or Theme.Light
 
 Here’s what that API looks like in action in our sample app.
 
-![](dark-mode.gif)
+![](dark-mode-2.gif)
 
 > **TIP**: You can [detect whether the user has dark mode enabled on their iOS device](https://github.com/EddyVerbruggen/nativescript-dark-mode), and conditionally apply a dark mode in your app based on the user’s global iOS preference. Pretty cool, huh?
 
@@ -194,7 +208,7 @@ Feel free to play with the theme colors if you’d like, and then click the **DO
 
 One important note before we continue: to use ThemeBuilder-built color schemes in NativeScript you must use SASS in your NativeScript apps, as ThemeBuilder outputs SASS variables, which the new NativeScript theme consumes.
 
-The good news is that SASS is really easy to use in NativeScript. In fact, as of NativeScript 6.0, SASS support is built into all new apps by default, and all you need to do is create an `app.scss` file in the same folder as your `app.css` file to get started.
+The good news is that [SASS is really easy to use in NativeScript](https://www.tjvantoll.com/2019/08/30/nativescript-sass/). In fact, as of NativeScript 6.0, SASS support is built into all new apps by default, and all you need to do is create an `app.scss` file in the same folder as your `app.css` file to get started.
 
 Once you’ve configured your theme in ThemeBuilder, downloaded the appropriate file, and created an `app.scss` file for your app, open your `app.scss` file and paste in the contents of your downloaded `variables.scss` file. Your `app.scss` file should look like this.
 
@@ -206,24 +220,39 @@ Once you’ve configured your theme in ThemeBuilder, downloaded the appropriate 
 /* Your custom CSS */
 ```
 
-For example here’s what the default Material theme looks like.
+For example here’s what the default Bootstrap theme looks like.
 
 ``` SCSS
-$base-theme:Material;
-$skin-name:material;
-$swatch-name:Material;
-$border-radius: 2px;
-$primary-palette-name: indigo;
-$secondary-palette-name: pink;
-$theme-type: light;
+$base-theme:Bootstrap;
+$skin-name:Bootstrap;
+$swatch-name:Bootstrap;
+$border-radius: 0.25rem;
+$accent: #007bff;
+$secondary: #e4e7eb;
+$info: #17a2b8;
+$success: #28a745;
+$warning: #ffc107;
+$error: #dc3545;
+$body-bg: #ffffff;
+$body-color: #292b2c;
+$component-bg: #ffffff;
+$component-color: #292b2c;
+$card-cap-bg: #f7f7f9;
+$card-cap-color: #292b2c;
+$series-a: #0275d8;
+$series-b: #5bc0de;
+$series-c: #5cb85c;
+$series-d: #f0ad4e;
+$series-e: #e67d4a;
+$series-f: #d9534f;
 
 @import "~nativescript-theme-core/index";
 ```
 
-And... that’s it! Just by plugging in those variables you’ll have an app that uses your ThemeBuilder-configured theme. For example here’s what the ThemeBuilder Material color scheme looks like for our sample button app.
+And... that’s it! Just by plugging in those variables you’ll have an app that uses your ThemeBuilder-configured theme. For example here’s what the ThemeBuilder Bootstrap color scheme looks like for our sample button app.
 
-![](ios-material.png)
-![](android-material.png)
+![](ios-bootstrap.png)
+![](android-bootstrap.png)
 
 Feel free to experiment with Kendo UI ThemeBuilder to create the perfect theme for your own apps.
 
