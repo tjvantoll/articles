@@ -73,6 +73,11 @@ When the app is up and running, tap the “Theme” button in the top-right corn
 
 With these steps complete you should now have the new theme up and running, so let’s next look at the changes and new features you can try out.
 
+> **TIP**: You can also try the new theme in NativeScript Playground. Use these examples as a starting point, as they already have the new theme installed and ready to go.
+> * **Vue.js**: <https://play.nativescript.org/?template=play-vue&id=E2K7p7&v=9>
+> * **Angular**: <https://play.nativescript.org/?template=play-ng&id=VmvebB&v=2>
+> * **Core**: <https://play.nativescript.org/?template=play-tsc&id=79RODG&v=3>
+
 ## Plug and play
 
 There’s one big update to the way the new core theme works, and I think it’s easiest to understand by looking at a bit of code first.
