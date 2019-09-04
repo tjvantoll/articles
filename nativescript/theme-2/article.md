@@ -130,6 +130,13 @@ One super important note before we go further: **the NativeScript 2.0 theme prov
 For example a full `app.css` file for an app that uses the blue color scheme in compatability mode should look like this.
 
 ``` CSS
+@import "~nativescript-theme-core/css/core.compat.css";
+@import "~nativescript-theme-core/css/blue.compat.css";
+```
+
+And if you want both set of selectors to work simultaneously, e.g. you want both `<Button class="-primary">` and `<Button class="btn btn-primary">` to work, you’ll need to include both set of CSS files in your `app.css`, which looks like this.
+
+``` CSS
 @import "~nativescript-theme-core/css/core.css";
 @import "~nativescript-theme-core/css/core.compat.css";
 @import "~nativescript-theme-core/css/blue.css";
