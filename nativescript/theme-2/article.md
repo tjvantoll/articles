@@ -34,6 +34,8 @@ Here are the list of class names that are now globally available for your app. T
 * `ns-os-dark`: Present when your user has an OS-level dark mode enabled on their device.
 * `ns-os-light`: Present when your user does _not_ have an OS-level dark mode enabled on their device.
 
+> **TIP**: There are also [a number of new CSS variables](https://github.com/nativescript/theme#css-variables) that you can use in your custom CSS as well.
+
 There’s one final change you have to make to finish updating to the new theme. To make that change, open your `app.css` file and find your current theme import, which will look something like this.
 
 ```
