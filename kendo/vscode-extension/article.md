@@ -4,7 +4,7 @@ One of our goals on the Kendo UI team is to help you build great apps fast. With
 
 ![View of the Kendo UI Template Wizard in the Visual Studio Code extension page](screenshot.png)
 
-The template wizard allows you to quickly scaffold  React and Angular applications using an easy-to-use tool built directly into Visual Studio Code.
+The template wizard allows you to quickly scaffold React and Angular applications using an easy-to-use tool built directly into Visual Studio Code.
 
 ![Using the Kendo UI Template wizard to create an application](in-action.gif)
 
@@ -14,7 +14,7 @@ In this article you’ll learn how to install the extension, and how to use it t
 
 The Kendo UI Template Wizard is a Visual Studio Code extension, and as such you’ll need to have [Visual Studio Code installed](https://code.visualstudio.com/) to use it.
 
-Once you do, open Visual Studio Code, head to the extensions tab (#1 in the image below), and use the search bar (#2 in the image below) to search for **Kendo UI Template Wizard**.
+Once you have Visual Studio Code installed, go ahead and open it, head to the extensions tab (#1 in the image below), and use the search bar (#2 in the image below) to search for **Kendo UI Template Wizard**.
 
 ![Instructions on how to find the Kendo UI Template Wizard extension](instructions-1.png)
 
@@ -38,11 +38,13 @@ Next, select whether you’d like to use React or Angular.
 
 ![](wizard-step-2.png)
 
-For the third step, you can create pages that you want to appear in your new application. Currently the wizard allows you to start pages from four pre-configured templates: Blank, Form, Grid, and Chart. If you’re trying the wizard for the first time, go ahead and create a page using each type so you can see how everything works.
+For the third step, you need to create any pages you want to appear in your application. The wizard allows you to start pages from four pre-configured templates: Blank, Form, Grid, and Chart.
+
+If you’re trying the wizard for the first time, go ahead and create a page using each type so you can see how everything works.
 
 ![](wizard-step-3.gif)
 
-And then for your last step, choose which of the preconfigured Kendo UI themes you’d like to start your app with. (And you’ll be able to configure your themes later on.)
+After you create your pages, hit the Next button one last time. This will take you to the final step of the process, where you’ll have to choose which of the preconfigured Kendo UI themes you’d like to start your app with. (And you’ll be able to configure your themes later on.)
 
 ![](wizard-step-4.png)
 
@@ -68,6 +70,15 @@ Next, run your app using `ng serve` for Angular or `npm run start` for React.
 And just like that, you now have a multi-page application set up and ready to go!
 
 ![](final-app.gif)
+
+One final tip: now that you have your app, you can use the [Kendo UI ThemeBuilder](https://themebuilder.telerik.com) to customize the visual appearance of your theme directly in the browser.
+
+![](themebuilder-in-action.gif)
+
+If you’re interested, check out the following documentation articles for detailed steps on using ThemeBuilder to customize your app’s theme.
+
+* [ThemeBuilder overview for KendoReact](https://www.telerik.com/kendo-react-ui/components/styling/theme-builder/)
+* [ThemeBuilder overview for Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui/components/styling/theme-builder/)
 
 ## Next steps
 
