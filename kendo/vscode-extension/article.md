@@ -82,4 +82,4 @@ If you’re interested, check out the following documentation articles for detai
 
 ## Next steps
 
-The Kendo UI Template Wizard makes it trivial to quickly scaffold new apps for React or Angular, so give it a shot. And when you do—let us know what you think. The extension is [open source on GitHub](https://github.com/telerik/kendo-vscode-extensions), so [create an issue](https://github.com/telerik/kendo-vscode-extensions/issues/new) if you run into issues or have any feature requests.
+The Kendo UI Template Wizard makes it trivial to quickly scaffold new apps for React or Angular, so give it a shot. And when you do—let us know what you think. The extension is [available on GitHub](https://github.com/telerik/kendo-vscode-extensions), so [create an issue](https://github.com/telerik/kendo-vscode-extensions/issues/new) if you run into issues or have any feature requests.
