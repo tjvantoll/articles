@@ -4,7 +4,7 @@ One of our goals on the Kendo UI team is to help you build great apps fast. With
 
 ![View of the Kendo UI Template Wizard in the Visual Studio Code extension page](screenshot.png)
 
-The template wizard allows you to quickly scaffold React and Angular applications using an easy-to-use tool built directly into Visual Studio Code.
+The template wizard allows you to quickly scaffold [KendoReact](https://www.telerik.com/kendo-react-ui/) and [Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui) applications with an easy-to-use tool built directly into Visual Studio Code.
 
 ![Using the Kendo UI Template wizard to create an application](in-action.gif)
 
@@ -18,7 +18,7 @@ Once you have Visual Studio Code installed, go ahead and open it, head to the ex
 
 ![Instructions on how to find the Kendo UI Template Wizard extension](instructions-1.png)
 
-Select the Kendo UI Template Wizard and then click the green **Install** button to add the extension to Visual Studio Code.
+Select the Kendo UI Template Wizard, and then click the green **Install** button to add the extension to Visual Studio Code.
 
 ![Visual representation of where the installation button lives](instructions-2.png)
 
@@ -30,7 +30,7 @@ To launch the Kendo UI Template Wizard you’ll need to use the Visual Studio Co
 
 ![](launch.png)
 
-From here, the process of building an app is pretty simple. First give your project a name and path.
+From here, the process of building an app is pretty simple. First, give your project a name and path.
 
 ![](wizard-step-1.png)
 
@@ -44,11 +44,11 @@ If you’re trying the wizard for the first time, go ahead and create a page usi
 
 ![](wizard-step-3.gif)
 
-After you create your pages, hit the Next button one last time. This will take you to the final step of the process, where you’ll have to choose which of the preconfigured Kendo UI themes you’d like to start your app with. (And you’ll be able to configure your themes later on.)
+After you create your pages, hit the Next button one last time. This will take you to the final step of the process, where you’ll have to choose which of the preconfigured Kendo UI themes you’d like to start your app with. (And you’ll be able to customize your theme further later on.)
 
 ![](wizard-step-4.png)
 
-Next, click the create button, and the wizard will generate your new application, as well as a link to open that app up in Visual Studio Code.
+Next, click the create button, and the wizard will generate your new application, as well as a link to open your app up in Visual Studio Code.
 
 ![](wizard-step-5.png)
 
