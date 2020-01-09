@@ -1,4 +1,4 @@
-# 10 Things I Learned Building the Same App With Angular and React
+# 9 Things I Learned Building the Same App With Angular and React
 
 Over the holidays I rewrote an Angular app with React.
 
@@ -262,7 +262,7 @@ If you’re having trouble sleeping tonight I recommend reading the documentatio
 
 Over the years these modules have cost me a ton of time, as not only are Angular modules tedious to create, they’re also error prone, as it’s easy to accidentally put a declaration in the `imports` array, or vice versa, and the error messages don’t always point you in the right direction.
 
-Similarly, Angular also has a concept of services and dependency injection that I don’t miss either. If you’re unfamiliar with the concept you could again [read through the documentation](https://angular.io/guide/architecture-services), but the short version is you provide a bit of metadata on your services, for example.
+Similarly, Angular also has a concept of services and dependency injection that I don’t miss either. In short, the process involves a few steps you must take. First, you have to provide a metadata on each service that you create.
 
 ``` TypeScript
 @Injectable({
@@ -271,7 +271,7 @@ Similarly, Angular also has a concept of services and dependency injection that 
 export class MyService { ... }
 ```
 
-Which you then must include in the `providers` array in an Angular module.
+Next, you must include that service in the `providers` array of every Angular module you intend to use the service.
 
 ``` TypeScript
 @NgModule({
@@ -280,28 +280,88 @@ Which you then must include in the `providers` array in an Angular module.
 })
 ```
 
-And then you can _inject_ that service into your components by including it in an individual component’s constructor.
+And then finally you _inject_ that service into your components by including it in an individual component’s constructor.
 
 ``` TypeScript
 constructor(private myService: MyService) { }
 ```
 
-There’s a [whole science behind dependency injection](https://angular.io/guide/dependency-injection) and why Angular provides this, but honestly dependency injection has always felt like an unnecessary abstraction to me throughout my career. Maybe it’s just me, but I’ve never once had that moment where I thought, “oh, thank goodness I used dependency injection here, that made \<literally anything\> so much easier”.
+There’s a [whole science behind dependency injection](https://angular.io/guide/dependency-injection) and why Angular provides this, but it’s always felt unnecessary to me. The only concrete benefit I’ve ever gotten out of dependency injection is during unit testing, as injected services are easy to mock out for the purposes of tests. But JavaScript mocking libraries are pretty powerful nowadays, and that benefit alone doesn’t make it worth all the hassle for me.
 
-React has none of this stuff and it’s liberating. No modules. No services. No dependency injection. It’s the wild west and you can do whatever you want.
+React has none of any of this stuff and it’s liberating. If I need a new feature in my app I create a new folder and add a new file—no need to create a module and register metadata. If I need a service I create a file that returns a function—again, no metadata configuration necessary.
 
-If I need a new feature in my app I create a new folder and add a new file—no need to create a module and register metadata. If I need a service I create a file that returns a function—again, no metadata configuration necessary. It’s amazing.
+## 5) I miss TypeScript
 
-## 5) The React Router is easier to use than Angular’s router
+I might not miss Angular modules or services, but I definitely miss TypeScript, which is not something I ever thought I would’ve said a few years ago.
 
+The process of giving up TypeScript reminded me of an article the Slack team did when they [adopted TypeScript](https://slack.engineering/typescript-at-slack-a81307fa288d). The two biggest discoveries they made were:
 
+> First, we were surprised by the number of small bugs we found when converting our code.
 
-## 6) I miss TypeScript
+> Second, we underestimated how powerful the editor integration is. Thanks to TypeScript’s language service, editors with an autocomplete function can support the development with context-aware suggestions.
 
-## 7) I prefer the way Angular handles CSS
+I discovered these things too just in a bad way.
 
-## 8) React has a smaller footprint, but not a lot smaller
+First of all, as crazy as this sounds, I had gotten so used to writing TypeScript that I completely forgot do _any_ type validation on my JavaScript function parameters. I just expected them to always be what I thought they would be, and, spoiler alert, they weren’t.
 
-## 9) I’m concerned with how my React app will scale
+And now I have code like `sortOrder = parseInt(sortOrder, 10);` cluttering up my codebase to remind me of nice things used to be.
 
-## 10) It really doesn’t matter which framework you use
+As for editor integration, I was actually pleasantly surprised at how much better Visual Studio Code has gotten at intellisense in vanilla JavaScript files, but it still can’t match what TypeScript provides.
+
+I specifically missed the inline error messages. For example, suppose I try to do something silly like this.
+
+``` JavaScript
+parseInt("10", "10");
+```
+
+The second parameter here is invalid (it needs to be a number), but in a JavaScript file Code gives no indication that anything is wrong. It’s little things like this that made me regret giving up a framework that uses TypeScript by default.
+
+One last note: I do know that Create React App now supports TypeScript usage, and it’s something I plan on checking out. That being said, the nice thing about Angular is 100% of the code samples, documentation articles, Stack Overflow questions, and what not all use TypeScript, whereas the TypeScript faction of the React community seems to be a minority. At least for now 🙂
+
+## 6) I prefer the way Angular handles CSS
+
+In Angular, CSS works one way and it works really well. When you write a component you provide that component a `styleUrls` metadata property, and you pass that property an array of URLs that point to stylesheets you’d like to use to style that component.
+
+``` TypeScript
+// my.component.ts
+import { Component } from "@angular/core";
+
+@Component({
+  selector: "mycomponent",
+  moduleId: module.id,
+  styleUrls: ["./my.component.css"],
+  templateUrl: "./my.component.html"
+})
+export class MyComponent { ... }
+```
+
+The CSS you write in those files are then scoped to that component. Meaning, if you write a rule like `h4 { color: blue; }`, Angular will ensure that the `color: blue` rule only gets applied to `<h4>` elements rendered by `MyComponent`, and not all `<h4>` elements throughout your app.
+
+I always found this to be an elegant way of handling CSS. I put all my app-wide rules and sharable class names in an app-level `.css` file, and then I put my component-specific styling in component-specific scoped files. Easy.
+
+In React styling is the wild west. You can kind-of achieve the Angular equivalent using something called [CSS modules](https://github.com/css-modules/css-modules), which allow you do write a series of class names that are scoped to a component by default. For a React component that looks something like this.
+
+``` CSS
+/* mycomponent.module.css */
+h1 { color: blue; }
+```
+
+``` JavaScript
+/* mycomponent.js */
+import React from "react";
+import styles from "./myComponent.module.css";
+
+export default function MyComponent() {
+  return <h1 className={styles.heading}>Hi</h1>;
+}
+```
+
+This works, but you’re limited to using only class names in your CSS files, and you must manually apply those class names using JSX, which can get get clunky when you need to apply multiple class names simultaneously.
+
+The other popular option for component-level styling in React is to use CSS-in-JS, a technique that, as its name implies, lets you apply CSS rules in JavaScript directly. 
+
+## 7) React has a smaller footprint, but not a lot smaller
+
+## 8) I’m concerned with how my React app will scale
+
+## 9) It really doesn’t matter which framework you use
