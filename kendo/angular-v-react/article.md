@@ -362,6 +362,9 @@ The other popular option for component-level styling in React is to use CSS-in-J
 
 ## 7) React has a smaller footprint, but not a lot smaller
 
+![](angular-stats.png)
+![](react-stats.png)
+
 ## 8) I’m concerned with how my React app will scale
 
 ## 9) It really doesn’t matter which framework you use
