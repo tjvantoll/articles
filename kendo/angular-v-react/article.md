@@ -154,7 +154,7 @@ React recently introduced a new concept called [React Hooks](https://www.telerik
 
 To me, React Hooks are a microcosm of how I feel about React in general: they’re powerful and concise, but also esoteric at times.
 
-To discuss this let’s start with the first example from the [React documentation on hooks](https://reactjs.org/docs/hooks-intro.html).
+To discuss this, let’s start with the first example from the [React documentation on hooks](https://reactjs.org/docs/hooks-intro.html).
 
 ``` JavaScript
 import React, { useState } from 'react';
@@ -275,7 +275,7 @@ Because there are so many things to individually declare, Angular modules tend t
 
 Similarly, Angular also has a concept of services and dependency injection that I’ve always had a hard time seeing the value of.
 
-Creating a service in Angular takes a few steps, the first of which is creating a `.service.ts` file, and then including a bit of metadata before declaring the service class.
+Creating a service in Angular takes a few steps, the first of which is creating a `.service.ts` file, and marking that service’s exported class with an `@Injectable` decorator.
 
 ``` TypeScript
 @Injectable({
@@ -299,9 +299,9 @@ And then, finally, you _inject_ your service into your components by including i
 constructor(private myService: MyService) { }
 ```
 
-If this all sounds a bit confusing it’s because it kind of is.
+If this all sounds a bit confusing—it’s because it is.
 
-There’s a [whole science behind dependency injection](https://angular.io/guide/dependency-injection) and why Angular takes this approach, but it’s always felt unnecessary to me. The only concrete benefit I’ve ever gotten out of dependency injection is during unit testing, as injected services are easy to mock out for the purposes of tests. But JavaScript mocking libraries are pretty powerful nowadays, and that benefit alone doesn’t make it worth all the hassle for me.
+There’s a [whole science behind dependency injection](https://angular.io/guide/dependency-injection) and why Angular takes this approach, but it’s always felt unnecessary to me. The only concrete benefit I’ve ever gotten out of dependency injection is during unit testing, as injected services are easy to mock out in tests. But JavaScript mocking libraries are pretty powerful nowadays, and that benefit doesn’t make the abstraction worth all the hassle for me.
 
 React has none of any of this structure, and frankly, it’s kind of liberating. If I need a new feature in my app I create a new folder and add a new file. If I need a service, I create a file that returns a function. Simple.
 
@@ -345,7 +345,6 @@ import { Component } from "@angular/core";
 
 @Component({
   selector: "mycomponent",
-  moduleId: module.id,
   styleUrls: ["./my.component.css"],
   templateUrl: "./my.component.html"
 })
@@ -430,7 +429,7 @@ My React build ended up being two JavaScript files that were a combined **52.4KB
 
 In total, moving from React to Angular reduced my JavaScript payload from 93KB to 52KB, which was pretty nice.
 
-That being said, I’m pretty impressed by how much the Angular team has done to reduce their bundle sizes over the years. As someone that remembers when Angular bundles _started_ at 300KB, seeing a number under 100KB is a great sign that features like [Angular’s differential loading](https://angular.io/guide/browser-support) are making a real difference. And the [upcoming Angular 9 releases](https://www.telerik.com/blogs/top-new-features-of-angular-9) includes a new default renderer that promises to reduce Angular bundle sizes even more.
+That being said, I’m pretty impressed by how much the Angular team has done to reduce their bundle sizes over the years. As someone that remembers when Angular bundles _started_ at 300KB, seeing a number under 100KB is a great sign that features like [Angular’s differential loading](https://angular.io/guide/browser-support) are making a real difference. And the [upcoming Angular 9 release](https://www.telerik.com/blogs/top-new-features-of-angular-9) includes a new default renderer that promises to reduce Angular bundle sizes even more.
 
 For now, React still gets the edge for allowing you to build smaller apps, but it’ll interesting to watch how much of a gap React will maintain moving forward.
 
@@ -459,6 +458,8 @@ And while the two frameworks take different approaches at times, overall I found
 
 Pretty similar, huh?
 
-Despite the similarities, I do think there are some differences between the two that do matter. In general, I find that React gives you more flexibility in how you choose to build your apps, and Angular gives you more structure. Neither approach is wrong, and which framework you should choose comes down to personal preference, as well as the needs of your team or organization. When in doubt, build a small app with both to see which framework best meets your needs. That’s what I did 🙂
+Despite the similarities, I do think there are some differences between the two that do matter. In general, I find that React gives you more flexibility in how you choose to build your apps, and Angular gives you more structure. That structure can be advantageous when working on large apps on a large team, but you can replicate a similar structure in React by adhering to well-established style guides.
+
+Neither approach is wrong, and which framework you should choose comes down to personal preference, as well as the needs of your team or organization. When in doubt, build a small app with both to see which framework best meets your needs. That’s what I did 🙂
 
 > **TIP**: React and Angular developers both need UI components, and we make them for both frameworks! If you’re a React developer you should check out [KendoReact](https://www.telerik.com/kendo-react-ui/), and if you’re an Angular developer you should try [Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui) 📊📈📆
