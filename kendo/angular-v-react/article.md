@@ -2,9 +2,7 @@
 
 I rewrote an Angular app with React.
 
-I did this for two reasons: first, I’m learning React in my new role as a [KendoReact](https://www.telerik.com/kendo-react-ui/) developer advocate, and I find working on real apps is the best way to learn a new technology.
-
-Second, I genuinely wanted to compare React to Angular, as I’ve spent the last several years of my career working with Angular, and I wanted to see how the React approaches the same web-development problems.
+I did this for two reasons: first, I’m learning React in my new role as a [KendoReact](https://www.telerik.com/kendo-react-ui/) developer advocate, and I find working on real apps is the best way to learn a new technology. Second, I genuinely wanted to compare React to Angular, as I’ve spent the last several years of my career working with Angular, and I wanted to see how the React approaches the same web-development problems.
 
 In this article I’m going to list nine things I learned going through the rewrite process, but first, I’ll give you a bit of background on the app itself so you have some context.
 
@@ -27,13 +25,13 @@ In this article I’m going to list nine things I learned going through the rewr
 
 Before you laugh, you should know that GO Checklists has roughly 10,000 users, and that the game it supports, Pokémon GO, [made $1.4 billion dollars in 2019](https://digistatement.com/pokemon-go-made-1-4b-dollars-in-2019/). (For reference Fortnite made $1.8 billion dollars.)
 
-So even though this app is relatively simple, it has a real userbase that I didn’t want to lose. Therefore, I had to make sure the rewrite preserved all existing functionality, and also didn’t introduce any performance regressions.
+So even though this app is relatively simple, it has a real userbase that I don’t want to lose. Therefore, I had to make sure the rewrite preserved all existing functionality, and also didn’t introduce any performance regressions.
 
 With that context in mind, let’s look at what I found.
 
 <h2 id="finding-1">1) React is simpler in many ways</h2>
 
-When starting with React, the first thing I noticed was how simple React’s default project structure is, at least when compared with Angular. In Angular, a simple hello world app with one component looks something like this.
+When starting with React, the first thing I noticed was how simple React’s default project structure is—at least when compared with Angular. In Angular, a simple hello world app with one component and routing looks something like this.
 
 ```
 src
@@ -49,6 +47,7 @@ src
 │       ├── helloworld.component.html
 │       ├── helloworld.component.ts
 │       └── helloworld.module.ts
+├── index.html
 ├── styles.css
 └── main.ts
 ```
@@ -56,12 +55,15 @@ src
 And the equivalent in React looks something like this.
 
 ```
-src
-├── components
-│   └── HelloWorld.js
-├── App.js
-├── index.css
-└── index.js
+.
+├── public
+│   └── index.html
+└── src
+    ├── App.css
+    ├── App.js
+    ├── index.css
+    └── index.js
+
 ```
 
 Having a smaller file tree made the app easier to navigate while coding, which was great, but the real benefit was to my app’s architecture. Because React components are considerably more lightweight to create and use, I found myself experimenting with modularizing my React code more than I did with Angular.
@@ -136,7 +138,7 @@ But like all good things in life, when something seems too good to be true it us
 
 Holy features Batman! To get a sense of just how heavy-handed Create React App can be, you can run [the tool’s eject script](https://create-react-app.dev/docs/available-scripts/#npm-run-eject), which installs all of your app’s transitive dependencies and configuration files directly into your app.
 
-I encourage every React developer to run the eject script at least once, just to get a sense of the sheer scale of what Create React App is doing for you. For example, as of this writing a post-eject hello world app has 56 dependencies. Yes, 56.
+I encourage every React developer to run the eject script at least once, just to get a sense of the sheer scale of what Create React App is doing for you. For example, as of this writing, a post-eject hello world app has 56 dependencies. Yes, 56.
 
 ![](react-dependencies.png)
 
@@ -173,7 +175,7 @@ function Example() {
 }
 ```
 
-If you haven’t seen React hooks in action before this code might seem a bit weird, mostly because `useState` is a bizarre API. Let’s look at this line of code specifically, as it’s the one that uses a React hook.
+If you haven’t seen React hooks in action before, this code might seem a bit weird—mostly because `useState` is a bizarre API. Let’s start by looking at the line of code below, as it’s the one that uses a React hook.
 
 ``` JavaScript
 const [count, setCount] = useState(0);
@@ -181,7 +183,7 @@ const [count, setCount] = useState(0);
 
 This code creates a new state variable named `count`, as well as a function to change that state named `setCount()`. You pass `useState` the initial value of your state variable, which in this case is `0`.
 
-Although initially confusing, I’ve found `useState` to be quite elegant, and I got used to the API after I used it in a few files. My issues with hooks happen when you get beyond that basics.
+Although initially confusing, I’ve found `useState` to be quite elegant, and I got used to the API after I used it in a few files. My issues with hooks happen when you get beyond the basics.
 
 For example, the next hook I needed was React’s effect hook, which, according to [React’s documentation](https://reactjs.org/docs/hooks-effect.html), “lets you perform side effects in function components”. This description alone is a bit confusing, but their initial example is fairly straightforward.
 
@@ -248,7 +250,7 @@ React.useEffect(() => {
 
 A lot of this is on me, as I’m new to React and still figuring out how these new APIs work. But I tend to prefer using frameworks and APIs that feel intuitive, and all React hooks beyond `useState()` have confused me, which makes me hesitant to introduce them into a large codebase.
 
-That being said, I plan to return to this topic after I’ve had some more time to learn and experiment. And also, even though I find hooks confusing, there are definitely some confusing Angular APIs that I was happy to remove.
+That being said, I plan to return to this topic after I’ve had some more time to learn and experiment. And also, even though I found hooks confusing, there were definitely some confusing Angular APIs that I was happy to remove.
 
 <h2 id="finding-4">4) I don’t miss Angular’s modules, or services, or dependency injection</h2>
 
@@ -278,9 +280,7 @@ Similarly, Angular also has a concept of services and dependency injection that 
 Creating a service in Angular takes a few steps, the first of which is creating a `.service.ts` file, and marking that service’s exported class with an `@Injectable` decorator.
 
 ``` TypeScript
-@Injectable({
- providedIn: 'root',
-})
+@Injectable()
 export class MyService { ... }
 ```
 
@@ -301,15 +301,15 @@ constructor(private myService: MyService) { }
 
 If this all sounds a bit confusing—it’s because it is.
 
-There’s a [whole science behind dependency injection](https://angular.io/guide/dependency-injection) and why Angular takes this approach, but it’s always felt unnecessary to me. The only concrete benefit I’ve ever gotten out of dependency injection is during unit testing, as injected services are easy to mock out in tests. But JavaScript mocking libraries are pretty powerful nowadays, and that benefit doesn’t make the abstraction worth all the hassle for me.
+There’s a [whole science behind dependency injection](https://angular.io/guide/dependency-injection), and why Angular takes this approach, but it’s always felt unnecessary to me. The only concrete benefit I’ve ever gotten out of dependency injection is during unit testing, as injected services are easy to mock out in tests. But JavaScript mocking libraries are pretty powerful nowadays, and that benefit doesn’t make the abstraction worth all the hassle for me.
 
-React has none of any of this structure, and frankly, it’s kind of liberating. If I need a new feature in my app I create a new folder and add a new file. If I need a service, I create a file that returns a function. Simple.
+React has none of this structure, and frankly, it’s kind of liberating. If I need a new feature in my app I create a new folder and add a new file. If I need a service, I create a file that returns a function. Simple.
 
 But although I might appreciate the simplicity of React for most things, there’s one tool I gave up that I didn’t realize how much I’d miss.
 
 <h2 id="finding-5">5) I miss TypeScript</h2>
 
-I might not miss Angular modules or services, but I definitely miss TypeScript—which is not something I ever thought I would’ve said a few years ago.
+I might not miss Angular modules or services, but I definitely miss TypeScript, which is not something I ever thought I would’ve said a few years ago.
 
 The process of giving up TypeScript reminded me of [an article the Slack team did when they adopted TypeScript](https://slack.engineering/typescript-at-slack-a81307fa288d). The two biggest discoveries they made were:
 
@@ -372,9 +372,9 @@ export default function MyComponent() {
 }
 ```
 
-This works, but you’re limited to using only class names in your CSS files, and you must manually apply those class names using JSX, which can get get clunky when you need to apply multiple class names simultaneously.
+This works, but you’re limited to using only class names in your CSS files, and you must manually apply those class names using JSX (for example `className={styles.heading}` in the code above), and that can get clunky in real-world apps where you need to manage a lot of class names.
 
-The other popular option for component-level styling in React is to use CSS-in-JS, a technique that, as its name implies, lets you apply CSS rules in JavaScript directly. I’ve been experimenting with this approach, and so far I’ve found it to be surprisingly elegant. For example, here’s what one of my components looks like using [styled components](https://styled-components.com/), one of the most popular libraries for doing CSS-in-JS in React.
+The other popular option for component-level styling in React is to use a technique called CSS-in-JS, which, as its name implies, lets you apply CSS rules in JavaScript directly. I’ve been experimenting with this approach, and so far I’ve found it to be surprisingly elegant. For example, here’s what one of my components looks like using [styled components](https://styled-components.com/), one of the most popular libraries for doing CSS-in-JS in React.
 
 ``` JavaScript
 import React from "react";
@@ -398,7 +398,7 @@ export default function Loading() {
 }
 ```
 
-Although I think the syntax here is elegant, I do have some performance concerns, as styled components applies CSS at runtime rather than build time, and I’m concerned about the cost of doing that at scale.
+Although I do initially like the CSS-in-JS methodology, I do have some performance concerns, as styled components applies CSS at runtime rather than build time, and I’m concerned about the cost of doing that at scale.
 
 I know that there are CSS-in-JS options that apply styling at build time, and this is a topic I intend to research over the next few weeks.
 
@@ -431,34 +431,36 @@ In total, moving from React to Angular reduced my JavaScript payload from 93KB t
 
 That being said, I’m pretty impressed by how much the Angular team has done to reduce their bundle sizes over the years. As someone that remembers when Angular bundles _started_ at 300KB, seeing a number under 100KB is a great sign that features like [Angular’s differential loading](https://angular.io/guide/browser-support) are making a real difference. And the [upcoming Angular 9 release](https://www.telerik.com/blogs/top-new-features-of-angular-9) includes a new default renderer that promises to reduce Angular bundle sizes even more.
 
-For now, React still gets the edge for allowing you to build smaller apps, but it’ll interesting to watch how much of a gap React will maintain moving forward.
+For now, React still gets the edge for allowing you to build smaller apps, but it’ll be interesting to watch how much of a gap React will maintain moving forward.
+
+
 
 <h2 id="finding-8">8) I’m concerned with how React apps will scale</h2>
 
-To explain this finding I’ve got to give you a bit of background. Over the last few years I’ve worked as a developer advocate on the [NativeScript](https://www.nativescript.org/) project, which is a project that allows you to build iOS and Android apps using frameworks like Angular. As part of my role as a developer advocate I had to run lots of apps, whether those apps were personal apps, demo apps, or customer applications.
+To explain my thoughts on this point I have to give you a bit of background. Over the last few years I’ve worked as a developer advocate on [NativeScript](https://www.nativescript.org/), which is a project that allows you to build iOS and Android apps using frameworks like Angular. As part of my role as a developer advocate I had to run lots of apps, whether those apps were personal apps, demo apps, or customer applications.
 
-And as I spent more time in the role, I started to appreciate how Angular’s [extremely comprehensive set of development guidelines](https://angular.io/guide/styleguide) made it easy for me to jump into new apps and quickly find my way around.
+As I spent more time in the role, I started to appreciate how Angular’s [extremely comprehensive set of development guidelines](https://angular.io/guide/styleguide) made it easy for me to jump into unfamiliar apps and quickly find my way around.
 
 In contrast, when I jump into a random React app I immediately have to ask myself a number of questions. Did this app’s developers use Create React App? What are they doing for CSS? Did they use Redux? How about hooks? What do these naming conventions mean?
 
 To be fair, it’s not necessarily a bad thing that React gives you more choices and freedom. Heck, I’ve complimented React on that flexibility repeatedly in this article. I do, however, think developers starting new React apps, especially large React apps, should strive to follow established community conventions as much as possible, such as [Airbnb’s React/JSX style guide](https://github.com/airbnb/javascript/tree/master/react).
 
-It’s also worth establishing conventions within your own organization so your React apps stay as consistent as possible. The time you save getting people up to speed really does matter as developers move on and off your team, and as you cycle between developing multiple applications.
+It’s also worth establishing conventions within your own organization so your React apps stay as consistent as possible. Any onboarding optimizations you make really do matter, as developers will inevitably move on and off your team.
 
 <h2 id="finding-9">9) It really doesn’t matter which framework you use</h2>
 
-If you came to this article looking for me to strongly recommend one framework over another, well then I have some bad news for you. Despite the differences between Angular and React, my single biggest finding is that, at the end of the day, the two frameworks are remarkably similar.
+If you came to this article looking for me to strongly recommend one framework over another, well then I have some bad news for you: despite the differences between Angular and React, my single biggest finding is that, at the end of the day, the two frameworks are remarkably similar.
 
-React and Angular both do data binding; they both have a rich templating syntax; they both handle events; they both have routers; and they both let you use modern JavaScript features.
+React and Angular both do data binding, they both have a rich templating syntax, they both handle events, they both have routers, and they both let you use modern JavaScript features.
 
-And while the two frameworks take different approaches at times, overall I found the codebases to be surprisingly alike. To give you an example, here’s a chunk of code to build a list item with Angular (top) and React (bottom).
+And while the two frameworks take different approaches at times, overall I found my two codebases to be surprisingly alike. To give you an example, below are two chunks of code that build a list item with Angular (top) and React (bottom).
 
 ![](angular-list-item.png)
 ![](react-list-item.png)
 
 Pretty similar, huh?
 
-Despite the similarities, I do think there are some differences between the two that do matter. In general, I find that React gives you more flexibility in how you choose to build your apps, and Angular gives you more structure. That structure can be advantageous when working on large apps on a large team, but you can replicate a similar structure in React by adhering to well-established style guides.
+That being said, despite the similarities, I do think there are some differences between the two frameworks that matter. In general, I find that React gives you more flexibility in how you choose to build your apps, and Angular gives you more structure. That structure can be advantageous when working on large apps or on a large team, but you can replicate a similar structure in React by adhering to well-established style guides.
 
 Neither approach is wrong, and which framework you should choose comes down to personal preference, as well as the needs of your team or organization. When in doubt, build a small app with both to see which framework best meets your needs. That’s what I did 🙂
 
