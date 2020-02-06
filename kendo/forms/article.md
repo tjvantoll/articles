@@ -123,7 +123,7 @@ You can install the package into your own app from npm.
 npm install --save @progress/kendo-react-form
 ```
 
-The package contains two components, Form and Field. The basic idea is you wrap your HTML `<form>` with the Form component, and then use one Field component for each field in your form. The structure looks like this.
+The package contains two main components, Form and Field. The basic idea is you wrap your HTML `<form>` with the Form component, and then use one Field component for each field in your form. The structure looks like this.
 
 ``` HTML
 <Form ...>
@@ -268,7 +268,7 @@ The KendoReact Form provides a series of APIs that make it easy to add custom fo
   component={Input} />
 ```
 
-To add validation, let’s start by adding a `validator` prop to the field, which we’ll point at a function that determines whether the field’s contents are valid. For example, here is how you could ensure that email is a required field.
+To add validation, let’s start by adding a `validator` prop to the field, which we’ll point at a function that determines whether the field’s contents are valid. For example, here is how you can ensure that email is a required field.
 
 ``` JavaScript
 // Returning an empty string indicates that the field is valid.
@@ -288,7 +288,7 @@ const requiredValidator = (value) => {
   validator={requiredValidator} />
 ```
 
-In our example we want to enforce that the user provided an email address, and also that the user provided a _valid_ email address. To do that we’ll tweak our validator a bit using the code below.
+In our example we want to enforce that the user provided an email address, and also that the user provided a _valid_ email address. To do that we’ll tweak add a new email validator using the code below.
 
 ``` JavaScript
 const emailValidator = (value) => (
@@ -296,13 +296,15 @@ const emailValidator = (value) => (
 );
 ```
 
+And then pass both the required and email validators for the `validator` prop.
+
 ``` HTML
 <Field
   label="Email:"
   name="email"
   fieldType="email"
   component={Input}
-  validator={emailValidator} />
+  validator={[requiredValidator, emailValidator]} />
 ```
 
 Now that you have a way of determining whether fields are valid, your last step is visually displaying that information to your users. Let’s do that by returning to your custom Input component, which currently looks like this.
@@ -325,7 +327,7 @@ const Input = (fieldProps) => {
 };
 ```
 
-To add a validation message you’ll need to use three additional provided props: `valid`, `visited`, and `validationMessage`. The code below takes these new props, and uses them to display a validation message to the user when the field is erred.
+To add a validation message you’ll need to use three additional provided props: `valid`, `visited`, and `validationMessage`. The code below takes these new props, and uses them to display a validation message to the user on fields with errors.
 
 ``` JavaScript
 const Input = (fieldProps) => {
@@ -375,6 +377,10 @@ The beauty of the KendoReact Form is just how easy it is to customize everything
 Don’t want to disable your app’s submit button? Then don’t include the `allowSubmit` logic. Want to show your validation messages in a different place, or use different class names? Then adjust the logic in your custom components.
 
 By using the KendoReact Form you get all this, and you also benefit from the easy state management that the Form provides. Before we wrap up, let’s look at one additional KendoReact Form benefit: how easily the Form integrates with the rest of KendoReact.
+
+> **TIP**: The validation we covered in this article was done at the Field level, but the KendoReact Form also allows you to perform [Form-level validation](https://www.telerik.com/kendo-react-ui-develop/components/form/validation/#toc-fieldarray-validation), which can be useful for complex validation that spans many fields.
+
+> **TJ TODO**: Remove “develop” from the above URL once that’s live.
 
 ## Using rich components
 
