@@ -1,4 +1,4 @@
-# An Opinionated Guide to Starting a Custom UI Component Library
+# An Opinionated Guide to Starting a UI Component Library
 
 Building a custom component UI library is a great way to create consistent user interfaces throughout your organization.
 
@@ -8,13 +8,13 @@ In this article I’m going to walk you through an opinionated set of steps to g
 
 If you follow the tutorial to the end, you’ll have a development environment that looks like this.
 
--- gif --
+![](whole-workflow.gif)
 
 Let’s get started.
 
 ## Getting started
 
-For the purposes of this article we’re going to assume we work for a fictitious company named ACME, and we’re creating a handful of components that ACME can use throughout their organization.
+For the purposes of this article we’re going to assume we work for a fictitious company named ACME, and we’re creating a handful of components that ACME will use throughout their organization.
 
 Let’s start by creating the npm package that will contain all of ACME’s components. To do so, run the following commands from your terminal or command prompt to create a directory for your project.
 
@@ -29,7 +29,7 @@ Next, create two new subdirectories named `demo` and `src`.
 mkdir demo src
 ```
 
-The idea here is the `src` directory will contain all of your company’s components, aka the actual source code, and the `demo` directory will contain a demo app that lets you test your components in a live running app.
+The idea here is the `src` directory will contain all of your company’s components, aka the actual component source code, and the `demo` directory will contain a demo app that lets you test your components in a live running app.
 
 At this point you should have a folder structure that looks like this.
 
@@ -43,13 +43,13 @@ In the next two sections we’ll look at how to start writing your components, a
 
 ## Choosing a framework
 
-One of the most challenging parts of writing components for an entire organization is deciding on frameworks. At large companies it’s fairly common to have apps built with a variety of front-end frameworks—both because enterprise apps stick around for a long time, and also because developers have different opinions on what the “best” framework is, especially when you’re building different types of applications.
+One of the most challenging parts of writing components for an entire organization is deciding on a framework to use, if any. At large companies it’s fairly common to have apps built with a variety of front-end frameworks—both because enterprise apps stick around for a long time, and also because developers have different opinions on what the “best” framework is.
 
-This fragmentation is a problem when it comes to building components that you intend to use in a standard way throughout your company. When building a component library you have three options for how to deal with this situation.
+This fragmentation is a problem when it comes to building components that you intend to use in a standard way throughout an organization. When building a component library you have three options for how to deal with this situation.
 
 1) **Choose one framework**
 
-* With this option you build all of your components with one framework—aka you build either React components, or Angular components, or whatever other framework you might be using.
+* With this option you build all of your components with one framework—aka you build either React components, or Angular components, or whatever other framework.
 * This option makes the most sense for companies that have standardized on a single framework for all of their applications.
 
 2) **Support multiple frameworks** 
@@ -62,9 +62,11 @@ This fragmentation is a problem when it comes to building components that you in
 * With this option you build all of your components without frameworks like React, Angular or Vue, and you building your components on top of the browser’s web component APIs.
 * Although this seems appealing—who wouldn’t want components that can work in any app?—the downside is most developers have a lot more experience working with their framework of choice than they do with web components. And although web components have come a long way in the last decade, they still don’t offer many of the features that frameworks like React, Angular, and Vue offer out of the box.
 
-Like any software decision, the correct option is highly dependent on your team and the applications you work with, but for most organizations I recommend starting with #1 (choose one framework), and moving on to #2 (support multiple frameworks) as necessary.
+Like any software decision, the correct option is highly dependent on your team and the applications you support, but for most organizations I recommend starting with #1 (choose one framework), and moving on to #2 (support multiple frameworks) as necessary.
 
-For this article we’ll use approach #1 and build our component suite with React, although you can use the same basic structure with other frameworks like Angular and Vue. Let’s start building.
+For this article we’ll use approach #1 and build our component suite with React. You can use the same basic project structure and workflow with frameworks like Angular and Vue, but some of the specifics, such as how you build your demo app, will be slightly different. I’ll make a note of those differences as we cover them.
+
+Let’s start building.
 
 ## Creating your components
 
@@ -110,6 +112,10 @@ acme-components/
 
 Next, open your three new files and paste in the code below.
 
+> **NOTE**:
+> * These components are purposefully simple so we can focus on the workflow.
+* * If you use Angular or Vue, you would write these components with those frameworks instead of using React syntax. 
+
 ``` JavaScript
 // Button.js
 import React from 'react';
@@ -133,9 +139,8 @@ export default Button;
 import React from 'react';
 
 const Input = (props) => {
-  const { value } = props;
   return (
-    <input value={value} className="acme-input" />
+    <input {...props} className="acme-input" />
   )
 }
 
@@ -178,6 +183,8 @@ npm install --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-re
 
 Along with Babel itself, this command also installs [Babel presets](https://babeljs.io/docs/en/presets), which are set of configuration options. In this case you’re using `@babel/preset-env`, which is a common set of JavaScript defaults, and `@babel/preset-react`, which is a common set of React defaults.
 
+> **TIP**: There is also a [popular Babel preset for Vue](https://cli.vuejs.org/core-plugins/babel.html#configuration).
+
 To tell Babel to use these presets, go ahead and create a `.babelrc` file within your `src` directory.
 
 ```
@@ -209,7 +216,7 @@ With the presets in place, you now have everything you need to build your compon
 },
 ```
 
-Let’s break down what’s happening here. First, adding a new script to your `package.json` gives you a new command that you use with `npm run`. That is, after you save this `package.json` change, you can run your new `"build"` script by executing `npm run build`.
+Let’s break down what’s happening here. First, adding a new script to your `package.json` gives you a new command that you can use with `npm run`—meaning, after you save you `package.json` file with this change, you can run your new `"build"` script by executing `npm run build`.
 
 The build command itself tells Babel to operate on all JavaScript files (`*.js`), all CSS files (`*.css`), and your `package.json` file. The command says to place your built files in a new `dist` directory (`--out-dir ../dist`), and to copy all the files it operates on to that new directory (`--copy-files`).
 
@@ -376,21 +383,62 @@ To test this, return to your terminal or command prompt, ensure you’re still i
 npm run watch
 ```
 
-change files
+With the watcher running, open your `src/theme.css` file and change `color: #444` to `color: black`. When you save your change, your watcher should detect the change, trigger a new build, and copy the updated file to `dist/theme.css`.
 
-awesome right?
+Now that you have a watcher in place for your components, let’s put together. Your end goal is to have a workflow that allows you to develop your components while seeing them running in a live application. To do that you’re going to need to have two terminals running—one that watches your components, and another that runs your demo application. Specifically, you need to have `npm run watch` executing in your `src` directory, while also having `npm run start` executing in your `demo` directory.
 
--- super awesome gif --
+There are many ways you can accomplish this depending on your terminal or command prompt client, but personally I like setting up this workflow entirely within Visual Studio Code.
 
+Visual Studio Code has an [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) that you can open with `Ctrl` + <code>`</code> (backtick). With the terminal open, you can use the button below to split the terminal, which creates two terminal instances that appear side by side.
+
+![](split.png)
+
+With this split I navigate the left terminal to my `src` directory and run `npm run watch`, and then I navigate my right terminal to my `demo` directory and run `npm run start`.
+
+![](workflow.png)
+
+Next, I use VS Code’s [side-by-side editing](https://code.visualstudio.com/docs/getstarted/userinterface#_side-by-side-editing), and open my component files in editing column that lines up with my `src` terminal, and open my demo files in an editing column that lines up with my `demo` terminal.
+
+![](side-by-side-editing.png)
+
+With all of these steps in place, I now have the ability to change files in either my components or my demo, and to see those changes instantly.
+
+![](whole-workflow.gif)
+
+I like using Visual Studio Code because I really like the side-by-side interface for both editing and terminals, but you can accomplish the same workflow in other environments—all you need to do is execute `npm run watch` in your `src` directory and execute `npm run start` in your `demo` directory.
 
 ## Common questions
 
-### distribution
+In this article you learned an opinionated workflow for building custom component libraries, but component libraries tend to get complex, so I wanted to wrap up by answering some common questions about the next steps you can take. (And let me know in the comments if you’d like to see me expand on any of these topics in future articles 🙂 )
 
-### documentation
+### How do I distribute my components?
 
-### dependencies
+If you use this article’s workflow your `dist` folder is a complete npm package that you can immediately use in other applications.
 
-### testing
+You you choose to distribute that depends on your company’s infrastructure. If you want the package to be publicly available you can [publish the package to npm](https://docs.npmjs.com/cli/v6/commands/npm-publish). If your company uses a [private npm registry](https://docs.npmjs.com/creating-and-publishing-private-packages) you can publish your there.
 
-Are there other topics you’d like to see?
+### How do I document my components?
+
+Documentation is vital when building a set of components. _How_ exactly you document the components is up to you.
+
+One thing I see people commonly do is turn their demo application into documentation. For example you could create a one page per component, and document the syntax and different ways you can use each component. Then you can deploy your demo app to a web server that other in your company can view. The advantage of this approach is it encourages you to maintain your documentation as you develop your components.
+
+There are other options as well. You could reuse a documentation system your company might already be using, such as a Wiki. You could also check out a framework like [Storybook](https://storybook.js.org/), which allows you to build visual documentation for your components within the same project.
+
+### Should I add dependencies to my components?
+
+Although it’s relatively easy to build your own inputs and buttons, things get harder when you need more complex components like datepickers or dialogs.
+
+In these situations I’m a big proponent of wrapping existing component libraries that have already solved these problems. Aka, you write a DatePicker component using this article’s workflow, but under the hood you use a third-party datepicker from an existing library.
+
+Any library you trust works, but as a member of the KendoReact team I have to put in a recommendation for [KendoReact](https://www.telerik.com/kendo-react-ui/components/) here. We built the [KendoReact components](https://www.telerik.com/kendo-react-ui/components/) with modularity and extensibility in mind, so you should find our components easy to build on top of in your own libraries.
+
+### Can I unit test my components?
+
+The great thing about this article’s workflow is, at the end of the day, it’s just a JavaScript project, so there’s nothing stopping you from adding other functionality such as unit testing. You can add unit tests directly in your component’s `src` directory, you could implement the tests in your demo application, or you could do some combination of both.
+
+### Are there better ways of doing this?
+
+There are a lot of different ways of writing component libraries. The recommendations I give in this article are based on my own experience for building these types of libraries, but like anything in the software world, what works best for you depends on your company and your requirements.
+
+With that in mind I’d love to hear from you. Are you building a custom component library for your company? If so what has worked for you? What hasn’t? Let me know because I’d love to incorporate your experiences into future articles.
