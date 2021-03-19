@@ -1,12 +1,12 @@
-# The Ultimate Guide to Building a UI Library for Your Company—Part 2: Establishing a Development Environment
+# The Ultimate Guide to Building a UI Component Library—Part 2: Establishing a Development Environment
 
-Building a custom component UI library is a great way to create consistent user interfaces throughout your organization.
+_This article is the second part in a series on how to build a complete UI component library for your organization. If you missed part 1, you might want to [check it out](https://www.telerik.com/blogs/ultimate-guide-to-building-ui-component-library-part-1-plan) before continuing._
 
-But building a component library is also hard, as you immediately have to solve a number of problems—like, what technologies are you going to use to build the components, how are you going to document those components, and how are you going to distribute everything throughout your organization?
+In part 1 of this series you learned how to plan a UI component library, including how to choose which components to start with, as well as which JavaScript framework to use. With that prep out of the way—it’s time to start coding 🙂
 
 In this article I’m going to walk you through an opinionated set of steps to get a component library up and running fast. My focus will be on helping you set up a development environment that allows to develop your components, and also see those components running in a live app. I’ll also cover builds, so that you can have a built npm package ready to distribute to other developers at your company.
 
-If you follow the tutorial to the end, you’ll have a development environment that looks like this.
+If you follow the tutorial to the end, you’ll have a development environment for building your library that looks like this.
 
 ![](whole-workflow.gif)
 
@@ -39,17 +39,13 @@ acme-components
 └── src
 ```
 
-In the next two sections we’ll look at how to start writing your components, and then how to build a demo app so that you can test your components as you code them. Let’s start with the components themselves, and discuss one of the first questions you’ll have to answer: which framework to use?
+In the next two sections we’ll look at how to start writing your components, and then how to build a demo app so that you can test your components as you code them.
 
-## Choosing a framework
-
-
-
-Let’s start building.
+Let’s start with the components themselves.
 
 ## Creating your components
 
-Let’s return to your project, which remember currently has the following directory structure.
+Let’s return to your project, which currently has the following directory structure.
 
 ```
 acme-components
@@ -71,13 +67,13 @@ Next, run `npm init` to generate a `package.json` file for your components.
 npm init
 ```
 
-The `init` command will first prompt you for a package name. When it does, type in `"acme-components"`, as otherwise npm will set the package name to `src`, as `src` is the name of the folder you’re in.
+The `init` command will start by prompting you for a package name. When it does, type in `"acme-components"`, as otherwise npm will set the package name to `src` (because `src` is the name of the folder you’re in).
 
 ![](package-name.png)
 
 Feel free to accept the defaults for all subsequent questions, which you can do by hitting the Enter key without typing anything.
 
-Now that you have your `package.json` file, let’s create a few new files that you’ll use to write the components themselves. While still in the `src` directory, create three new files, `Button.js`, `Input.js` and `theme.css`. Your directory structure should now look like this.
+Now that you have your `package.json` file, let’s create a few new files that you’ll use to write your components. While still in your `src` directory, create three new files, `Button.js`, `Input.js` and `theme.css`. Your directory structure should now look like this.
 
 ```
 acme-components/
@@ -92,7 +88,7 @@ acme-components/
 Next, open your three new files and paste in the code below.
 
 > **NOTE**:
-> * These components are purposefully simple so we can focus on the workflow.
+> * These components are purposefully simple so we can focus on the workflow. You’ll build more complex components in the third part of this article series.
 > * If you use Angular or Vue, you would write these components with those Angular or Vue syntax, and not the React syntax you see below.
 
 ``` JavaScript
@@ -160,7 +156,7 @@ Your first step is to install Babel in your project, which you can do by running
 npm install --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react
 ```
 
-Along with Babel itself, this command also installs [Babel presets](https://babeljs.io/docs/en/presets), which are set of configuration options. In this case you’re using `@babel/preset-env`, which is a common set of JavaScript defaults, and `@babel/preset-react`, which is a common set of React defaults.
+Along with Babel itself, this command also installs [Babel presets](https://babeljs.io/docs/en/presets), which are sets of configuration options. In this case you’re using `@babel/preset-env`, which is a common set of JavaScript defaults, and `@babel/preset-react`, which is a common set of React defaults.
 
 > **TIP**: There is also a [popular Babel preset for Vue](https://cli.vuejs.org/core-plugins/babel.html#configuration).
 
@@ -386,38 +382,11 @@ With all of these steps in place, you now have the ability to change files in ei
 
 I like using Visual Studio Code because I really like the side-by-side interface for both editing and terminals, but you can accomplish the same workflow in other environments. As long as you can come up with some way to execute `npm run watch` in your `src` directory and `npm run start` in your `demo` directory, you’re good to go.
 
-## Common questions
+## Wrapping up
 
-In this article you learned an opinionated workflow for building custom component libraries, but in the real-world component libraries tend to get complex, so I wanted to wrap up by answering some common questions about the next steps you can take. (And let me know in the comments if you’d like to see me expand on any of these topics in future articles 🙂 )
+In this article you learned an opinionated way to set up a complete development environment for a component library.
 
-### How do I distribute my components?
+But real-world component libraries are complex, and require more than a project with a Button and Input component. Therefore, in the last article in this series we’ll discuss building more complex components, including a discussion on whether you should build your own components from scratch, add dependencies on existing libraries, or do some combination of both. We’ll also discuss the options you have for unit testing and documenting your components as well.
 
-If you use this article’s workflow your `dist` folder is a complete npm package that you can immediately use in other applications.
+Stay tuned 🙂
 
-How you choose to distribute that package depends on your company’s infrastructure. If you want your package to be publicly available you can [publish the package to npm](https://docs.npmjs.com/cli/v6/commands/npm-publish). If your company uses a [private npm registry](https://docs.npmjs.com/creating-and-publishing-private-packages) you can publish your package there.
-
-### How do I document my components?
-
-Documentation is vital when building a set of reusable components. _How_ exactly you document the components is up to you.
-
-One thing I like to do is turn my demo application into documentation. For example, you can create one demo page per component, and document the syntax and different ways you can use each component on that page. Then you can deploy your demo app to a web server that others in your company can view. The advantage of this approach is it encourages you to maintain your documentation as you develop your components.
-
-There are other options as well. You could reuse a documentation system your company might already be using, such as a Wiki. You could also try out a framework like [Storybook](https://storybook.js.org/), which allows you to build visual documentation for your components within the same project.
-
-### Should I add dependencies to my components?
-
-Although it’s relatively easy to build your own inputs and buttons, things get harder when you need more complex components like datepickers or dialogs.
-
-In these situations I’m a big proponent of wrapping existing component libraries that have already solved these problems. Aka, you write a DatePicker component using this article’s workflow, but under the hood you leverage a third-party datepicker from an existing library.
-
-Any library that you trust works, but as a member of the KendoReact team I have to put in a recommendation for [KendoReact](https://www.telerik.com/kendo-react-ui/components/) here. We built the [KendoReact components](https://www.telerik.com/kendo-react-ui/components/) with modularity and extensibility in mind, so you should find our components easy to build on top of in your own libraries.
-
-### Can I unit test my components?
-
-The great thing about this article’s workflow is, at the end of the day, you’re just building a JavaScript project, so there’s nothing stopping you from adding other functionality such as unit testing. You can add unit tests directly in your component’s `src` directory, you could add tests to your demo application, or you could do some combination of both.
-
-### Are there better ways of doing this?
-
-There are a lot of different ways of writing component libraries. The recommendations I give in this article are based on my own experience for building these types of libraries, but like anything in the software world, what works best for you depends on your company and your requirements.
-
-With that in mind I’d love to hear from you. Are you building a custom component library for your company? If so what has worked for you? What hasn’t? Let me know because I’d love to incorporate your experiences into future articles.
