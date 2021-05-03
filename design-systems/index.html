@@ -1,0 +1,393 @@
+<style>
+    img { max-width: 100%; }
+</style>
+<p><em>This article is the third part in a series on how to build a complete UI component library for your organization. If you found this article first, you might want to read <a href="https://www.telerik.com/blogs/ultimate-guide-to-building-ui-component-library-part-1-plan">part 1</a> and <a href="https://www.telerik.com/blogs/ultimate-guide-to-building-ui-component-library-part-2-environment">part 2</a> before continuing.</em></p>
+<p>In part 1 of this series you learned how to plan a UI component library, and in part 2 you learned how to set up a development environment for coding components for your library.</p>
+<p>In this article we&rsquo;ll shift our focus to writing the UI components themselves. We&rsquo;ll start with a discussion of when to code components by hand, and when to build on top of third-party libraries. Next, we&rsquo;ll set up a unit testing structure for your components and write a few tests with it. And finally, we&rsquo;ll wrap up showing a few options you have for writing documentation for your components.</p>
+<p>There&rsquo;s a lot to discuss, so let&rsquo;s start by talking about when to code components yourself, and when to use third-party libraries.</p>
+<h2>Table of Contents</h2>
+<h2 id="when-to-use-third-party-libraries">When to use third-party libraries</h2>
+<p>Building a full component library for a large company often involves building dozens (if not hundreds) of UI components. Building these components can take a ton of time, especially once you move beyond basic components like inputs and buttons, and start needing advanced components like datepickers, autocompletes, dialogs, and more.</p>
+<p>You can make your life easier by using existing UI component libraries, as there are plenty of high-quality datepickers, autocompletes, and dialogs available on npm. But adding dependencies on other libraries comes with downsides, like larger client-side bundles for your users to download, and having less control over how much you can customize your components.</p>
+<p>So what do you do? I have a few recommendations when you&rsquo;re deciding whether to use a library or not.</p>
+<h3 id="recommendation-1-lean-towards-libraries-for-complex-components">Recommendation #1: Lean towards libraries for complex components</h3>
+<p>Most front-end developers can build a high-quality button component in a reasonable amount of time.</p>
+<p>But almost all developers will struggle to build a calendar or data grid&mdash;and even if they&rsquo;re capable, it&rsquo;ll take them weeks or months to build one with the features your company needs. (And even more time if you want those components to be accessible, well-documented, and so on.)</p>
+<p>Although it can be tempting to take the time to build a complex component yourself, in most situations you&rsquo;re better off leveraging the work another library has already done, and saving your time for working on features that are unique to your business.</p>
+<p>There are exceptions to this. For example, if you work for a company that builds calendars, it might make sense to build your own calendar control, as it&rsquo;s critical to your business and something you probably need to heavily customize. But for most situations it makes sense to depend on existing libraries for complex components.</p>
+<h3 id="recommendation-2-wrap-your-third-party-dependencies">Recommendation #2: Wrap your third-party dependencies</h3>
+<p>The UI component library we&rsquo;ve been building in this article series is designed to be used by multiple other applications at a company. As such, when you add a dependency to your component library, you&rsquo;re also adding that dependency to every application that uses your library.</p>
+<p>This coupling can be problematic if you want to switch libraries in the future, as any dependency change in the component library forces all consumers of the library to update as well.</p>
+<p>You can mitigate this risk by wrapping all third-party controls you use with your own API. For example, suppose you want to use a DatePicker component from a hypothetical LibraryX component library. </p>
+<p>Instead of encouraging your company&rsquo;s apps to use LibraryX&rsquo;s DatePicker directly, which would look something like this.</p>
+<pre><code class="lang-tsx"><span class="hljs-keyword">import</span> { DatePicker <span class="hljs-keyword">as</span> LibraryDatePicker } <span class="hljs-keyword">from</span> <span class="hljs-string">'LibraryX'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DatePicker</span> /&gt;</span></span>
+</code></pre>
+<p>You could instead create a wrapper of the third-party control in your component library, and have your company&rsquo;s apps use that wrapper instead. Here&rsquo;s an example of what that wrapper might look like.</p>
+<pre><code class="lang-tsx"><span class="hljs-keyword">import</span> { DatePicker <span class="hljs-keyword">as</span> LibraryXDatePicker } <span class="hljs-keyword">from</span> <span class="hljs-string">'LibraryX'</span>;
+
+<span class="hljs-keyword">const</span> DatePicker = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">LibraryXDatePicker</span> {<span class="hljs-attr">...props</span>} /&gt;</span>
+  );
+}
+
+export default DatePicker;</span>
+</code></pre>
+<p>In addition to making it easier to switch libraries in the future, this approach also gives you a consolidated place to control all DatePicker controls throughout your organization. For example, if your design team suddenly decides all your company&rsquo;s datepickers should use a different date format, you now have a single place where you can make that change and affect all of your organization&rsquo;s datepicker controls.</p>
+<h3 id="recommendation-3-limit-the-number-of-third-party-libraries-you-use-">Recommendation #3: Limit the number of third-party libraries you use.</h3>
+<p>Although there are many advantages of using third-party libraries, one downside is that it&rsquo;s often difficult to style third-party components to match your company&rsquo;s design guidelines.</p>
+<p>This problem gets harder with each new library you introduce, as each library has its own author, and therefore also its own approach to determining what a component&rsquo;s markup structure, CSS class names, and so on that a component uses.</p>
+<p>Because of that, when possible, I encourage developers to lean towards libraries that offer multiple components that use the same design (for example Material-UI, Ant Design, KendoReact), over trying to bring in several small components that you have to manually figure out how to make work together.</p>
+<p>There are exceptions to this rule as well. If you find a bespoke component on npm that solves your problem perfectly, and you can&rsquo;t find any alternatives in bigger libraries&mdash;then absolutely use it. But in general it makes sense to limit the number of dependencies you use when possible.</p>
+<h3 id="recommendation-4-look-for-libraries-that-have-accessibility-built-in">Recommendation #4: Look for libraries that have accessibility built in</h3>
+<p>Building a corporate component library gives you a single place to implement UI accessibility for your controls. That is, if you build accessible components in your library, all of your corporate apps that use your library get those accessibility benefits &ldquo;for free&rdquo;&mdash;which is awesome!</p>
+<p>That does mean it&rsquo;s important to get accessibility right in your components though. And therefore, it&rsquo;s also worth making sure that any library you use adheres to accessibility best practices.</p>
+<p>With these recommendations for working with UI component libraries in mind, let&rsquo;s now look at how to put this guidance into practice, and build a component for your library that uses a third-party dependency.</p>
+<h2 id="how-to-build-components-that-use-third-party-libraries">How to build components that use third-party libraries</h2>
+<p>If you&rsquo;ve followed along through <a href="https://www.telerik.com/blogs/ultimate-guide-to-building-ui-component-library-part-2-environment">part 2 of this article series</a>, you should have a small component library set up that includes a Button and Input component.</p>
+<p>Button and inputs are relatively easy, so let&rsquo;s now look at how to build a DatePicker, which is a far more complex component that most companies won&rsquo;t want to build themselves.</p>
+<p>There are lots of React datepickers out there, but for this article we&rsquo;ll use the <a href="https://www.telerik.com/kendo-react-ui/components/dateinputs/datepicker/">KendoReact DatePicker</a>, both because KendoReact provides a <a href="https://www.telerik.com/kendo-react-ui/components/">wide variety of components</a>, and because <a href="https://www.telerik.com/kendo-react-ui/components/accessibility/">KendoReact adheres to numerous accessibility standards</a>. That being said, the advice in this section applies for other third-party components you might want to build on top of.</p>
+<blockquote>
+<p><strong>NOTE</strong>: KendoReact is a <a href="https://www.telerik.com/kendo-react-ui/pricing/">paid library</a> that requires a license to use in production. You can <a href="https://www.telerik.com/download-login-v2-kendo-react-ui">start a free 30-day trial</a> if you want to complete this article&rsquo;s steps without licensing warnings.</p>
+</blockquote>
+<p>To start, remember that your component library current has a structure that looks like this.</p>
+<pre><code>.
+├── demo
+│   └── ...
+└── src
+    ├── Button<span class="hljs-selector-class">.js</span>
+    ├── Input<span class="hljs-selector-class">.js</span>
+    ├── theme<span class="hljs-selector-class">.css</span>
+    └── ...
+</code></pre>
+<p>To start, go ahead and create a new <code>DatePicker.js</code> file in your <code>src</code> directory.</p>
+<pre><code>.
+├── demo
+│   └── ...
+└── src
+    ├── Button<span class="hljs-selector-class">.js</span>
+    ├── DatePicker<span class="hljs-selector-class">.js</span> &lt;-- create this
+    ├── Input<span class="hljs-selector-class">.js</span>
+    ├── theme<span class="hljs-selector-class">.css</span>
+    └── ...
+</code></pre>
+<p>Next, go ahead and paste in the following code, which creates a new DatePicker component that wraps the KendoReact DatePicker control.</p>
+<pre><code class="lang-tsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { DatePicker <span class="hljs-keyword">as</span> KendoDatePicker } <span class="hljs-keyword">from</span> <span class="hljs-string">'@progress/kendo-react-dateinputs'</span>;
+
+<span class="hljs-keyword">const</span> DatePicker = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">KendoDatePicker</span> {<span class="hljs-attr">...props</span>} /&gt;</span>
+  )
+}
+
+export default DatePicker;</span>
+</code></pre>
+<p>When you save this file you might gets errors in your editor, as you&rsquo;re referencing a <code>@progress/kendo-react-dateinputs</code> package that doesn&rsquo;t exist yet. To fix that, head to your terminal and first <code>cd</code> into your <code>src</code> directory (if you haven&rsquo;t already).</p>
+<pre><code><span class="hljs-built_in">cd</span> src
+</code></pre>
+<p>Next, run the following command to install <code>@progress/kendo-react-dateinputs</code> as well as its dependencies.</p>
+<pre><code><span class="hljs-built_in">npm</span> install @progress/kendo-react-dateinputs @progress/kendo-licensing @progress/kendo-react-intl
+</code></pre>
+<p>With that dependency installed, you&rsquo;re good to run your build to compile your new DatePicker component. To do so, make sure you&rsquo;re still in your <code>src</code> directory, and run the following command.</p>
+<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> build</span>
+</code></pre>
+<p>This command will compile your new component, and place the outputted file in your <code>dist</code> directory.</p>
+<p>To use this component in your demo, open your <code>demo/src/App.js</code> file, and replace its contents with the code below.</p>
+<pre><code class="lang-tsx"><span class="hljs-keyword">import</span> DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'acme-components/DatePicker'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'acme-components/theme.css'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ACME&rsquo;s Components<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">DatePicker</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span>
+  );
+}
+
+export default App;</span>
+</code></pre>
+<p>Next, return to your terminal or command prompt, and change to your project&rsquo;s <code>demo</code> directory.</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">cd</span></span> ../demo
+</code></pre>
+<p>After that, install the same KendoReact DatePicker dependencies.</p>
+<pre><code><span class="hljs-built_in">npm</span> install @progress/kendo-react-dateinputs @progress/kendo-licensing @progress/kendo-react-intl
+</code></pre>
+<p>And finally, while still in your <code>demo</code> directory, use the following command to run your demo app.</p>
+<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> start</span>
+</code></pre>
+<blockquote>
+<p><strong>NOTE</strong>: You might get warnings about using KendoReact without a license at this step. If they annoy you, you can remove them by <a href="https://www.telerik.com/kendo-react-ui/my-license/">setting up your KendoReact license key</a>.</p>
+</blockquote>
+<p>When you run this command you&rsquo;ll see your new DatePicker in the browser, which shows up as an input, but doesn&rsquo;t look quite like a datepicker yet.<img sfref="[images|OpenAccessDataProvider]e5bbda64-80e0-4fc6-a833-12753f80cded" src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/initial-datepicker.png?sfvrsn=3ee0885d_0" data-displaymode="Original" alt="Initial DatePicker component" title="Initial DatePicker component"></p>
+<p><img src="initial-datepicker.png" alt=""></p>
+<p>If you use your browser&rsquo;s developer tools you&rsquo;ll see that KendoReact is in fact working, as a number of class names are now applied to your input, but there&rsquo;s no CSS being applied to your markup.<br>
+<img sfref="[images|OpenAccessDataProvider]5b17b904-dccb-4265-bcc2-9bd80dc0fce3" src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/datepicker-dev-tools.png?sfvrsn=491d9899_0" data-displaymode="Original" alt="Dev tools showing the datepicker" title="Dev tools showing the datepicker"></p>
+<p><img src="datepicker-dev-tools.png" alt=""></p>
+<p>To fix that, let&rsquo;s next look at how to implement CSS for this control.</p>
+<h2 id="how-to-implement-css-with-third-party-libraries">How to implement CSS with third-party libraries</h2>
+<p>Because of that, when using third-party libraries I recommend encapsulating third-party CSS within your library. The reason being&mdash;you want other applications to use your library with as few steps as possible. To see what I mean, let&rsquo;s go ahead and implement the CSS of KendoReact&rsquo;s DatePicker in your component library.</p>
+<p>To start, head back to your terminal or command prompt and navigate back to your <code>src</code> folder.</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">cd</span></span> ../src
+</code></pre>
+<p>Next, install KendoReact&rsquo;s default theme using the command below.</p>
+<pre><code><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">install</span> @<span class="hljs-keyword">progress</span>/<span class="hljs-keyword">kendo</span>-<span class="hljs-keyword">theme</span>-<span class="hljs-keyword">default</span>
+</code></pre>
+<blockquote>
+<p><strong>TIP</strong>: KendoReact also <a href="https://www.telerik.com/kendo-react-ui/components/styling/">offers both bootstrap and material themes</a> that you can experiment with later.</p>
+</blockquote>
+<p>With the theme installation out of the way, your next step is to import the theme&rsquo;s CSS in your library. Remember from the previous article in this series that you have a <code>src/theme.css</code> file, which currently looks like this.</p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.acme-button</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#444</span>;
+  <span class="hljs-attribute">background</span>: lightblue;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0.5em</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">text-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-built_in">rgba</span>(0, 0, 0, 0.2);
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.1em</span>;
+}
+<span class="hljs-selector-class">.acme-input</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0.5em</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#444</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.1em</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+}
+</code></pre>
+<p>This file is the logical place to import KendoReact&rsquo;s CSS, but how exactly do you do that? My first instinct when trying this was to use the following syntax.</p>
+<pre><code class="lang-css">@<span class="hljs-keyword">import</span> <span class="hljs-string">'@progress/kendo-theme-default/dist/all.css'</span>;
+
+.acme-button { ... }
+.acme-input { ... }
+</code></pre>
+<p>But if you try this approach your demo app won&rsquo;t recognize this syntax, and your app will crash with the following error.</p>
+<pre><code><span class="hljs-attribute">Error</span>: Can<span class="hljs-string">'t resolve '</span><span class="hljs-variable">@progress</span>/kendo-theme-default/dist/all.css<span class="hljs-string">' in '</span>/Users/tj/Desktop/acme-components/dist'
+</code></pre>
+<p>The problem is CSS on its own doesn&rsquo;t know how to import files from <code>node_modules</code>. To do that you either need to introduce something like webpack, which <a href="https://stackoverflow.com/questions/49518277/import-css-from-node-modules-in-webpack">allows you to import files from <code>node_modules</code> with a <code>~</code> character</a>, or you need to use a CSS preprocessor like SASS.</p>
+<p>For this article we&rsquo;ll use SASS, as I prefer to avoid more complicated tooling like webpack unless I absolutely need it, and also because KendoReact itself uses SASS, so by using SASS for our library we can optimize the CSS that we import.</p>
+<p>To install SASS first you need to install it in your <code>src</code> folder (as well as a small <code>copyfiles</code> utility you&rsquo;ll use to move some files around).</p>
+<pre><code>npm install sass copyfiles --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span>
+</code></pre>
+<p>Next, you need to alter your scripts in your <code>package.json</code> file so that they now run the SASS compiler. To do so, replace the existing <code>"scripts"</code> block in your <code>src/package.json</code> file with the code below.</p>
+<pre><code><span class="hljs-string">"scripts"</span>: {
+  <span class="hljs-string">"build"</span>: <span class="hljs-string">"npm run build-js &amp;&amp; npm run build-css"</span>,
+  <span class="hljs-string">"build-js"</span>: <span class="hljs-string">"babel *.js --out-dir ../dist --copy-files &amp;&amp; copyfiles *.json ../dist"</span>,
+  <span class="hljs-string">"build-css"</span>: <span class="hljs-string">"sass theme.scss theme.css &amp;&amp; copyfiles *.css ../dist"</span>,
+  <span class="hljs-string">"watch"</span>: <span class="hljs-string">"npm-watch"</span>
+},
+</code></pre>
+<p>This change adds a new <code>"build-css"</code> script that tells SASS to compile a <code>theme.scss</code> file into a <code>theme.css</code> file. This change also updates the <code>"build"</code> script, so that it triggers both a JavaScript and CSS build.</p>
+<p>With that update in place, next, update your <code>src/package.json</code> file&rsquo;s <code>"watch"</code> configuration with the code below.</p>
+<pre><code><span class="hljs-string">"watch"</span>: {
+  <span class="hljs-string">"build-js"</span>: {
+    <span class="hljs-string">"patterns"</span>: [
+      <span class="hljs-string">"*.js"</span>
+    ],
+    <span class="hljs-string">"extensions"</span>: <span class="hljs-string">".js"</span>
+  },
+  <span class="hljs-string">"build-css"</span>: {
+    <span class="hljs-string">"patterns"</span>: [
+      <span class="hljs-string">"*.scss"</span>
+    ],
+    <span class="hljs-string">"extensions"</span>: <span class="hljs-string">".scss"</span>
+  }
+},
+</code></pre>
+<p>This change tells the watcher we set up in the previous article to additionally watch for changes to <code>.scss</code> files, and when it detects a change, to trigger the <code>"build-css"</code> script.</p>
+<p>With the configuration complete, next find your <code>src/theme.css</code> file and rename it to <code>theme.scss</code>, as it will now contain SASS code. And then finally, open your <code>theme.scss</code> file, and place the following import right on top.</p>
+<pre><code class="lang-css">@<span class="hljs-keyword">import</span> <span class="hljs-string">"node_modules/@progress/kendo-theme-default/scss/datetime/_index.scss"</span>;
+</code></pre>
+<p>This line of code imports CSS from KendoReact&rsquo;s default theme. And because KendoReact uses SASS itself, this code is also smart enough to import just the <code>datetime</code> styles, so that you don&rsquo;t have to ship the CSS for all of KendoReact&rsquo;s components to your users.</p>
+<p>And with that your SASS changes are complete. To try this all out first run a new build of your code by running the following command from your <code>src</code> directory.</p>
+<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> build</span>
+</code></pre>
+<p>Next, return to your <code>demo</code> directory.</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">cd</span></span> ../demo
+</code></pre>
+<p>And then start your app up to try out your new styles.</p>
+<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> start</span>
+</code></pre>
+<p>If all went well, you should see your DatePicker component styled correctly.</p>
+<img sfref="[images|OpenAccessDataProvider]813cc42b-5e90-49ed-9c0d-ed7a0a2762b1" src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/styled-datepicker.png?sfvrsn=b7423818_0" data-displaymode="Original" alt="A correctly styled datepicker" title="A correctly styled datepicker"><img src="styled-datepicker.png" alt="">
+<p>What&rsquo;s cool here is your demo app didn&rsquo;t have to worry about CSS at all&mdash;all it needed to do is import <code>acme-components/theme.css</code>, and the rest happened automatically.</p>
+<p>And really this entire component setup is pretty powerful. If you&rsquo;ve followed along to this point in the article, you now have a workflow that allows you to write components that can either be hand written, or wrap third-party libraries&mdash;and you can make that decision on a component-by-component basis. Pretty cool!</p>
+<p>With this setup in place, let&rsquo;s next discuss one of the other trickier aspects of any development environment&mdash;unit testing.</p>
+<h2 id="how-to-unit-test-your-components">How to unit test your components</h2>
+<p>Unit testing is important in any environment, but it&rsquo;s especially important in component libraries, as the controls you build are intended to be used throughout your entire organization&mdash;so you want to make sure they work correctly.</p>
+<p>The good news is the setup we&rsquo;ve built so far is a pretty standard JavaScript environment, so you can test your components using pretty much any unit-testing tool you have in mind.</p>
+<p>For this article we&rsquo;ll use both <a href="https://jestjs.io/">Jest</a> and <a href="https://testing-library.com/">Testing Library</a>, as they&rsquo;re a pretty standard testing setup for React applications, and Testing Library is especially well suited to testing UI components.</p>
+<p>To try out unit testing in our library, first open your <code>src/DatePicker.js</code> file and replace its contents with the following code.</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { DatePicker <span class="hljs-keyword">as</span> KendoDatePicker } <span class="hljs-keyword">from</span> <span class="hljs-string">'@progress/kendo-react-dateinputs'</span>;
+
+<span class="hljs-keyword">const</span> DatePicker = <span class="hljs-function">(<span class="hljs-params">{ className, ...otherProps }</span>) =&gt;</span> {
+  className = className ? (<span class="hljs-string">'acme-datepicker '</span> + className) : <span class="hljs-string">'acme-datepicker'</span>;
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">KendoDatePicker</span>
+      {<span class="hljs-attr">...otherProps</span>}
+      <span class="hljs-attr">className</span>=<span class="hljs-string">{className}</span> /&gt;</span>
+  )
+}
+
+export default DatePicker;</span>
+</code></pre>
+<p>This change adds a <code>className</code> prop that allows users to pass in custom CSS class names, as well as a bit of logic that ensures that an <code>acme-datepicker</code> class name ends up on the DatePicker regardless of whether a custom class name gets passed or not.</p>
+<p>This logic is the exact sort of thing that&rsquo;s great to verify with a unit test.</p>
+<p>To do that, let&rsquo;s start by installing both Jest and Testing Library. You can do that by heading back to your terminal or command prompt, and running the following commands.</p>
+<pre><code><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">install</span> <span class="hljs-selector-tag">jest</span> @<span class="hljs-keyword">testing</span>-<span class="hljs-keyword">library</span>/<span class="hljs-keyword">react</span> --save-dev
+</code></pre>
+<p>Next, open your <code>src/package.json</code> file and add a new <code>"test": "jest"</code> command to your <code>"scripts"</code> configuration. The full <code>"scripts"</code> block should now look like this.</p>
+<pre><code><span class="hljs-string">"scripts"</span>: {
+  <span class="hljs-string">"build"</span>: <span class="hljs-string">"npm run build-js &amp;&amp; npm run build-css"</span>,
+  <span class="hljs-string">"build-js"</span>: <span class="hljs-string">"babel *.js --out-dir ../dist --copy-files &amp;&amp; copyfiles *.json ../dist"</span>,
+  <span class="hljs-string">"build-css"</span>: <span class="hljs-string">"sass theme.scss theme.css &amp;&amp; copyfiles *.css ../dist"</span>,
+  <span class="hljs-string">"test"</span>: <span class="hljs-string">"jest"</span>,
+  <span class="hljs-string">"watch"</span>: <span class="hljs-string">"npm-watch"</span>
+},
+</code></pre>
+<p>With this configuration you can now run <code>npm run test</code> to trigger Jest, which finds and runs your tests for you.</p>
+<p>To get our tests started, create a new <code>src/DatePicker.test.js</code> file with the following contents, which are currently simple so you can see how Jest works.</p>
+<pre><code class="lang-jsx">test('Ensure math works', () =&gt; {
+  expect(<span class="hljs-number">1</span> + <span class="hljs-number">2</span>).toEqual(<span class="hljs-number">3</span>)<span class="hljs-comment">;</span>
+})<span class="hljs-comment">;</span>
+</code></pre>
+<p>Next, return to your terminal and run your new <code>npm run test</code> command, which tells Jest to find and run all of your unit tests. In this case, Jest should find your new <code>DatePicker.test.js</code> file and show the following successful result.<br>
+<img sfref="[images|OpenAccessDataProvider]0c710294-8423-4cd1-8b84-27ffacf12360" src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/simple-jest-test.png?sfvrsn=b2b3255c_0" data-displaymode="Original" alt="Simple Jest test passing" title="Simple Jest test passing"></p>
+<p><img src="simple-jest-test.png" alt=""></p>
+<blockquote>
+<p><strong>NOTE</strong>: You can <a href="https://jestjs.io/docs/tutorial-react">learn more about how Jest works on its documentation</a>.</p>
+</blockquote>
+<p>Now that you have Jest in place to run your tests, let&rsquo;s look at how you can use Testing Library to test your components themselves. Return to your <code>src/DatePicker.test.js</code> file, and replace its contents with the following code.</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { render, screen } <span class="hljs-keyword">from</span> <span class="hljs-string">'@testing-library/react'</span>;
+<span class="hljs-keyword">import</span> DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'./DatePicker'</span>;
+
+describe(<span class="hljs-string">'DatePicker tests'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  test(<span class="hljs-string">'Ensure acme class name gets added'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    render(&lt;DatePicker /&gt;);
+    expect(screen.getByRole(<span class="hljs-string">'group'</span>).classList.contains(<span class="hljs-string">'acme-datepicker'</span>));
+  });
+
+  test(<span class="hljs-string">'Ensure additional class names get added'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    render(&lt;DatePicker className=<span class="hljs-string">"foo"</span> /&gt;);
+    const picker = screen.getByRole(<span class="hljs-string">'group'</span>);
+    expect(picker.classList.contains(<span class="hljs-string">'acme-datepicker'</span>));
+    expect(picker.classList.contains(<span class="hljs-string">'foo'</span>));
+  });
+});
+</code></pre>
+<p>Whereas Jest provides the ability to run your tests, as well as methods like <code>describe()</code> and <code>test()</code> to organize them, Testing Library provides a number of methods that makes testing your components themselves easy.</p>
+<p>For example, Testing Library&rsquo;s <code>render()</code> method allows you to &ldquo;render&rdquo; a component, and then find individual pieces of your component with methods like <code>screen.getByRole()</code> and perform checks. The code above uses this approach to render a DatePicker with and without a <code>className</code> prop, and ensures the <code>"acme-datepicker"</code> class name is in place under both scenarios.</p>
+<blockquote>
+<p><strong>NOTE</strong>: A full tutorial on Testing Library is out of scope for this article, but if you want to learn more about Testing Library, I highly recommend reading through this <a href="https://www.robinwieruch.de/react-testing-library">Testing Library introduction from Robin Wieruch</a>.</p>
+</blockquote>
+<p>To run these new tests return to your terminal or command prompt, and again run <code>npm run test</code>. Jest should find your new tests automatically and they should both pass.<br>
+<br>
+<img sfref="[images|OpenAccessDataProvider]f5872767-14d9-4911-9793-0121f1ad3b8d" src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/updated-tests-pass.png?sfvrsn=8aba5c89_0" data-displaymode="Original" alt="Jest tests should now pass" title="Jest tests should now pass"></p>
+<p><img src="updated-tests-pass.png" alt=""></p>
+<blockquote>
+<p><strong>NOTE</strong>:</p>
+<ul>
+    <li>If you get a <code>Cannot find module 'react'</code> error you need to run <code>npm install react react-dom</code> to install React as a dependency of your library.</li>
+    <li>If you get KendoReact licensing warnings and want to remove them, you&rsquo;ll need to <a href="https://www.telerik.com/kendo-react-ui/my-license/">add the KendoReact license key</a> to your <code>src</code> folder.</li>
+</ul>
+</blockquote>
+<p>At this point you have a complete testing setup in place for your components. When you write new components and want to test them, all you need to do is create a new <code>ComponentName.test.js</code> file. Pretty cool!</p>
+<p>And at this point you now have a development workflow for building, demoing, and unit testing components for your company or organization. That just leaves us with one final topic&mdash;figuring out how to document your components so others know how to use them.</p>
+<h2 id="how-to-document-your-components">How to document your components</h2>
+<p>Documentation is important for any set of reusable components, as developers need to figure out how to install and use your components, or they&rsquo;ll never get started building anything.</p>
+<p>Exactly how you document your components sometimes depends on your company&rsquo;s policies and infrastructure, but in this section I&rsquo;ll walk you through two documentation implementations that have worked for me for you to consider.</p>
+<h3 id="documentation-option-1-turn-your-demo-app-into-documentation">Documentation option #1: Turn your demo app into documentation</h3>
+<p>The development environment we&rsquo;ve built throughout this article series includes a full demo app for testing your components in a real app. The great thing about that demo app is that it&rsquo;s just a web app, so there&rsquo;s nothing stopping you from turning your demo app into your components&rsquo; documentation, and then deploying that demo app somewhere at your organization.</p>
+<p>To give you a quick example of what&rsquo;s possible, open your <code>demo/src/App.js</code> file and replace its contents with the following code.</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'acme-components/DatePicker'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">'acme-components/theme.css'</span>;
+
+<span class="hljs-keyword">function</span> App() {
+  <span class="hljs-keyword">return</span> (
+    &lt;&gt;
+
+&lt;h1&gt;DatePicker&lt;/h1&gt;
+
+&lt;h2&gt;Default usage&lt;/h2&gt;
+
+&lt;pre&gt;
+{`
+<span class="hljs-keyword">import</span> DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'acme-components/DatePicker'</span>;
+&lt;DatePicker /&gt;
+`}
+&lt;/pre&gt;
+
+&lt;DatePicker /&gt;
+
+&lt;h2&gt;Setting a <span class="hljs-keyword">default</span> value&lt;/h2&gt;
+
+&lt;pre&gt;
+{`
+<span class="hljs-keyword">import</span> DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'acme-components/DatePicker'</span>;
+&lt;DatePicker defaultValue={<span class="hljs-keyword">new</span> Date(<span class="hljs-number">2022</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)} /&gt;
+`}
+&lt;/pre&gt;
+
+&lt;DatePicker defaultValue={<span class="hljs-keyword">new</span> Date(<span class="hljs-number">2022</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)} /&gt;
+
+&lt;p&gt;The ACME DatePicker <span class="hljs-keyword">is</span> built <span class="hljs-literal">on</span> top <span class="hljs-keyword">of</span> the KendoReact DatePicker, <span class="hljs-keyword">and</span> you can &lt;a href=<span class="hljs-string">"https://www.telerik.com/kendo-react-ui/components/dateinputs/datepicker/"</span>&gt;refer <span class="hljs-keyword">to</span> KendoReact&rsquo;s documentation&lt;/a&gt; <span class="hljs-keyword">for</span> additional properties <span class="hljs-literal">that</span> you can <span class="hljs-keyword">for</span> customization.&lt;/p&gt;
+
+    &lt;/&gt;
+  );
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<p>Next, return to your terminal or command prompt and navigate to your <code>demo</code> directory (if you aren&rsquo;t there already).</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">cd</span></span> ../demo
+</code></pre>
+<p>And then use <code>npm run start</code> to run your demo app with these changes.</p>
+<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> start</span>
+</code></pre>
+<p>You should see a UI that looks something like this.<br>
+<img sfref="[images|OpenAccessDataProvider]7adac487-dd8c-4a9a-89db-4059f305582e" src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/docs-example.png?sfvrsn=92930fa9_0" data-displaymode="Original" alt="Example of a documentation site" title="Example of a documentation site"></p>
+<p><img src="docs-example.png" alt=""></p>
+<p>This is some basic documentation that shows other developers how your DatePicker component works. You could additionally show installation instructions, best practices, design guidelines&mdash;or really, anything you&rsquo;d like.</p>
+<p>And this is just a really basic implementation to give you a sense of what&rsquo;s possible. Most documentation sites like this create one page per component, as well as some means to navigate between components (tabs, a drawer, etc).</p>
+<p>Regardless of how you choose to write the documentation, there&rsquo;s one big benefit of treating your demo app as documentation: you&rsquo;re forced to update documentation as you update the components themselves&mdash;which in my opinion is better than putting that same documentation on something like a wiki that you&rsquo;ll constantly forget to update.</p>
+<p>Let&rsquo;s look at one additional option you have for documentation that builds on these same principles.</p>
+<h3 id="documentation-option-2-use-storybook">Documentation option #2: Use Storybook</h3>
+<p><a href="https://storybook.js.org/">Storybook</a> is an open-source tool that provides a number of tools for building component documentation. The Storybook approach is similar to what we discussed in the previous section&mdash;the difference being: Storybook makes building the documentation site itself super easy.</p>
+<p>If you want to try it out, return to your terminal or command prompt, make sure you&rsquo;re still in your <code>demo</code> directory, and run the following command to install Storybook.</p>
+<pre><code><span class="hljs-symbol">npx</span> <span class="hljs-built_in">sb</span> init
+</code></pre>
+<p>This command takes a while to run, as Storybook is building a new <code>stories</code> folder in your <code>demo/src</code> directory, complete with sample documentation to help teach you how Storybook works.</p>
+<p>To try it, you can next run <code>npm run storybook</code>, and then visit <code>http://localhost:6006</code> in your web browser. You should see something like this.<br>
+<img sfref="[images|OpenAccessDataProvider]6329f793-757a-4376-bf82-cbfa7022afad" src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/storybook.png?sfvrsn=8d19a991_0" data-displaymode="Original" alt="Default Storybook look" title="Default Storybook look"></p>
+<p><img src="storybook.png" alt=""></p>
+<p>To get a sense of how Storybook works, create a new <code>stories/DatePicker.js</code> file and paste in the following code.</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'acme-components/DatePicker'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'acme-components/theme.css'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">title</span>: <span class="hljs-string">'Example/DatePicker'</span>,
+  <span class="hljs-attr">component</span>: DatePicker,
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Default = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &lt;DatePicker /&gt;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Disabled = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &lt;DatePicker disabled /&gt;
+</code></pre>
+<p>This file creates two &ldquo;stories&rdquo;, or ways of using your DatePicker component&mdash;one for the default usage of the DatePicker, and one for a DatePicker when it&rsquo;s disabled.</p>
+<p>After you save this change you can return to <code>http://localhost:6006</code> to see these new stories in a live app.<br>
+<br>
+<img sfref="[images|OpenAccessDataProvider]c2838ad8-469f-490e-b15b-e2d4114efb2e" src="https://d585tldpucybw.cloudfront.net/sfimages/default-source/default-album/storybook-in-action.gif?sfvrsn=7d819bdb_0" data-displaymode="Original" alt="Storybook in action" title="Storybook in action"></p>
+<p><img src="storybook-in-action.gif" alt=""></p>
+<p>The idea behind Storybook is you have a place to test all or your stories, or ways of using your components, and you could then distribute this Storybook to other developers so they can also learn how your components work.</p>
+<p>Plus, I&rsquo;m just showing the basics here. Storybook has <a href="https://storybook.js.org/docs/react/writing-docs/introduction">an entire section of its site devoted to building documentation sites</a>, my favorite part being <a href="https://storybook.js.org/docs/react/writing-docs/mdx">Storybook&rsquo;s integration with MDX</a>, which is <a href="https://mdxjs.com/">an interesting technology that lets you write JSX in Markdown documents</a>.</p>
+<p>Overall Storybook is definitely a project that&rsquo;s worth checking out as an option for documenting components for your company.</p>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>Phew, it&rsquo;s been quite a ride. If you&rsquo;ve finished this whole article series you&rsquo;ve learned how to plan out a component library, how to set up a full development environment, and&mdash;in this article&mdash;how to build, test, and document your components.</p>
+<p>Even though I&rsquo;ve tried to cover most common topics and questions, building component libraries is challenging and complex. With that in mind, if any questions came up while reading through this series feel free to reach out in the comments, or to me personally on Twitter (<a href="https://twitter.com/tjvantoll">@tjvantoll</a>). And best of luck building your library 😃</p>
+<blockquote>
+<p><strong>NOTE</strong>: The <a href="https://github.com/tjvantoll/acme-components">full source code for this article series is available on GitHub</a>&mdash;feel free to use that as a reference, or as a starting point for your own component library.</p>
+</blockquote>
