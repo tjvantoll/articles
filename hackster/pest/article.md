@@ -32,7 +32,7 @@ In this article I’ll run through these steps in detail, and teach you how you 
 
 > **NOTE**: The full source code for this project is [available on GitHub](https://github.com/tjvantoll/pest-detector).
 
-> **FUN MOLE FACT**: The star-nosed mole—the species that happens to be in my yard—is [considered the world’s fastest eater](https://www.nationalgeographic.com/animals/article/star-nosed-mole-touch-pain-senses), and can find and eat an insect or worm in a quarter of a second. They also look weird—like, [really weird](https://static.wikia.nocookie.net/animals-are-cool/images/0/01/Star-nosed-mole-tentacles.jpg/revision/latest?cb=20180322022203).
+> **FUN MOLE FACT**: The star-nosed mole—the species that happens to be in my yard—is [considered the world’s fastest eater](https://www.nationalgeographic.com/animals/article/star-nosed-mole-touch-pain-senses), and can find and eat an insect or worm in a quarter of a second. They also look weird—like, [really weird](https://static.wikia.nocookie.net/animals-are-cool/images/0/01/Star-nosed-mole-tentacles.jpg/revision/latest).
 
 <h2 id="step-1">Step #1: Connect everything</h2>
 
