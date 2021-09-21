@@ -21,20 +21,11 @@ That’s why I used a Raspberry Pi, a Pi camera, and a bit of machine learning t
 
 In this article I’ll run through these steps in detail, and teach you how you can replicate some (or all) of this setup if you so choose. Let’s get started!
 
-* [Step #1: Connect everything](#step-1)
-* [Step #2: Detect motion](#step-2)
-* [Step #3: Take a picture](#step-3)
-* [Step #4: Analyze the picture with machine learning](#step-4)
-* [Step #5: Send notifications](#step-5)
-* [Step #6: Place outdoors](#step-6)
-* [Step #7: Running it](#step-7)
-* [Potential improvements](#potential-improvements)
-
 > **NOTE**: The full source code for this project is [available on GitHub](https://github.com/tjvantoll/pest-detector).
 
 > **FUN MOLE FACT**: The star-nosed mole—the species that happens to be in my yard—is [considered the world’s fastest eater](https://www.nationalgeographic.com/animals/article/star-nosed-mole-touch-pain-senses), and can find and eat an insect or worm in a quarter of a second. They also look weird—like, [really weird](mole.webp).
 
-<h2 id="step-1">Step #1: Connect everything</h2>
+## Step #1: Connect everything
 
 Let’s start by talking about how to hook everything up. For this project I’m using a Raspberry Pi 4, a PIR motion sensor (for detecting motion), a Raspberry Pi Camera (for taking pictures), and a [Blues Wireless Raspberry Pi Starter Kit](https://shop.blues.io/products/raspberry-pi-starter-kit?utm_source=hackster&utm_medium=web&utm_campaign=featured-project) (for wireless cellular connectivity). Here’s what things look like when they’re all connected.
 
@@ -56,7 +47,7 @@ Once you have everything hooked up, you’re ready to start coding!
 
 > **FUN MOLE FACT #2**: You didn’t think there’d be two of these, did you? Remember our friend the star-nosed mole? They’re [one of two animals in the world known to smell underwater](https://www.nationalgeographic.com/animals/article/star-nosed-mole-touch-pain-senses), and they do so by blowing air bubbles and sucking them back into their nose. Creepy!
 
-<h2 id="step-2">Step #2: Detect motion</h2>
+## Step #2: Detect motion
 
 Detecting motion was the first problem I wanted to tackle, because I use it as the trigger for everything that happens next. Plus, the machine-learning algorithm I use (and which we’ll discuss in step 4) is fairly processor intensive, so I want to make sure we’re only running that process when an animal might actually be in the picture.
 
@@ -88,7 +79,7 @@ If you’re setting this up yourself, go ahead and save this code in a new Pytho
 
 Now that we have the code to sense motion in place, let’s move on to the next logical step, and look at how to use the Pi Camera.
 
-<h2 id="step-3">Step #3: Take a picture</h2>
+## Step #3: Take a picture
 
 In order to analyze an image with machine learning you need a picture. Luckily the Pi has a common camera that works great and is [very well documented](https://projects.raspberrypi.org/en/projects/getting-started-with-picamera).
 
@@ -179,7 +170,7 @@ Now that we have a photo to work with we next have to determine if that photo co
 
 > **FUN MOLE FACT #3**: [Moles can dig up to 18 feet in one hour](https://easyscienceforkids.com/all-about-moles/). And they appear to be attempting that in my yard.
 
-<h2 id="step-4">Step #4: Analyze the picture with machine learning</h2>
+## Step #4: Analyze the picture with machine learning
 
 One of the most common applications of machine learning is image classification—or the ability to take an image and figure out what’s in it.
 
@@ -282,7 +273,7 @@ And with this, we now have an algorithm that can detect motion, take pictures, a
 
 But there’s one final coding task I want to cover, and that’s notifications, as I wanted to know when my camera spotted an animal so I can run out and try to see it too.
 
-<h2 id="step-5">Step #5: Send notifications</h2>
+## Step #5: Send notifications
 
 When this project started I knew that I wanted to send notifications when I detected an animal, but I didn’t know exactly how to do it. Most of the places I wanted to monitor weren’t right next to my house, and therefore had shaky access to my home WiFi (at best).
 
@@ -359,7 +350,7 @@ And with that, we’re done, at least with code (which as a reminder is [availab
 
 At this point we have a setup that can detect motion, take a picture when it does, analyze that photo, and send a text message when a ML algorithm detects an animal in that photo. Now that the code is ready, let’s put this thing into action.
 
-<h2 id="step-6">Step #6: Place outdoors</h2>
+## Step #6: Place outdoors
 
 A Raspberry Pi is not water proof, and neither is its camera, so I wanted to build something that provided a bit of protection for my hardware, even if it was a bit clunky.
 
@@ -377,7 +368,7 @@ And when I got to this point, it was time to start detecting animals!
 
 > **FUN MOLE FACT #4**: [Moles paralyze worms and insects with poison in their saliva](https://easyscienceforkids.com/all-about-moles/). Then they store the insects in an underground room to eat later. Cute!
 
-<h2 id="step-7">Step #7: Running it</h2>
+## Step #7: Running it
 
 The very last step to this project is to start up the code itself. During testing I had been SSHing into my Pi and manually running the `main.py` command.
 
@@ -405,7 +396,7 @@ And a few hours later the same critter (or their friend) came back for more.
 
 And after having this project deployed for several days, so far all I’ve found is a bunch of squirrels, which is fun, but I was hoping to catch something more exotic in action (if I do I’ll post pictures in the comments). And before I leave, I want to discuss some reasons why I think I’m not getting as many animal images as I’d like, and give you some tips if you’re trying to build something like this yourself.
 
-<h2 id="potential-improvements">Potential improvements</h2>
+## Potential improvements
 
 **A better motion sensor**
 
