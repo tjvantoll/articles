@@ -7,7 +7,7 @@ My yard is under attack. Woodpeckers are drilling holes in my deck, something is
 
 I’ve watched a lot of war movies, so I know the first step to winning any war is to understand your enemy. And as a software developer, I’m constantly looking for an excuse to overengineer solutions to my problems.
 
-That’s why I used a Raspberry Pi, a Pi camera, a bit of machine learning to try to catch my yard’s attackers in action. More specifically, here’s a high-level overview of what I did.
+That’s why I used a Raspberry Pi, a Pi camera, and a bit of machine learning to try to catch my yard’s attackers in action. More specifically, here’s a high-level overview of what I did.
 
 * I put a Raspberry Pi in my yard.
 * I connected a motion detector to the Pi.
@@ -32,11 +32,11 @@ In this article I’ll run through these steps in detail, and teach you how you 
 
 > **NOTE**: The full source code for this project is [available on GitHub](https://github.com/tjvantoll/pest-detector).
 
-> **FUN MOLE FACT**: The star-nosed mole—the species that happens to be in my yard—is [considered the world’s fastest eater](https://www.nationalgeographic.com/animals/article/star-nosed-mole-touch-pain-senses), and can find and eat an insect or worm in a quarter of a second. They also look weird—like, [really weird](https://static.wikia.nocookie.net/animals-are-cool/images/0/01/Star-nosed-mole-tentacles.jpg/revision/latest).
+> **FUN MOLE FACT**: The star-nosed mole—the species that happens to be in my yard—is [considered the world’s fastest eater](https://www.nationalgeographic.com/animals/article/star-nosed-mole-touch-pain-senses), and can find and eat an insect or worm in a quarter of a second. They also look weird—like, [really weird](mole.webp).
 
 <h2 id="step-1">Step #1: Connect everything</h2>
 
-Let’s start by talking about how to hook everything up. For this project I’m using a Raspberry Pi 4, a PIR motion sensor (for detecting motion), a Raspberry Pi Camera (for taking pictures), and a Blues Wireless Raspberry Pi Starter Kit (for wireless cellular connectivity). Here’s what things look like when they’re all connected.
+Let’s start by talking about how to hook everything up. For this project I’m using a Raspberry Pi 4, a PIR motion sensor (for detecting motion), a Raspberry Pi Camera (for taking pictures), and a [Blues Wireless Raspberry Pi Starter Kit](https://shop.blues.io/products/raspberry-pi-starter-kit?utm_source=hackster&utm_medium=web&utm_campaign=featured-project) (for wireless cellular connectivity). Here’s what things look like when they’re all connected.
 
 ![The initial setup of my project](initial-setup.jpg)
 
@@ -44,7 +44,7 @@ If you’re looking to set this up for yourself, you’ll want to start by conne
 
 ![](hw-camera.webp)
 
-Next, you’ll want to attach the Blues’ Notecarrier-Pi HAT on top of the Raspberry Pi by lining up the pass-through headers.
+Next, you’ll want to attach the Blues Wireless Notecarrier on top of the Raspberry Pi by lining up the pass-through headers.
 
 ![](hw-notecarrier-1.webp)
 
@@ -84,7 +84,7 @@ The idea here is to check the state of the motion sensor by checking the state o
 
 If you’re setting this up yourself, go ahead and save this code in a new Python file on your Pi, e.g. `pest.py`, and run it with `python3 pest.py`. If everything is working correctly, you should be able to wave your hand in front of the sensor and see `Motion detected` in your terminal output.
 
-> **NOTE**: The code you need to use might vary based on the sensor you’re using and the GPIO pin you connect to. [This article](https://learn.sparkfun.com/tutorials/raspberry-gpio/all) is a pretty reference to check which pin you’re using with the Python `GPIO` API.
+> **NOTE**: The code you need to use might vary based on the sensor you’re using and the GPIO pin you connect to. [This article](https://learn.sparkfun.com/tutorials/raspberry-gpio/all) is a pretty good reference to check which pin you’re using with the Python `GPIO` API.
 
 Now that we have the code to sense motion in place, let’s move on to the next logical step, and look at how to use the Pi Camera.
 
@@ -177,7 +177,7 @@ main()
 
 Now that we have a photo to work with we next have to determine if that photo contains an animal. Let’s look at how to do that.
 
-> **Fun mole fact #3**: [Moles can dig up to 18 feet in one hour](https://easyscienceforkids.com/all-about-moles/). And they appear to be attempting that in my yard.
+> **FUN MOLE FACT #3**: [Moles can dig up to 18 feet in one hour](https://easyscienceforkids.com/all-about-moles/). And they appear to be attempting that in my yard.
 
 <h2 id="step-4">Step #4: Analyze the picture with machine learning</h2>
 
@@ -286,15 +286,15 @@ But there’s one final coding task I want to cover, and that’s notifications,
 
 When this project started I knew that I wanted to send notifications when I detected an animal, but I didn’t know exactly how to do it. Most of the places I wanted to monitor weren’t right next to my house, and therefore had shaky access to my home WiFi (at best).
 
-I ended up using the Notecard from [Blues Wireless](https://blues.io/), as it allows you to easily send data over cellular, so that you’re not dependent on a WiFi network to send http requests. (Full disclosure: I now work at Blues, and it’s because we’re making awesome stuff like this 🙂 )
+I ended up using the Notecard from [Blues Wireless](https://blues.io/?utm_source=hackster&utm_medium=web&utm_campaign=featured-project), as it allows you to easily send data over cellular, so that you’re not dependent on a WiFi network to send http requests. (Full disclosure: I now work at Blues, and it’s because we’re making awesome stuff like this 🙂 )
 
 As a quick reminder from step #1, the Notecard and its Notecarrier are this bit of hardware that slots right on top of the Pi.
 
 ![](hw-notecarrier-1.webp)
 
-If you want to try the Notecard out, start by going through its [quickstart tutorial](https://dev.blues.io/get-started/quickstart/notecarrier-pi/), which will teach you the basics and help you set up a [Notehub](https://notehub.io) account, which is where the Notecard sends its data by default.
+If you want to try the Notecard out, start by going through its [quickstart tutorial](https://dev.blues.io/get-started/quickstart/notecarrier-pi/?utm_source=hackster&utm_medium=web&utm_campaign=featured-project), which will teach you the basics and help you set up a [Notehub](https://notehub.io) account, which is where the Notecard sends its data by default.
 
-Blues also has an [extremely comprehensive guide on routing Notehub data to Twilio](https://dev.blues.io/notehub/routing-guides/twilio-route/), which is what I ended up using for my project. If you want to follow along, start by going through the steps in [the Blues tutorial](https://dev.blues.io/notehub/routing-guides/twilio-route/), which will show you how to create a Twilio account and set everything up. Once that’s done you can use the following Python code to connect to the Notecard and send a Twilio-based notification.
+Blues also has an [extremely comprehensive guide on routing Notehub data to Twilio](https://dev.blues.io/notehub/routing-guides/twilio-route/?utm_source=hackster&utm_medium=web&utm_campaign=featured-project), which is what I ended up using for my project. If you want to follow along, start by going through the steps in [the Blues tutorial](https://dev.blues.io/notehub/routing-guides/twilio-route/?utm_source=hackster&utm_medium=web&utm_campaign=featured-project), which will show you how to create a Twilio account and set everything up. Once that’s done you can use the following Python code to connect to the Notecard and send a Twilio-based notification.
 
 ``` python
 import keys
@@ -375,7 +375,7 @@ I powered the Pi with its standard USB-C cable and a series of extension cords. 
 
 And when I got to this point, it was time to start detecting animals!
 
-> **Fun mole fact #4**: [Moles paralyze worms and insects with poison in their saliva](https://easyscienceforkids.com/all-about-moles/). Then they store the insects in an underground room to eat later. Cute!
+> **FUN MOLE FACT #4**: [Moles paralyze worms and insects with poison in their saliva](https://easyscienceforkids.com/all-about-moles/). Then they store the insects in an underground room to eat later. Cute!
 
 <h2 id="step-7">Step #7: Running it</h2>
 
