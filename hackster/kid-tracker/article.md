@@ -1,4 +1,4 @@
-# Building Your Own Inexpensive GPS Kid Tracker
+# How to Build Your Own Inexpensive GPS Kid Tracker
 
 I built a GPS tracker that monitors my kids’ location, and gives them the ability to request a pickup.
 
@@ -12,7 +12,7 @@ My twins love to ride the trails on their bikes, and they’ve (unfortunately) r
 
 My kids are a bit young for their own cell phones, and I’m trying to avoid paying for more data plans for as long as possible. There are [a whole bunch of commercial kid GPS trackers](https://www.safewise.com/resources/wearable-gps-tracking-devices-for-kids-guide/) available, but virtually all of them also come with a monthly subscription fee.
 
-All this got me thinking—I’m a software developer, and I work for [a company](https://blues.io/) that makes a [low-cost device with cellular and GPS capabilities](https://blues.io/products/notecard/). I should be able to build something like this for myself.
+All this got me thinking—I’m a software developer, and I work for a company ([Blues Wireless](https://blues.io/)) that makes a [low-cost device with cellular and GPS capabilities](https://blues.io/products/notecard/). I should be able to build something like this for myself.
 
 So I did 🙂
 
@@ -458,13 +458,11 @@ And after about a half hour I got a text message when they were ready for me to 
 
 ![](dashboard-with-text.png)
 
-Plus, the device has continued to work as expected as we’ve tried it out on a handful of walks and bikes rides the last few days.
-
 ## Wrapping up
 
 Overall I’m pretty happy with how things turned out. I now have a small device I can attach to my kids bikes, and let them roam around knowing they have a button they can press if anything goes wrong.
 
-And as a bonus, I don’t have to worry about any subscription fees, as the Notecard comes with 500MB of cellular data included, which I’m never going to come close to using for this simple project.
+And as a bonus, I don’t have to worry about any subscription fees, as the Notecard comes with 500MB of cellular data included, which I’m never going to go through for this simple project.
 
 Long term I’d love to build a plastic enclosure for my hardware, both to add a bit of weather proofing, and to further ensure everything stays together as the device bounces on bumpy trails.
 
