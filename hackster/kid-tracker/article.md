@@ -10,7 +10,7 @@ Here in Lansing, Michigan we’re very proud of our river trail system, which ha
 
 My twins love to ride the trails on their bikes, and they’ve (unfortunately) reached an age where they can do so way faster than me. As a parent I want to encourage them to explore on their own, but I also want to keep tabs on their location in case something goes wrong. (Flat tires are very common.)
 
-My kids are a bit young for their own cell phones, and I’m trying to avoid paying for more data plans for as long as possible. There are [a whole bunch of commercial kid GPS trackers](https://www.safewise.com/resources/wearable-gps-tracking-devices-for-kids-guide/) available, but virtually all of them also come with a monthly subscription fee.
+My kids are a bit young for their own cell phones, and I’m trying to avoid paying for two more data plans for as long as possible. There are [a lot of commercial kid GPS trackers](https://www.safewise.com/resources/wearable-gps-tracking-devices-for-kids-guide/) available, but virtually all of them also come with a monthly subscription fee.
 
 All this got me thinking—I’m a software developer, and I work for a company ([Blues Wireless](https://blues.io/)) that makes a [low-cost device with cellular and GPS capabilities](https://blues.io/products/notecard/). I should be able to build something like this for myself.
 
@@ -20,7 +20,7 @@ So I did 🙂
 
 My custom tracker takes GPS readings every five minutes and displays them on a map. Additionally, the tracker includes a button that kids can press to send their location to a parent over SMS.
 
-In this article I’ll show you how I built my own custom GPS tracker, and teach you how you can replicate some (or all) of this setup for yourself. Let’s get started.
+In this article I’ll show you how I built my own custom GPS tracker, and teach you how you can replicate some (or all!) of this setup yourself. Let’s get started.
 
 ## Step #1: Assemble the hardware
 
@@ -28,7 +28,7 @@ The majority of the hardware I used came in the [Blues Wireless Feather Starter 
 
 ### Notecard
 
-The [Notecard](https://blues.io/products/notecard/) is a small system-on-module that can add connectivity to just about any IoT project. Blues makes both cellular and and Wi-Fi Notecards, but for GPS tracking you’ll basically always want to use a cellular Notecard.
+The [Notecard](https://blues.io/products/notecard/) is a small system-on-module that can add connectivity to just about any IoT project. Blues makes both cellular and Wi-Fi Notecards, but for GPS tracking you’ll want to use a cellular Notecard.
 
 ![](notecard-on-desk.jpg)
 
@@ -44,11 +44,11 @@ The Notecarrier AF also contains Feather-compatible headers, making it easy to e
 
 ### Swan
 
-The embedded Feather-compatible device I used with the Notecarrier AF was the [Swan](https://blues.io/products/swan/). The Swan can drive just about any IoT project, as it has a hefty 640KB of RAM, is expandable to 55 pins for access to additional I/O and buses, and has built-in support for C/C++, Arduino, and CircuitPython.
+The Notecarrier makes it easy to attach a Feather-compatible MCU, and the MCU I used was the [Swan](https://blues.io/products/swan/). The Swan can drive just about any IoT project, as it has a hefty 640KB of RAM, is expandable to 55 pins for access to additional I/O and buses, and has built-in support for C/C++, Arduino, and CircuitPython.
 
 ![](swan.jpg)
 
-For my purposes the Swan runs the code I use to interface with the Notecard.
+In this project the Swan runs the code I use to interface with the Notecard, which we’ll walk through in detail later in this article.
 
 ### Putting it all together
 
@@ -72,7 +72,7 @@ Finally, because I didn’t want things a bunch of loose pieces flying around as
 
 ![](back-updated.jpg)
 
-Long term I’d love to build a nice enclosure for the device, but for prototyping this gave me single item my kids can carry around to try out.
+Long term I want to build a nice enclosure for the device, but for prototyping this gave me single item my kids can carry around to try out.
 
 ![](final-hardware.jpg)
 
@@ -142,7 +142,7 @@ void setup() {
 }
 ```
 
-> **NOTE**: If you’re following along, make sure to change `"com.blues.tj:kidtracker"` to your own ProductUID that you copied in the previous step.
+> **NOTE**: If you’re following along, make sure to change `"com.blues.tj:kidtracker"` to the ProductUID that you copied in the previous step.
 
 This code does a few different things. First, it initializes the Notecard (`notecard.begin()`) and sets the debug output stream (`notecard.setDebugOutputStream(serialDebug)`), which allows you to view logs using the Arduino IDE’s Serial Monitor.
 
@@ -221,7 +221,7 @@ In a moment we’ll look at how to visualize your GPS readings on a map, but let
 
 ### Handling button presses
 
-One of the main features I wanted my tracker to have was the ability for kids to press a button, and have that button send an SMS message to a parent with their current location. This is a feature of most commercial kid trackers, so I’m confident this is something other parents would want as well.
+I wanted my tracker to have a button that kids can press, and have that button send an SMS message to a parent with the tracker’s current location. This is a feature of most commercial kid trackers, so I’m confident this is something other parents would want as well.
 
 There are a lot of ways you could handle a button press in an IoT app, but the Swan includes a user button (`USER_BTN`), for handling this exact sort of scenario.
 
@@ -353,7 +353,7 @@ JAddItemToObject(req2, "body", body);
 notecard.sendRequest(req2);
 ```
 
-And finally, we flip the boolean back to `false` as we’ve now finished handling the button press.
+And finally, we flip the boolean back to `false`, as we’ve now finished handling the button press.
 
 ```cpp
 locationRequested = false;
@@ -365,10 +365,10 @@ And with that, you’re done writing the code you need to make this project run!
 ![](arduino-options.png)
 
 > **NOTE**:
-> * Floating point support uses a _lot_ of memory, so you should use some caution before building with it in any IoT project. This is one reason I chose the Swan for this project, as it comes with a hefty 640KB of RAM which is great for situations like this.
-> * As a reminder, this [project’s full source code](https://github.com/tjvantoll/kid-tracker) is available on GitHub. Feel free to jump there for a copy-and-paste friendly version of the entire sketch.
+> * Floating point support uses a _lot_ of memory, so you should use some caution before building with it in any IoT project. The Swan is great for project’s that require floating point support, as it comes with a hefty 640KB of RAM.
+> * As a reminder, this [project’s full source code](https://github.com/tjvantoll/kid-tracker) is available on GitHub. Feel free to head there for a copy-and-paste friendly version of the entire program.
 
-And with that, go ahead and upload your code to your Swan one last time. Once you do, go ahead and press the user button on your Swan. You should see the following in your Serial Monitor (remembering it may take a few minutes to acquire a GPS signal, so you might see “The Notecard does not yet have a location” several times on start up).
+And with that, go ahead and upload your code to your Swan one last time. Once you do, press the user button on your Swan. You should see the following in your Serial Monitor (remembering it may take a few minutes to acquire a GPS signal, so you might see “The Notecard does not yet have a location” several times on start up).
 
 ![](log-success.png)
 
@@ -402,11 +402,11 @@ As a last step before we take this device out in the wild, let’s next look at 
 
 ## Step #5: Sending SMS messages
 
-SMS messages are critical to this project as I want my kids to be able to let me know if they get lost, or if something goes wrong. Luckily, implementing SMS messages with the Notecard is fairly trivial.
+SMS messages are critical to this project as I want my kids to be able to let me know if they get lost, or if something goes wrong. Luckily, implementing SMS messages with the Notecard is trivial.
 
-One of the services you can route to from Notehub is Twilio, and connecting the two is as easy as signing up for a Twilio trial account, and creating a new Notehub route.
+One of the many services Notehub can route data to is Twilio, and connecting the two is as easy as signing up for a Twilio trial account, and creating a new Notehub route.
 
-If you want to set this up for yourself, check out the [Blues guide on setting up a Twilio route](https://dev.blues.io/guides-and-tutorials/routing-references/twilio-route/), which walks you through setting everything up.
+If you want to set this up for yourself, check out the [Blues guide on setting up a Twilio route](https://dev.blues.io/guides-and-tutorials/routing-references/twilio-route/), which walks you through the steps you need to take in detail.
 
 > **NOTE**: If you’re following this guide exactly, use `"&Body=" & body.message & "&From=+1234567890&To=+1234567890&"` (swapping in your own numbers) as your route’s **JSONata Expression**. I like to store my phone numbers on the route in Notehub, as it’s more configurable there than as a variable in my Arduino code.
 
@@ -430,7 +430,7 @@ As it turns out, things can go wrong 😅 My big problem is that for test run #1
 
 ![](setup-loose.jpg)
 
-As it turns out, bouncing loose electrical components are a problem waiting to happen. Not only can this setup to electricial shorts, but a lose battery is actually dangerous, as [a punctured lipo battery is basically a small bomb](https://www.youtube.com/watch?v=wUFxlf4fXjo). Fun!
+As it turns out, bouncing loose electrical components are a problem waiting to happen. Not only can this setup easily create electrical shorts, but a loose battery is actually dangerous, as [a punctured lipo battery is basically a small bomb](https://www.youtube.com/watch?v=wUFxlf4fXjo). Fun!
 
 Luckily things didn’t go _that_ wrong, but about 13 minutes into my kids’ first bike ride I stopped getting `_track.qo` events, and noticed this concerning “brown-out & hard reset” health event come through.
 
@@ -464,7 +464,7 @@ Overall I’m pretty happy with how things turned out. I now have a small device
 
 And as a bonus, I don’t have to worry about any subscription fees, as the Notecard comes with 500MB of cellular data included, which I’m never going to go through for this simple project.
 
-Long term I’d love to build a plastic enclosure for my hardware, both to add a bit of weather proofing, and to further ensure everything stays together as the device bounces on bumpy trails.
+Long term I want to build a plastic enclosure for my hardware, both to add a bit of weather proofing, and to further ensure everything stays together as the device bounces on bumpy trails.
 
 Hopefully you found this writeup interesting, especially if you’re considering building a tracker like this yourself.
 
