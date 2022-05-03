@@ -2,6 +2,8 @@
 
 I built a GPS tracker that monitors my kids’ location, and gives them the ability to request a pickup.
 
+![](banner.png)
+
 ## Story
 
 Here in Lansing, Michigan we’re very proud of our river trail system, which has over 20 miles of paved paths.
@@ -30,7 +32,7 @@ The majority of the hardware I used came in the [Blues Wireless Feather Starter 
 
 The [Notecard](https://blues.io/products/notecard/) is a small system-on-module that can add connectivity to just about any IoT project. Blues makes both cellular and Wi-Fi Notecards, but for GPS tracking you’ll want to use a cellular Notecard.
 
-![](notecard-on-desk.jpg)
+![](notecard.jpg)
 
 I used the Notecard to gather GPS coordinates from an external antenna (which I’ll show momentarily), and to send those coordinates to the cloud over a cellular connection.
 
@@ -38,6 +40,7 @@ I used the Notecard to gather GPS coordinates from an external antenna (which I�
 
 Notecarriers are companion boards that make it easy to prototype and deploy IoT projects with the Notecard. The Notecarrier gives you a convenient place to connect a Notecard, supply it with power, access embedded antennas, and to connect to I2C peripherals through Qwiic ports.
 
+![](notecarrier.jpg)
 ![](notecarrier-af.jpg)
 
 The Notecarrier AF also contains Feather-compatible headers, making it easy to embed any Feather-compatible device to use with the Notecard.
@@ -70,7 +73,7 @@ Here’s what the setup looks after attaching the antenna and the battery.
 
 Finally, because I didn’t want things a bunch of loose pieces flying around as my kids use this, I duct taped the lipo battery to the back of my Notecarrier AF, and applied the sticky side of the Molex antenna to the back as well (with a bit of cardboard in between).
 
-![](back-updated.jpg)
+![](tape.jpg)
 
 Long term I want to build a nice enclosure for the device, but for prototyping this gave me single item my kids can carry around to try out.
 
