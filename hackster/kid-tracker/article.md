@@ -6,7 +6,7 @@ I built a GPS tracker that monitors my kids’ location, and gives them the abil
 
 Here in Lansing, Michigan we’re very proud of our river trail system, which has over 20 miles of paved paths.
 
--- image of park sign --
+![](river-trail.jpg)
 
 My twins love to ride the trails on their bikes, and they’ve (unfortunately) reached an age where they can do so way faster than me. As a parent I want to encourage them to explore on their own, but I also want to keep tabs on their location in case something goes wrong. (Flat tires are very common.)
 
