@@ -230,7 +230,7 @@ There are a lot of ways you could handle a button press in an IoT app, but the S
 
 ![](swan-user-button.jpg)
 
-To be use this button, you can start by adding the following `#define` line to the top of your sketch.
+To use this button, you can start by adding the following `#define` line to the top of your sketch.
 
 ```cpp
 #define BUTTON_PIN USER_BTN

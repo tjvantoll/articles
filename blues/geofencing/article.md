@@ -446,4 +446,10 @@ The Notecard and Notehub make asset tracking simple, and give you a solid founda
 
 In this article I showed you one way you can implement geofencing, with a JavaScript cloud function on Netlify—but the power of the Notecard and Notehub is how easy you can customize just about everything, and implement geofencing with your backend and hardware of choice.
 
-The code I used in this article is [available on GitHub](https://github.com/tjvantoll/geofencing)—feel free to copy or modify it as much as you’d like. And if you have any questions about getting geofencing working, [reach out in our community forum](https://discuss.blues.io/) and we’ll be happy to help you out.
+The code I used in this article is [available on GitHub](https://github.com/tjvantoll/geofencing)—feel free to copy or modify it as much as you’d like. And you can purchase the hardware I used from the links below.
+
+* [Notecard in Blues Shop](https://shop.blues.io/collections/notecard)
+* [Notecarrier in Blues Shop](https://shop.blues.io/collections/notecarrier/products/carr-al)
+
+
+If you have any questions about getting geofencing working, [reach out in our community forum](https://discuss.blues.io/) and we’ll be happy to help you out.
