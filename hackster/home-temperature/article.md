@@ -83,21 +83,21 @@ And as a bonus, because I had four nodes, I put one outside so I could compare t
 
 > **NOTE**: Although the sensor nodes are in a plastic enclosure, they are not rain proof. If you place a sensor outside make sure that it’s in a covered location.
 
-Depending on your home or location, you might need to be careful about how far away you place your sensors nodes from the gateway. The optimal distance depends on whether your devices have a clear line-of-sight, or the signal needs to penetrate walls, concrete, and the like.
+Depending on your home or location, you might need to be careful about how far away you place your sensor nodes from your gateway. The optimal distance depends on whether your devices have a clear line-of-sight, and whether the signal needs to penetrate walls, concrete, and the like.
 
-Out in the open, devices can communicate across 1 KM or more. In a home or building, your devices may need to be placed closer together, ideally less than a hundred meters apart—but you really just have to test in your own environment to know for sure.
+Out in the open, devices can communicate across 1 KM or more. In a home or building, your devices may need to be placed closer together, ideally less than a hundred meters apart, but the only way to know for sure is to set things up in your own environment.
 
 My house is relatively open so I had no signal issues, and in my testing I was able to take my sensors several hundred meters down my road before I started having communication problems.
 
-And the cool thing was, once I had the sensor nodes in place, I immediately started to get data flowing in from all the locations around my house.
+And the cool thing was, once I had the sensor nodes in place, I immediately started to see data flowing in from all the locations around my house.
 
 ![](data-dump.png)
 
 ## Building a Dashboard
 
-At this point, I now had a constant stream of sensor data coming into Notehub that I could view in a table—which is cool, but to actually make that data actionable I wanted to visualize the readings, and to do that I had to get them out of the simple table.
+At this point, I now had a constant stream of sensor data coming into Notehub that I could view in a table—which is cool, but to make that data actionable I wanted to visualize the readings.
 
-Luckily Blues offers several ways that you can [route data from Notehub](https://dev.blues.io/notehub/notehub-walkthrough/#routing-data-with-notehub) to other cloud services. You can use this approach to place your data in one of the big clouds like AWS or Azure, to IoT platforms like Datacake or Ubidots, or to a custom HTTP/HTTPS endpoint.
+Luckily, Blues offers several ways that you can [route data from Notehub](https://dev.blues.io/notehub/notehub-walkthrough/#routing-data-with-notehub) to other cloud services. You can use this approach to send your data to one of the big clouds like AWS or Azure, to IoT platforms like Datacake or Ubidots, or to a custom HTTP/HTTPS endpoint.
 
 For Sparrow specifically though, Blues provides an [open-source reference web application](https://github.com/blues/sparrow-reference-web-app) that you can easily configure with your own device identifiers, and immediately view your data in an online dashboard.
 
