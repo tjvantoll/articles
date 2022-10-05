@@ -451,5 +451,4 @@ The code I used in this article is [available on GitHub](https://github.com/tjva
 * [Notecard in Blues Shop](https://shop.blues.io/collections/notecard)
 * [Notecarrier in Blues Shop](https://shop.blues.io/collections/notecarrier/products/carr-al)
 
-
 If you have any questions about getting geofencing working, [reach out in our community forum](https://discuss.blues.io/) and we’ll be happy to help you out.
