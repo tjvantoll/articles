@@ -32,7 +32,7 @@ For a barometric pressure sensor we went with the [Bosch BMP581](https://www.spa
 
 > **NOTE**: To show off the accuracy of their sensor, Bosch runs a demo at events where they [move a Lego character between floors of a small building](https://www.youtube.com/watch?v=-I9pN4P_hWw).
 
-The sensor data is only useful if we have some way to send that data to the response coordinator. And to do that, here at Blues we make the [Notecard](https://blues.io/products/notecard/).  If you've not yet heard of the Notecard, it's a cellular and GPS/GNSS-enabled device-to-cloud data-pump that comes with 500 MB of data and 10 years of cellular for $49 dollars.
+The sensor data is only useful if we have some way to send that data to the response coordinator. And to do that, here at Blues we make the [Notecard](https://blues.io/products/notecard/).  If you've not yet heard of the Notecard, it's a cellular and GPS/GNSS-enabled device-to-cloud data-pump that comes with 500 MB of data and 10 years of cellular.
 
 ![](notecard.png)
 
