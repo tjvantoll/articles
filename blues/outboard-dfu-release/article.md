@@ -10,7 +10,7 @@ An increasing number of MCUs are shipped with their primary bootloader “in ROM
 
 These manufacturer-provided ROM bootloaders present exciting new opportunities—specifically, they allow us to perform firmware updates in a manner that is far more flexible in terms of language and RTOS, and far less vulnerable to inadvertent programming bugs.
 
-Beginning with firmware version 3.3.1, the Blues Wireless Notecard is now capable of utilizing these capabilities of modern MCUs, and performing firmware update “from the outside” and not involving the firmware running on the MCU whatsoever. The Notecard can update firmware regardless of RTOS or language, and can even be used to switch between them, even modifying Flash memory layout and partitioning any time after-the-fact, at the developer’s choice.
+Beginning with firmware version 3.3.1, the Blues Wireless Notecard is now capable of utilizing these capabilities of modern MCUs, and performing firmware update “from the outside” and **not involving the firmware running on the MCU whatsoever**. The Notecard can update firmware regardless of RTOS or language, and can even be used to switch between them, even modifying Flash memory layout and partitioning any time after-the-fact, at the developer’s choice.
 
 ## Hardware Setup
 
