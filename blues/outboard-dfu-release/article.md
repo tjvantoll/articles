@@ -1,6 +1,6 @@
-# Announcing a Developer Beta of Outboard DFU
+# Announcing the Developer Beta of Outboard DFU
 
-Today is a big day at Blues, as we’re excited to announce a developer beta of Outboard DFU, a new solution for over-the-air host firmware updates.
+Today is a big day at Blues, as we’re excited to announce the developer beta of Outboard DFU, a new solution for over-the-air host firmware updates.
 
 Let’s dive right in and look at what Outboard DFU is, how it works, and how you can start performing over-the-air firmware updates today.
 
@@ -54,7 +54,7 @@ After you select the new version you’d like, you’ll see your new firmware ap
 
 ![](requested-version.png)
 
-The next time your Notecard performs a sync, it’ll detect a new host binary is available and will being downloading it (without interfering with its normal operations). You can view the progress of the download in Notehub.
+The next time your Notecard performs a sync, it’ll detect a new host binary is available and will begin downloading it (without interfering with its normal operations). You can view the progress of the download in Notehub.
 
 ![](downloading.png)
 
