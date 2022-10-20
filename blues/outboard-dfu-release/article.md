@@ -18,7 +18,6 @@ Taking advantage of the Notecard’s new capabilities requires you to lay out se
 
 Today this wiring is available out-of-the-box and supported in the [Notecarrier-F](https://shop.blues.io/products/notecarrier-f), and we have successfully tested with the following MCUs:
 
-- Adafruit nRF52840 Feather
 - Adafruit STM32F405 Feather Express
 - Blues Wireless Swan (version 3 and greater)
 
