@@ -28,7 +28,7 @@ Over time, we intend to greatly expand our list of tested MCUs, and to publish h
 
 If you have a Notecarrier-F and one of the boards listed above, you can use Outboard DFU to perform over-the-air firmware updates today.
 
-To start, first make sure your Notecard is running a firmware version that’s 3.3 or newer. (And if it’s not, see our [guide on updating Notecard firmware](https://dev.blues.io/notecard/notecard-firmware-updates/)).
+To start, first make sure your Notecard is running a firmware version that’s 3.5.1 or newer. (And if it’s not, see our [guide on updating Notecard firmware](https://dev.blues.io/notecard/notecard-firmware-updates/)).
 
 From there, you need to enable Outboard DFU using the new `card.dfu` request.
 
